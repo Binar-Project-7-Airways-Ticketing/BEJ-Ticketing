@@ -27,7 +27,7 @@ public class AgeCategory {
     private Long nameCategory;
 
     @OneToOne
-    @JoinColumn(name = "id_passenger", referencedColumnName = "idPassenger")
+    @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")
     @JsonIgnore
     private Passenger passenger;
 
