@@ -26,7 +26,7 @@ public class PassengerController {
         return new ResponseEntity<>(passengerService.getAllPassengers(), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/age-category")
     public ResponseEntity<List<AgeCategory>> getAllListAgeCategories(){
         return new ResponseEntity<>(ageCategoryService.getAllAgeCategories(), HttpStatus.OK);
     }
