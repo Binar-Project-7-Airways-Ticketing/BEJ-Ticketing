@@ -32,7 +32,7 @@ public class Passenger {
     private boolean isDeleted = false;
 
     @OneToOne
-    @JoinColumn(name = "id_category", referencedColumnName = "id_passenger")
+    @JoinColumn(name = "id_category", referencedColumnName = "idPassenger")
     private AgeCategory ageCategory;
 
 
