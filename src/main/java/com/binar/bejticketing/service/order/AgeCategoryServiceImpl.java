@@ -7,12 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class AgeCategoryServiceImpl implements AgeCategoryService {
     @Autowired
     AgeCategoryRepository ageCategoryRepository;
     @Override
     public AgeCategory createAgeCategory(AgeCategory ageCategory) {
+        Optional<AgeCategory> checkedByUsername = ageCategoryRepository.isCheckedByUsername(ageCategory.getNameCategory());
+        if (checkedByUsername.isPresent()){
+            System.out.println("Failed to Save");
+            return null;
+        }
         return ageCategoryRepository.save(ageCategory);
     }
 
