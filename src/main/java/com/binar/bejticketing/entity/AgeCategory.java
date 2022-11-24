@@ -26,7 +26,7 @@ public class AgeCategory {
     @NotBlank(message = "Name Category shouldn't Blank")
     private Long nameCategory;
 
-    @OneToOne(cascade = CascadeType.ALL, targetEntity = Passenger.class)
+    @OneToOne(cascade = CascadeType.ALL, targetEntity = Passenger.class, mappedBy = "ageCategory")
     @JsonIgnore
     private Passenger passenger;
 
