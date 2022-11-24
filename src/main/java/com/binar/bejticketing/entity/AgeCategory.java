@@ -24,7 +24,7 @@ public class AgeCategory {
 
     @Column
     @NotBlank(message = "Name Category shouldn't Blank")
-    private Long nameCategory;
+    private String nameCategory;
 
     @OneToOne
     @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")
