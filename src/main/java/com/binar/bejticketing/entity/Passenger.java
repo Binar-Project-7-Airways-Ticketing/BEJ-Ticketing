@@ -31,8 +31,7 @@ public class Passenger {
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
 
-    @OneToOne
-    @JoinColumn(name = "id_category", referencedColumnName = "idPassenger")
+    @OneToOne(mappedBy = "passenger", cascade = CascadeType.ALL)
     private AgeCategory ageCategory;
 
 
