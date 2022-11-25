@@ -2,6 +2,7 @@ package com.binar.bejticketing.service.order;
 
 import com.binar.bejticketing.entity.AgeCategory;
 import com.binar.bejticketing.exception.DataAlreadyExistException;
+import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.AgeCategoryRepository;
 import com.binar.bejticketing.service.AgeCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,28 @@ public class AgeCategoryServiceImpl implements AgeCategoryService {
     @Override
     public List<AgeCategory> getAllAgeCategories() {
         return ageCategoryRepository.findAll();
+    }
+
+    @Override
+    public AgeCategory updateAgeCategory(AgeCategory ageCategory) {
+        var id = ageCategory.getIdCategory();
+        Optional<AgeCategory> byId = ageCategoryRepository.findById(id);
+
+        if (byId.isPresent()){
+            return ageCategoryRepository.updateAgeCategory(ageCategory.getIdCategory(), ageCategory.getNameCategory());
+        }
+        throw new DataNotFoundException(id);
+    }
+
+    @Override
+    public DataNotFoundException deleteAgeCategory(Long id) {
+        Optional<AgeCategory> byId = ageCategoryRepository.findById(id);
+
+        if (byId.isPresent()){
+            ageCategoryRepository.deleteById(id);
+            return null;
+        }
+
+        return new DataNotFoundException(id);
     }
 }
