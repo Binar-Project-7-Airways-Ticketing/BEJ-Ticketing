@@ -7,27 +7,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class AgeCategoryServiceImpl implements AgeCategoryService {
     @Autowired
     AgeCategoryRepository ageCategoryRepository;
-//    private Optional<AgeCategory> ageCategory1;
+    private boolean ageCategory1;
 
     @Override
     public AgeCategory createAgeCategory(AgeCategory ageCategory) {
-
-//        List<AgeCategory> ageCategoryList = ageCategoryRepository.findAll();
-//        System.out.println(ageCategoryList);
-//        for (AgeCategory category : ageCategoryList) {
-//            ageCategory1 = ageCategoryRepository.isCheckedByUsername(category.getNameCategory());
-//        }
-//        if (ageCategory1.isEmpty()){
-//        }
-            return ageCategoryRepository.save(ageCategory);
-//            System.out.println("Failed to Save");
-//            return null;
+        ageCategoryRepository.isCheckedByUsername(ageCategory.getNameCategory())
+                .ifPresent(data ->
+                        ageCategory1 = Objects.equals(data.getNameCategory(), ageCategory.getNameCategory())
+                );
+        System.out.println(ageCategory1);
+        if (ageCategory1){
+            System.out.println("Failed to Save");
+            return null;
+        }
+        return ageCategoryRepository.save(ageCategory);
     }
 
     @Override
