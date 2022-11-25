@@ -22,6 +22,7 @@ public class PassengerController {
     @Autowired
     private PassengerService passengerService;
 
+//    Get Data
     @GetMapping
     public ResponseEntity<List<Passenger>> getAllListPassengers(){
         return new ResponseEntity<>(passengerService.getAllPassengers(), HttpStatus.OK);
@@ -37,6 +38,7 @@ public class PassengerController {
         return new ResponseEntity<>(passengerService.getPassengerById(id), HttpStatus.OK);
     }
 
+//    Create
     @PostMapping("/create/passenger")
     public ResponseEntity<Passenger> createPassenger(@RequestBody Passenger passenger){
         return new ResponseEntity<>(passengerService.createPassenger(passenger), HttpStatus.CREATED);
@@ -47,15 +49,29 @@ public class PassengerController {
         return new ResponseEntity<>(ageCategoryService.createAgeCategory(ageCategory), HttpStatus.CREATED);
     }
 
+//    Update
+
     @PutMapping("/edit/age-category")
     public ResponseEntity<AgeCategory> updateAgeCategory(@RequestBody AgeCategory ageCategory){
         return new ResponseEntity<>(ageCategoryService.updateAgeCategory(ageCategory), HttpStatus.ACCEPTED);
     }
 
+    @PutMapping("/edit/passenger")
+    public ResponseEntity<Passenger> updatePassenger(@RequestBody Passenger passenger){
+        return new ResponseEntity<>(passengerService.updatePassenger(passenger), HttpStatus.ACCEPTED);
+    }
+
+//    Delete
+
     @DeleteMapping("/delete/age-category/{id}")
-    public ResponseEntity<DataNotFoundException> deleteAgeCategory(@PathVariable("id") Long id){
+    public ResponseEntity<String> deleteAgeCategory(@PathVariable("id") Long id){
         ageCategoryService.deleteAgeCategory(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/delete/passenger/{id}")
+    public ResponseEntity<String> deletePassenger(@PathVariable("id") Long id){
+        return new ResponseEntity<>(passengerService.deleteDataPassenger(id), HttpStatus.NO_CONTENT);
     }
 
 }
