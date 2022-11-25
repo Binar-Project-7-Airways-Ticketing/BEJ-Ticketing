@@ -2,6 +2,7 @@ package com.binar.bejticketing.controller.order;
 
 import com.binar.bejticketing.entity.AgeCategory;
 import com.binar.bejticketing.entity.Passenger;
+import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.service.AgeCategoryService;
 import com.binar.bejticketing.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,17 @@ public class PassengerController {
     @PostMapping("/create/age-category")
     public ResponseEntity<AgeCategory> createAgeCategory(@RequestBody AgeCategory ageCategory){
         return new ResponseEntity<>(ageCategoryService.createAgeCategory(ageCategory), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/edit/age-category")
+    public ResponseEntity<AgeCategory> updateAgeCategory(@RequestBody AgeCategory ageCategory){
+        return new ResponseEntity<>(ageCategoryService.updateAgeCategory(ageCategory), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/delete/age-category/{id}")
+    public ResponseEntity<DataNotFoundException> deleteAgeCategory(@PathVariable("id") Long id){
+        ageCategoryService.deleteAgeCategory(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
