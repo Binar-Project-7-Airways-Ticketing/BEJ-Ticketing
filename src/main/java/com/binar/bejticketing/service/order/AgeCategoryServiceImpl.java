@@ -19,13 +19,14 @@ public class AgeCategoryServiceImpl implements AgeCategoryService {
     public AgeCategory createAgeCategory(AgeCategory ageCategory) {
 
         List<AgeCategory> ageCategoryList = ageCategoryRepository.findAll();
-        for (AgeCategory category : ageCategoryList) {
-            ageCategory1 = ageCategoryRepository.isCheckedByUsername(category.getNameCategory());
-        }
-        if (ageCategory1.isPresent()){
-            System.out.println("Failed to Save");
-            return null;
-        }
+        System.out.println(ageCategoryList);
+//        for (AgeCategory category : ageCategoryList) {
+//            ageCategory1 = ageCategoryRepository.isCheckedByUsername(category.getNameCategory());
+//        }
+//        if (ageCategory1.isPresent()){
+//            System.out.println("Failed to Save");
+//            return null;
+//        }
         return ageCategoryRepository.save(ageCategory);
     }
 
