@@ -24,6 +24,11 @@ public class PassengerServiceImpl implements PassengerService {
     }
 
     @Override
+    public List<Passenger> getPassengersByName(String username) {
+        return passengerRepository.getPassengersByName(username);
+    }
+
+    @Override
     public List<Passenger> getAllPassengers() {
         return passengerRepository.getAllPassengers();
     }
