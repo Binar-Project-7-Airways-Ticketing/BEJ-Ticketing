@@ -49,6 +49,11 @@ public class PassengerController {
         return new ResponseEntity<>(passengerService.createPassenger(passenger), HttpStatus.CREATED);
     }
 
+    @PostMapping("/create/passengers")
+    public ResponseEntity<List<Passenger>> createPassengers(@RequestBody List<Passenger> passenger){
+        return new ResponseEntity<>(passengerService.createPassengers(passenger), HttpStatus.CREATED);
+    }
+
     @PostMapping("/create/age-category")
     public ResponseEntity<AgeCategory> createAgeCategory(@RequestBody AgeCategory ageCategory){
         return new ResponseEntity<>(ageCategoryService.createAgeCategory(ageCategory), HttpStatus.CREATED);
@@ -64,6 +69,16 @@ public class PassengerController {
     @PutMapping("/edit/passenger")
     public ResponseEntity<Passenger> updatePassenger(@RequestBody Passenger passenger){
         return new ResponseEntity<>(passengerService.updatePassenger(passenger), HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/edit/passenger/{idPassenger}/age-category/{idAgeCategory}")
+    public ResponseEntity<Passenger> updateAgeCategoryInPassenger(@RequestBody Passenger passenger,
+                                                                  @PathVariable("idPassenger") Long idPassenger,
+                                                                  @PathVariable("idAgeCategory") Long idAgeCategory){
+        return new ResponseEntity<>(passengerService.updateAgeCategoryInPassenger(
+                passenger,
+                idPassenger,
+                idAgeCategory), HttpStatus.ACCEPTED);
     }
 
 //    Delete
