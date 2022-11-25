@@ -13,10 +13,16 @@ import java.util.Optional;
 public class AgeCategoryServiceImpl implements AgeCategoryService {
     @Autowired
     AgeCategoryRepository ageCategoryRepository;
+    private Optional<AgeCategory> ageCategory1;
+
     @Override
     public AgeCategory createAgeCategory(AgeCategory ageCategory) {
-        Optional<AgeCategory> checkedByUsername = ageCategoryRepository.isCheckedByUsername(ageCategory.getNameCategory());
-        if (checkedByUsername.isPresent()){
+
+        List<AgeCategory> ageCategoryList = ageCategoryRepository.findAll();
+        for (AgeCategory category : ageCategoryList) {
+            ageCategory1 = ageCategoryRepository.isCheckedByUsername(category.getNameCategory());
+        }
+        if (ageCategory1.isPresent()){
             System.out.println("Failed to Save");
             return null;
         }
