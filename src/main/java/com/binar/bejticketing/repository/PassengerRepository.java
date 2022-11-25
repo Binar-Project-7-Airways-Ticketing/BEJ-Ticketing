@@ -16,7 +16,7 @@ public interface PassengerRepository extends JpaRepository<Passenger, Long> {
 
     @Modifying
     @Query("UPDATE Passenger p SET p.isDeleted = true WHERE p.idPassenger = :id")
-    boolean deletePassenger(Long id);
+    int deletePassenger(Long id);
 
 
 }
