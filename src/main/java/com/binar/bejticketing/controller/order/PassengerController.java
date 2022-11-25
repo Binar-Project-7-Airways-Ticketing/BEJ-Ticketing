@@ -34,8 +34,13 @@ public class PassengerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Passenger> getPassengerCategoryById(@PathVariable("id") Long id){
+    public ResponseEntity<Passenger> getPassengerById(@PathVariable("id") Long id){
         return new ResponseEntity<>(passengerService.getPassengerById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<List<Passenger>> getPassengerByName(@PathVariable("username") String username){
+        return new ResponseEntity<>(passengerService.getPassengersByName(username), HttpStatus.OK);
     }
 
 //    Create

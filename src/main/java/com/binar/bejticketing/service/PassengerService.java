@@ -9,6 +9,7 @@ import java.util.List;
 public interface PassengerService {
     Passenger createPassenger(Passenger passenger);
     Passenger getPassengerById(Long id);
+    List<Passenger> getPassengersByName(String username);
     List<Passenger> getAllPassengers();
     String deleteDataPassenger(Long id);
     Passenger updatePassenger(Passenger passenger);
