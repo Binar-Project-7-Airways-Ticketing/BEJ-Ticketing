@@ -14,5 +14,5 @@ public interface PassengerService {
     List<Passenger> getAllPassengers();
     String deleteDataPassenger(Long id);
     Passenger updatePassenger(Passenger passenger);
-    Passenger updateAgeCategoryInPassenger(Passenger passenger,Long idPassenger, Long idAgeCategory);
+    Passenger updateAgeCategoryInPassenger(Long idPassenger, Long idAgeCategory);
 }
