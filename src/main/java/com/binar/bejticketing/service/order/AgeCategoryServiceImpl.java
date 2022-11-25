@@ -18,8 +18,8 @@ public class AgeCategoryServiceImpl implements AgeCategoryService {
     @Override
     public AgeCategory createAgeCategory(AgeCategory ageCategory) {
 
-//        List<AgeCategory> ageCategoryList = ageCategoryRepository.findAll();
-//        System.out.println(ageCategoryList);
+        List<AgeCategory> ageCategoryList = ageCategoryRepository.findAll();
+        System.out.println(ageCategoryList);
 //        for (AgeCategory category : ageCategoryList) {
 //            ageCategory1 = ageCategoryRepository.isCheckedByUsername(category.getNameCategory());
 //        }
