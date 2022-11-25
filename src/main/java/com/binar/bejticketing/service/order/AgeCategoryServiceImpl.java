@@ -1,6 +1,7 @@
 package com.binar.bejticketing.service.order;
 
 import com.binar.bejticketing.entity.AgeCategory;
+import com.binar.bejticketing.exception.DataAlreadyExistException;
 import com.binar.bejticketing.repository.AgeCategoryRepository;
 import com.binar.bejticketing.service.AgeCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class AgeCategoryServiceImpl implements AgeCategoryService {
         System.out.println(ageCategory1);
         if (ageCategory1){
             System.out.println("Failed to Save");
-            return null;
+            throw  new DataAlreadyExistException(ageCategory.getNameCategory());
         }
         return ageCategoryRepository.save(ageCategory);
     }
