@@ -23,11 +23,11 @@ public class AgeCategoryServiceImpl implements AgeCategoryService {
         for (AgeCategory category : ageCategoryList) {
             ageCategory1 = ageCategoryRepository.isCheckedByUsername(category.getNameCategory());
         }
-        if (ageCategory1.isPresent()){
+        if (ageCategory1.isEmpty()){
+            return ageCategoryRepository.save(ageCategory);
+        }
             System.out.println("Failed to Save");
             return null;
-        }
-        return ageCategoryRepository.save(ageCategory);
     }
 
     @Override
