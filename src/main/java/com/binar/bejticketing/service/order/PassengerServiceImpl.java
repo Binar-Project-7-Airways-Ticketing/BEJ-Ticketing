@@ -32,7 +32,7 @@ public class PassengerServiceImpl implements PassengerService {
     public String deleteDataPassenger(Long id) {
         var passenger = passengerRepository.findById(id);
         if (passenger.isEmpty()){
-            throw  new DataNotFoundException(id);
+            throw new DataNotFoundException(id);
         }
         passengerRepository.deletePassenger(id);
         return "Success";
