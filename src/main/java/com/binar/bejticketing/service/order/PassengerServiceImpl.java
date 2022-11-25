@@ -63,13 +63,14 @@ public class PassengerServiceImpl implements PassengerService {
     }
 
     @Override
-    public Passenger updateAgeCategoryInPassenger(Passenger passenger,Long idPassenger, Long idAgeCategory) {
+    public Passenger updateAgeCategoryInPassenger(Passenger passenger, Long idPassenger, Long idAgeCategory) {
         Optional<AgeCategory> checkDataAge = ageCategoryRepository.findById(idAgeCategory);
         Optional<Passenger> checkDataPassenger = passengerRepository.findById(idPassenger);
 
         if (checkDataAge.isEmpty() && checkDataPassenger.isEmpty()){
             throw new DataNotFoundException(idAgeCategory, idPassenger);
         }
+        System.out.println(checkDataAge.get());
         passenger.setAgeCategory(checkDataAge.get());
         return passengerRepository.saveAndFlush(checkDataPassenger.get());
     }
