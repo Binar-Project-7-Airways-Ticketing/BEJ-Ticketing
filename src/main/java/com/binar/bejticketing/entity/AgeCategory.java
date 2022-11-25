@@ -22,7 +22,7 @@ public class AgeCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategory;
 
-    @Column
+    @Column(name = "name_category")
     @NotBlank(message = "Name Category shouldn't Blank")
     private String nameCategory;
 
