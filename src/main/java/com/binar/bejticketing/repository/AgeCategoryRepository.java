@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface AgeCategoryRepository extends JpaRepository<AgeCategory, Long> {
-    @Query("SELECT a FROM AgeCategory a WHERE a.nameCategory = :name")
+    @Query("SELECT a FROM AgeCategory a WHERE a.nameCategory = :username")
     Optional<AgeCategory> isCheckedByUsername(String username);
 }
