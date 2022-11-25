@@ -23,6 +23,9 @@ public class Seat {
     @Column(name = "number_seat")
     private String numberSeat;
 
+    @Column(name = "is_ready")
+    private boolean isReady = true;
+
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
