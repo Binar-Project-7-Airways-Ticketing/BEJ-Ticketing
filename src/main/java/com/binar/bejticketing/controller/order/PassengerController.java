@@ -72,11 +72,9 @@ public class PassengerController {
     }
 
     @PutMapping("/edit/passenger/{idPassenger}/age-category/{idAgeCategory}")
-    public ResponseEntity<Passenger> updateAgeCategoryInPassenger(@RequestBody Passenger passenger,
-                                                                  @PathVariable("idPassenger") Long idPassenger,
+    public ResponseEntity<Passenger> updateAgeCategoryInPassenger(@PathVariable("idPassenger") Long idPassenger,
                                                                   @PathVariable("idAgeCategory") Long idAgeCategory){
         return new ResponseEntity<>(passengerService.updateAgeCategoryInPassenger(
-                passenger,
                 idPassenger,
                 idAgeCategory), HttpStatus.ACCEPTED);
     }
