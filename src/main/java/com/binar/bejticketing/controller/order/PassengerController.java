@@ -38,7 +38,7 @@ public class PassengerController {
         return new ResponseEntity<>(passengerService.getPassengerById(id), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/username")
     public ResponseEntity<List<Passenger>> getPassengerByName(@RequestParam String username){
         return new ResponseEntity<>(passengerService.getPassengersByName(username), HttpStatus.OK);
     }
