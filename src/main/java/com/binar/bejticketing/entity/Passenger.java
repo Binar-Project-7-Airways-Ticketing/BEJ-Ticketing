@@ -1,6 +1,9 @@
 package com.binar.bejticketing.entity;
 
+import com.binar.bejticketing.utils.Gender;
+import com.binar.bejticketing.utils.SpecialRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Date;
 
 @Data
@@ -21,8 +25,18 @@ public class Passenger {
     @Column(name = "id_passenger")
     private Long idPassenger;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "contact_number")
+    private String contactNumber;
+
+    @Column(name = "email")
+    @Email
+    private String email;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "birthday")
@@ -31,9 +45,24 @@ public class Passenger {
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
 
-    @OneToOne(mappedBy = "passenger", cascade = CascadeType.ALL)
+    @Column(name = "gender")
+    @Enumerated(EnumType.ORDINAL)
+    private Gender gender;
+
+    @Column(name = "nationality")
+    private String nationality;
+
+    @Column(name = "special_request")
+    @Enumerated(EnumType.ORDINAL)
+    private SpecialRequest specialRequest;
+
+    @OneToOne(mappedBy = "passenger")
     private AgeCategory ageCategory;
 
+    @OneToOne
+    @JoinColumn(name = "id_payment", referencedColumnName = "id_payment")
+    @JsonIgnore
+    private Payment payment;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
