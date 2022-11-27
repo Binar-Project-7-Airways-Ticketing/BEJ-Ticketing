@@ -12,5 +12,5 @@ public interface SeatService {
     Seat createSeat(Seat seat);
     List<Seat> createSeats(List<Seat> seats);
 //    Seat updateSeat(Long id);
-    Seat getSeatByNumber(String numberSeat);
+    List<Seat> getSeatByNumber(String numberSeat);
 }
