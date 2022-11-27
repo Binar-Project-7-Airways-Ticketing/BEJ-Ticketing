@@ -8,20 +8,24 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Date;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "seats")
-public class Seat {
+@Table(name = "Luggage")
+public class Luggage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSeat;
+    @Column(name = "id_luggage")
+    private Long idLuggage;
 
-    @Column(name = "number_seat")
-    private String numberSeat;
+    @Column(name = "capacity")
+    private BigInteger capacity;
+
+    @Column(name = "price")
+    private BigInteger price;
 
     @Column(name = "is_ready")
     private boolean isReady = true;
