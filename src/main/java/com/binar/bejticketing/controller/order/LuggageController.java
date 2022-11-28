@@ -25,12 +25,12 @@ public class LuggageController {
         return new ResponseEntity<>(luggageService.getLuggageByState(state), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Luggage> createLuggage(@RequestBody Luggage luggage){
         return new ResponseEntity<>(luggageService.createLuggage(luggage), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Luggage> updateStateLuggage(@PathVariable Long id){
         return new ResponseEntity<>(luggageService.updateStateLuggage(id), HttpStatus.ACCEPTED);
     }
