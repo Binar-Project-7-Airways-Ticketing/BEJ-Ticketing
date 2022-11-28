@@ -23,4 +23,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User u SET u.isActive = false where u.lastLoginDate <:date")
     void deactivateUsersNotLoggedInSince(@Param("date") LocalDate date);
+    User findByUsername(String username);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
 }
