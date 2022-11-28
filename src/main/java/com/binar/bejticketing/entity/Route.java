@@ -14,22 +14,20 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "plane")
-public class Plane {
+@Table(name = "route")
+public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_plane")
-    private Long idPlane;
+    @Column(name = "id_route")
+    private Long idRoute;
 
-    @Column(name = "plane_type")
-    private String planeType;
+    @JoinColumn(name = "id_airport_start", referencedColumnName = "id_airport_start")
+    @ManyToOne
+    private AirportStart airportStart;
 
-    @Column(name = "baggage_capacity")
-    private Integer baggageCapacity;
-
-    @OneToOne
-    @JoinColumn(name = "id_plane_class", referencedColumnName = "id_plane_class")
-    private PlaneDetails planeClass;
+    @JoinColumn(name = "id_airport_final", referencedColumnName = "id_airport_final")
+    @ManyToOne
+    private AirportStart airportFinal;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

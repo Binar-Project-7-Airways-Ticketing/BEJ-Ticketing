@@ -14,15 +14,18 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "plane_class")
-public class PlaneClass {
+@Table(name = "city")
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_plane_class")
-    private Long idPlaneClass;
+    @Column(name = "id_city")
+    private Long idCity;
 
-    @Column(name = "plane_class_name")
-    private String PlaneClassName;
+    @Column(name = "city_name")
+    private String cityName;
+
+    @Column(name = "city_code")
+    private String cityCode;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
