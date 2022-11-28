@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/seat/")
+@RequestMapping("/api/seat")
 public class SeatController {
     @Autowired
     private SeatService seatService;
@@ -25,7 +25,7 @@ public class SeatController {
         return new ResponseEntity<>(seatService.getAllSeats(), HttpStatus.OK);
     }
 
-    @GetMapping("/number")
+    @GetMapping
     public ResponseEntity<List<Seat>> getAllSeatsByNumber(@RequestParam String number){
         return new ResponseEntity<>(seatService.getSeatByNumber(number), HttpStatus.OK);
     }
