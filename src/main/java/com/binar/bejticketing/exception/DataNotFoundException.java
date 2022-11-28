@@ -6,6 +6,10 @@ public class DataNotFoundException extends RuntimeException{
         super("The data using id '"+ id + "' does not exists");
     }
 
+    public DataNotFoundException(Long id1, Long id2){
+        super("The data using id '"+ id1 + " and using id " + id2 + "' does not exists");
+    }
+
     public DataNotFoundException() {
 
     }
