@@ -20,8 +20,8 @@ public interface PassengerRepository extends JpaRepository<Passenger, Long> {
     @Query("UPDATE Passenger p SET p.isDeleted = true WHERE p.idPassenger = :id")
     int deletePassenger(Long id);
 
-    @Query("SELECT p FROM Passenger p WHERE p.username = :username")
-    List<Passenger> getPassengersByName(String username);
+    @Query("SELECT p FROM Passenger p WHERE p.firstName = :firstname")
+    List<Passenger> getPassengersByName(String firstname);
 
 
 }
