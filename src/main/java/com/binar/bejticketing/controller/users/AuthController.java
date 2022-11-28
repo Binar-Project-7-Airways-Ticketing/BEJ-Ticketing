@@ -52,7 +52,8 @@ public class AuthController {
     public ResponseEntity<Object> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername()
+                        , loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
@@ -65,8 +66,12 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
-                userDetails.getEmail(),
+                userDetails.getFirstname(),
+                userDetails.getLastname(),
                 userDetails.getBirthday(),
+                userDetails.getAddress(),
+                userDetails.getEmail(),
+                userDetails.getNoHp(),
                 roles));
     }
     @PostMapping("/signup")
@@ -87,8 +92,13 @@ public class AuthController {
         // Create new account
         User user = new User();
         user.setUsername(signUpRequest.getUsername());
-        user.setEmail(signUpRequest.getEmail());
+        user.setFirstName(signUpRequest.getFirstname());
+        user.setLastName(signUpRequest.getLastname());
         user.setBirthday((String) signUpRequest.getBirthday());
+        user.setAddress(signUpRequest.getAddress());
+        user.setEmail(signUpRequest.getEmail());
+        user.setNoHp(signUpRequest.getNoHp());
+
         user.setPassword(bCryptPasswordEncoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();

@@ -1,22 +1,38 @@
 package com.binar.bejticketing.payload.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 
+@Setter
+@Getter
 public class JwtResponse {
     private String token;
     private String type = "Bearer";
     private Long id;
     private String username;
-    private String email;
+    private String firstname;
+    private String lastname;
     private String birthday;
+    private String address;
+    private String email;
+    private String noHp;
     private final List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username, String email,String birthday, List<String> roles) {
-        this.token = accessToken;
+
+    public JwtResponse(String token,Long id, String username, String firstname, String lastname,String birthday , String address, String email, String noHp, List<String> roles) {
+        this.token = token;
         this.id = id;
         this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthday = birthday;
+        this.address = address;
         this.email = email;
-        this.birthday=birthday;
+        this.noHp = noHp;
         this.roles = roles;
     }
 

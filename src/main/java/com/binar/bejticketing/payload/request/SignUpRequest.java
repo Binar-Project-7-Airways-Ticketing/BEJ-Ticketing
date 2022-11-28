@@ -1,10 +1,18 @@
 package com.binar.bejticketing.payload.request;
 
+import com.binar.bejticketing.entity.User;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
+@Setter
+@Getter
 public class SignUpRequest {
     @NotBlank
     @Size(min = 3)
@@ -14,7 +22,15 @@ public class SignUpRequest {
     @Email
     private String email;
 
-    private Set<String> role;
+    private String firstname;
+
+    private String lastname;
+
+    private String address;
+
+    private String noHp;
+
+    private Set<String> role=new HashSet<>(Arrays.asList("User"));
 
     @NotBlank
     @Size(min = 2)
