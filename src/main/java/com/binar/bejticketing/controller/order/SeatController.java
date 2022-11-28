@@ -25,7 +25,7 @@ public class SeatController {
         return new ResponseEntity<>(seatService.getAllSeats(), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/number")
     public ResponseEntity<List<Seat>> getAllSeatsByNumber(@RequestParam String number){
         return new ResponseEntity<>(seatService.getSeatByNumber(number), HttpStatus.OK);
     }
