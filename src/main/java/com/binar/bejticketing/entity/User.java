@@ -7,7 +7,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+
+import static javax.persistence.FetchType.EAGER;
 
 @Getter
 @Setter
@@ -53,6 +57,9 @@ public class User {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
     private Role role;
+
+    @ManyToMany(fetch = EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
