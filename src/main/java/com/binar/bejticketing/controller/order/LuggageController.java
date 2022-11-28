@@ -20,7 +20,7 @@ public class LuggageController {
         return new ResponseEntity<>(luggageService.getAllLuggage(), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/state")
     public ResponseEntity<List<Luggage>> getLuggageByState(@RequestParam boolean state){
         return new ResponseEntity<>(luggageService.getLuggageByState(state), HttpStatus.OK);
     }
