@@ -12,6 +12,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Data
@@ -26,15 +27,19 @@ public class Passenger {
     private Long idPassenger;
 
     @Column(name = "first_name")
+    @NotBlank(message = "First Name Not Null")
     private String firstName;
 
     @Column(name = "last_name")
+    @NotBlank(message = "Last Name Not Null")
     private String lastName;
 
     @Column(name = "contact_number")
+    @NotBlank(message = "Contact Number Not Null")
     private String contactNumber;
 
     @Column(name = "email")
+    @NotBlank(message = "Email Not Null")
     @Email
     private String email;
 
@@ -50,6 +55,7 @@ public class Passenger {
     private Gender gender;
 
     @Column(name = "nationality")
+    @NotBlank(message = "Nationality Not Null")
     private String nationality;
 
     @Column(name = "special_request")
