@@ -21,11 +21,11 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBooking;
 
-    @OneToOne(mappedBy = "booking")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_booking_details")
     private BookingDetails bookingDetails;
 
-    @OneToOne(mappedBy = "booking")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_payment")
     private Payment payment;
 
