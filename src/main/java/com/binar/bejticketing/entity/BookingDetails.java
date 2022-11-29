@@ -1,0 +1,33 @@
+package com.binar.bejticketing.entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "booking_details")
+public class BookingDetails {
+    @Id
+    @Column(name = "id_booking_details")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idBookingDetails;
+
+    @Column(name = "price")
+    private Double price;
+
+    @Column(name = "state_pricing")
+    private boolean statePricing = false;
+
+    @OneToOne
+    @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
+    @JsonIgnore
+    private Booking booking;
+
+
+}

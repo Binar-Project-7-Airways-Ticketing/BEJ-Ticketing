@@ -66,6 +66,11 @@ public class Passenger {
     private AgeCategory ageCategory;
 
     @OneToOne
+    @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
+    @JsonIgnore
+    private Booking booking;
+
+    @OneToOne
     @JoinColumn(name = "id_payment", referencedColumnName = "id_payment")
     @JsonIgnore
     private Payment payment;
