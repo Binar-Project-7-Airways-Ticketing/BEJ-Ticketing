@@ -2,6 +2,7 @@ package com.binar.bejticketing.entity;
 
 import com.binar.bejticketing.utils.PaymentMethod;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,11 @@ public class Payment {
 
     @Column(name = "is_paying")
     private boolean isPaying = false;
+
+    @OneToOne
+    @JoinColumn(referencedColumnName = "id_booking", name = "id_booking")
+    @JsonIgnore
+    private Booking booking;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

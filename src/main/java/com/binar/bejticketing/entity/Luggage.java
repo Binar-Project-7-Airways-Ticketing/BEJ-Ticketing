@@ -1,6 +1,7 @@
 package com.binar.bejticketing.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,11 @@ public class Luggage {
 
     @Column(name = "is_ready")
     private boolean isReady = true;
+
+    @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
+    @OneToOne
+    @JsonIgnore
+    private Booking booking;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
