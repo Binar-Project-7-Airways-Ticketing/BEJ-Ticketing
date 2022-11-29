@@ -40,8 +40,8 @@ public class Booking {
     @Column(name = "is_valid")
     private boolean isValid = true;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_luggage")
+    @ManyToOne
+    @JoinColumn(name = "id_user")
     private User user;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
