@@ -21,18 +21,8 @@ public class BookingController {
     private BookingService bookingService;
 
     @GetMapping
-    public ResponseEntity<ResponseData<List<Booking>>> getAllBooking(Errors errors){
+    public ResponseEntity<ResponseData<List<Booking>>> getAllBooking(){
         ResponseData<List<Booking>> responseData = new ResponseData<>();
-
-        if (errors.hasErrors()){
-            for (ObjectError error: errors.getAllErrors()){
-                responseData.getMessages().add(error.getDefaultMessage());
-            }
-            responseData.setStatus(false);
-            responseData.setPayload(null);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(responseData);
-        }
-
 
         responseData.setStatus(true);
         responseData.setPayload(bookingService.getAllBooking());
@@ -40,18 +30,8 @@ public class BookingController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseData<Booking>> getBookingById(@PathVariable("id") Long id, Errors errors){
+    public ResponseEntity<ResponseData<Booking>> getBookingById(@PathVariable("id") Long id){
         ResponseData<Booking> responseData = new ResponseData<>();
-
-        if (errors.hasErrors()){
-            for (ObjectError error: errors.getAllErrors()){
-                responseData.getMessages().add(error.getDefaultMessage());
-            }
-            responseData.setStatus(false);
-            responseData.setPayload(null);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(responseData);
-        }
-
 
         responseData.setStatus(true);
         responseData.setPayload(bookingService.getBookingById(id));
