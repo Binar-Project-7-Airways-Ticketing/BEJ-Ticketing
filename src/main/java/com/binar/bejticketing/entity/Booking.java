@@ -29,18 +29,18 @@ public class Booking {
     @JoinColumn(name = "id_payment")
     private Payment payment;
 
-    @OneToOne(mappedBy = "booking")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
-    @OneToOne(mappedBy = "booking")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_luggage")
     private Luggage luggage;
 
     @Column(name = "is_valid")
     private boolean isValid = true;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_luggage")
     private User user;
 
