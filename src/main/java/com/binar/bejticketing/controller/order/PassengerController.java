@@ -5,6 +5,7 @@ import com.binar.bejticketing.entity.AgeCategory;
 import com.binar.bejticketing.entity.Passenger;
 import com.binar.bejticketing.service.AgeCategoryService;
 import com.binar.bejticketing.service.PassengerService;
+import com.binar.bejticketing.utils.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -66,8 +67,22 @@ public class PassengerController {
     }
 
     @PostMapping("/create/passengers")
-    public ResponseEntity<List<Passenger>> createPassengers(@RequestBody List<Passenger> passenger){
-        return new ResponseEntity<>(passengerService.createPassengers(passenger), HttpStatus.CREATED);
+    public ResponseEntity<ResponseData<List<Passenger>>> createPassengers(@RequestBody List<Passenger> passenger,
+                                                            Errors errors){
+
+        ResponseData<List<Passenger>> responseData = new ResponseData<>();
+
+        if (errors.hasErrors()){
+            for (ObjectError error: errors.getAllErrors()){
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+        responseData.setPayload(passengerService.createPassengers(passenger));
+        return ResponseEntity.ok(responseData);
     }
 
     @PostMapping("/create/age-category")
