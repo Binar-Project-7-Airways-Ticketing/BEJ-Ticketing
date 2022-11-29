@@ -37,8 +37,11 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public BookingDetails createBookingDetail(Long idBooking, BookingDetails bookingDetails) {
         Optional<Booking> booking = bookingRepository.findById(idBooking);
+        Optional<BookingDetails> bookingDetailsCheck = bookingDetailsRepository.findById(bookingDetails.getIdBookingDetails());
         if (booking.isEmpty()){
             throw new DataNotFoundException(idBooking);
+        } else if (bookingDetailsCheck.isPresent()) {
+            throw new RuntimeException("Data has been already");
         }
         booking.get().setBookingDetails(bookingDetails);
         return bookingDetailsRepository.saveAndFlush(booking.get().getBookingDetails());
