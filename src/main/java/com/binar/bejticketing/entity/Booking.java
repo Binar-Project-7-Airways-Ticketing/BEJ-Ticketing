@@ -37,6 +37,9 @@ public class Booking {
     @JoinColumn(name = "id_luggage")
     private Luggage luggage;
 
+    @Column(name = "is_valid")
+    private boolean isValid = true;
+
     @ManyToOne
     @JoinColumn(name = "id_luggage")
     private User user;
