@@ -52,7 +52,7 @@ public class AuthController {
     public ResponseEntity<Object> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = null;
-        if (!loginRequest.getEmail().isBlank()){
+        if (!loginRequest.getEmail().isEmpty()){
             User user = userRepository.findByEmail(loginRequest.getEmail());
             authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername()
