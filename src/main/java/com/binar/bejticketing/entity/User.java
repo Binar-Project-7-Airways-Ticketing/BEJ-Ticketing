@@ -6,6 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,6 +41,7 @@ public class User {
     private String address;
 
     @Column(name = "email")
+    @Email(message = "Value must be Email")
     private String email;
 
     @Column(name = "password")
