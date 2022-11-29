@@ -86,8 +86,22 @@ public class PassengerController {
     }
 
     @PostMapping("/create/age-category")
-    public ResponseEntity<AgeCategory> createAgeCategory(@Valid @RequestBody AgeCategory ageCategory){
-        return new ResponseEntity<>(ageCategoryService.createAgeCategory(ageCategory), HttpStatus.CREATED);
+    public ResponseEntity<ResponseData<AgeCategory>> createAgeCategory(@Valid @RequestBody AgeCategory ageCategory,
+                                                         Errors errors){
+
+        ResponseData<AgeCategory> responseData = new ResponseData<>();
+
+        if (errors.hasErrors()){
+            for (ObjectError error: errors.getAllErrors()){
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+        responseData.setPayload(ageCategoryService.createAgeCategory(ageCategory));
+        return ResponseEntity.ok(responseData);
     }
 
 //    Update
