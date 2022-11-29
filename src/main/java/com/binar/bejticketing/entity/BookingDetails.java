@@ -30,7 +30,7 @@ public class BookingDetails {
 
     @OneToOne(mappedBy = "bookingDetails")
     @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
-//    @JsonIgnore
+    @JsonIgnore
     private Booking booking;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
