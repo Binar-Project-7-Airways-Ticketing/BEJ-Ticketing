@@ -65,8 +65,8 @@ public class Passenger {
     @OneToOne(mappedBy = "passenger")
     private AgeCategory ageCategory;
 
-    @OneToOne
     @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
+    @OneToOne
     @JsonIgnore
     private Booking booking;
 
