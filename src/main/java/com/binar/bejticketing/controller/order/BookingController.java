@@ -58,7 +58,7 @@ public class BookingController {
         return ResponseEntity.ok(responseData);
     }
 
-    @PostMapping("/{id}/create/booking-details")
+    @PutMapping("/{id}/create/booking-details")
     public ResponseEntity<ResponseData<BookingDetails>> createBookingDetails(
             @PathVariable("id") Long id,
             @RequestBody @Valid BookingDetails bookingDetails,
