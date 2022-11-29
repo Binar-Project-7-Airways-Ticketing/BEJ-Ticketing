@@ -1,16 +1,19 @@
 package com.binar.bejticketing.controller.order;
 
+import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.AgeCategory;
 import com.binar.bejticketing.entity.Passenger;
-import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.service.AgeCategoryService;
 import com.binar.bejticketing.service.PassengerService;
+import com.binar.bejticketing.utils.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -45,24 +48,66 @@ public class PassengerController {
 
 //    Create
     @PostMapping("/create/passenger")
-    public ResponseEntity<Passenger> createPassenger(@RequestBody Passenger passenger){
-        return new ResponseEntity<>(passengerService.createPassenger(passenger), HttpStatus.CREATED);
+    public ResponseEntity<ResponseData<Passenger>> createPassenger(@Valid @RequestBody Passenger passenger,
+                                                                   Errors errors){
+
+        ResponseData<Passenger> responseData = new ResponseData<>();
+
+        if (errors.hasErrors()){
+            for (ObjectError error: errors.getAllErrors()){
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+        responseData.setPayload(passengerService.createPassenger(passenger));
+        return ResponseEntity.ok(responseData);
     }
 
     @PostMapping("/create/passengers")
-    public ResponseEntity<List<Passenger>> createPassengers(@RequestBody List<Passenger> passenger){
-        return new ResponseEntity<>(passengerService.createPassengers(passenger), HttpStatus.CREATED);
+    public ResponseEntity<ResponseData<List<Passenger>>> createPassengers(@RequestBody List<Passenger> passenger,
+                                                            Errors errors){
+
+        ResponseData<List<Passenger>> responseData = new ResponseData<>();
+
+        if (errors.hasErrors()){
+            for (ObjectError error: errors.getAllErrors()){
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+        responseData.setPayload(passengerService.createPassengers(passenger));
+        return ResponseEntity.ok(responseData);
     }
 
     @PostMapping("/create/age-category")
-    public ResponseEntity<AgeCategory> createAgeCategory(@RequestBody AgeCategory ageCategory){
-        return new ResponseEntity<>(ageCategoryService.createAgeCategory(ageCategory), HttpStatus.CREATED);
+    public ResponseEntity<ResponseData<AgeCategory>> createAgeCategory(@Valid @RequestBody AgeCategory ageCategory,
+                                                         Errors errors){
+
+        ResponseData<AgeCategory> responseData = new ResponseData<>();
+
+        if (errors.hasErrors()){
+            for (ObjectError error: errors.getAllErrors()){
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+        responseData.setPayload(ageCategoryService.createAgeCategory(ageCategory));
+        return ResponseEntity.ok(responseData);
     }
 
 //    Update
 
     @PutMapping("/edit/age-category")
-    public ResponseEntity<AgeCategory> updateAgeCategory(@RequestBody AgeCategory ageCategory){
+    public ResponseEntity<AgeCategory> updateAgeCategory(@Valid @RequestBody AgeCategory ageCategory){
         return new ResponseEntity<>(ageCategoryService.updateAgeCategory(ageCategory), HttpStatus.ACCEPTED);
     }
 
