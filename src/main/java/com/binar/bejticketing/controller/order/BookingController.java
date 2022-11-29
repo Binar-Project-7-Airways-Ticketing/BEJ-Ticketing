@@ -30,7 +30,7 @@ public class BookingController {
             }
             responseData.setStatus(false);
             responseData.setPayload(null);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(responseData);
         }
 
 
@@ -49,7 +49,7 @@ public class BookingController {
             }
             responseData.setStatus(false);
             responseData.setPayload(null);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(responseData);
         }
 
 
