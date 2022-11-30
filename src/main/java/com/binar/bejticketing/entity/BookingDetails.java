@@ -1,6 +1,7 @@
 package com.binar.bejticketing.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,17 +15,23 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "seats")
-public class Seat {
+@Table(name = "booking_details")
+public class BookingDetails {
     @Id
+    @Column(name = "id_booking_details")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idSeat;
+    private Long idBookingDetails;
 
-    @Column(name = "number_seat")
-    private String numberSeat;
+    @Column(name = "price")
+    private Double price;
 
-    @Column(name = "is_ready")
-    private boolean isReady = true;
+    @Column(name = "state_pricing")
+    private boolean statePricing = false;
+
+    @OneToOne(mappedBy = "bookingDetails")
+    @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
+    @JsonIgnore
+    private Booking booking;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

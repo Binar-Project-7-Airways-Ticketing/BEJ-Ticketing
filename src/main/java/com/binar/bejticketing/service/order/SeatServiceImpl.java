@@ -44,7 +44,7 @@ public class SeatServiceImpl implements SeatService {
 //    }
 
     @Override
-    public Seat getSeatByNumber(String numberSeat) {
-        return null;
+    public List<Seat> getSeatByNumber(String numberSeat) {
+        return seatRepository.getSeatsByNumber(numberSeat);
     }
 }
