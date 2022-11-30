@@ -1,11 +1,13 @@
 package com.binar.bejticketing.security.impl;
 
+import com.binar.bejticketing.entity.Role;
 import com.binar.bejticketing.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -41,8 +43,10 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public static UserDetailsImpl build(User user) {
-        List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRoleStatus()))
+        List<Role> roles = new ArrayList<>();
+        roles.add(user.getRole());
+        List<SimpleGrantedAuthority> authorities =roles
+                .stream().map(role -> new SimpleGrantedAuthority(role.getRoleStatus()))
                 .toList();
 
         return new UserDetailsImpl(

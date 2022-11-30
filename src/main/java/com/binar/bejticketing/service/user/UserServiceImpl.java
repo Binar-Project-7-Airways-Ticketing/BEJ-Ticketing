@@ -58,7 +58,8 @@ public class UserServiceImpl implements UserService {
     log.info("adding role {} to user {}",roleName,username);
         User user = userRepository.findByUsername(username);
         Role role = roleRepository.findByroleStatus(roleName);
-        user.getRoles().add(role);
+        user.setRole(role);
+        userRepository.save(user);
     }
     @Override
     public User findById(Long id) {

@@ -58,8 +58,8 @@ public class User {
     @ManyToOne
     private Role role;
 
-    @ManyToMany(fetch = EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+//    @ManyToMany(fetch = EAGER)
+//    private Collection<Role> roles = new ArrayList<>();
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
