@@ -21,13 +21,12 @@ public class Flight {
     @Column(name = "id_flight")
     private Long idFlight;
 
-    @JoinColumn(name = "id_route", referencedColumnName = "id_route")
-    @ManyToOne
-    private Route route;
 
-    @JoinColumn(name = "id_plane", referencedColumnName = "id_plane")
-    @ManyToOne
-    private Plane plane;
+    @Column(name = "departure_code")
+    private String departureCode;
+
+    @Column(name = "arrival_code")
+    private String arrivalCode;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "departure_date")
@@ -45,11 +44,15 @@ public class Flight {
     @Column(name = "arrival_time")
     private Date arrivalTime;
 
+    @JoinColumn(name = "id_plane", referencedColumnName = "id_plane")
+    @ManyToOne
+    private Plane plane;
+
     @Column(name = "flight_number")
     private String flightNumber;
 
     @Column(name = "is_active")
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

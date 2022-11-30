@@ -8,9 +8,12 @@ import java.util.Date;
 import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight,Long> {
-    @Query("SELECT f FROM Flight f WHERE f.route.airportStart.airportName = :airportStart and  f.route.airportFinal.airportName = :airportFinal and f.isActive=TRUE and f.departureDate=:date")
-    List<Flight> getFlightSearchDate(String airportStart , String airportFinal , Date date);
+    @Query("SELECT f FROM Flight f WHERE f.departureCode = :departureCode AND f.arrivalCode =:arrivalCode AND f.isActive=true AND f.departureDate=:date")
+    List<Flight> getFlightSearchDate(String departureCode , String arrivalCode , Date date);
 
-    @Query("SELECT f FROM Flight f WHERE f.route.airportStart.airportName = :airportStart and  f.route.airportFinal.airportName = :airportFinal and f.isActive=TRUE")
-    List<Flight> getFlightSearch(String airportStart , String airportFinal);
+    @Query("SELECT f FROM Flight f WHERE f.departureCode = :departureCode AND f.arrivalCode =:arrivalCode AND f.isActive=true ")
+    List<Flight> getFlightSearch(String departureCode , String arrivalCode );
+
+    @Query("SELECT f FROM Flight f WHERE f.isActive=true")
+    List<Flight> getAllFlight();
 }

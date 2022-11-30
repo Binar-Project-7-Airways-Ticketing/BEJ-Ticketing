@@ -28,7 +28,7 @@ public class Plane {
     private Integer baggageCapacity;
 
     @OneToOne
-    @JoinColumn(name = "id_plane_class", referencedColumnName = "id_plane_class")
+    @JoinColumn(name = "id_plane_details", referencedColumnName = "id_plane_details")
     private PlaneDetails planeClass;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")

@@ -21,12 +21,27 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public List<Flight> findFlightSearchDate(String airportStart, String airportFinal, Date date) {
-        return flightRepository.getFlightSearchDate(airportStart,airportFinal,date);
+    public Flight updateFlight(Flight flight) {
+        return flightRepository.save(flight);
     }
 
     @Override
-    public List<Flight> findFlightSearch(String airportStart, String airportFinal) {
-        return null;
+    public void deleteFlight(Long id) {
+    flightRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Flight> findFlightSearchDate(String departureCode , String arrivalCode , Date date) {
+        return flightRepository.getFlightSearchDate(departureCode,arrivalCode,date);
+    }
+
+    @Override
+    public List<Flight> findFlightSearch(String departureCode , String arrivalCode) {
+        return flightRepository.getFlightSearch(departureCode,arrivalCode);
+    }
+
+    @Override
+    public List<Flight> findAllFlightAvailable() {
+        return flightRepository.getAllFlight();
     }
 }

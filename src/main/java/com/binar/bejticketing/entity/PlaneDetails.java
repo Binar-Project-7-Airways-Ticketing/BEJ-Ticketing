@@ -18,7 +18,7 @@ import java.util.Date;
 public class PlaneDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_plane_class")
+    @Column(name = "id_plane_details")
     private Long idPlaneClass;
 
     @Column(name = "plane_class_name")

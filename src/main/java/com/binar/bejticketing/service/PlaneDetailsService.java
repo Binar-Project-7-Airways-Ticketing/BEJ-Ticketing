@@ -9,7 +9,10 @@ import java.util.List;
 @Service
 public interface PlaneDetailsService {
     PlaneDetails createPlaneDetails(PlaneDetails planeDetails);
-    PlaneDetails createPlaneClass(PlaneDetails planeClass);
 
-    List<PlaneDetails> getAllPlaneClass();
+    PlaneDetails updatePlaneDetails(PlaneDetails planeDetails);
+
+    void deletePlaneDetails(Long id);
+
+    List<PlaneDetails> getAllPlaneDetails();
 }

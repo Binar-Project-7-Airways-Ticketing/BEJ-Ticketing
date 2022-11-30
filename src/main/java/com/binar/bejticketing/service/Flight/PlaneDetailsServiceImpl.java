@@ -21,12 +21,18 @@ public class PlaneDetailsServiceImpl implements PlaneDetailsService {
     }
 
     @Override
-    public PlaneDetails createPlaneClass(PlaneDetails planeClass) {
-        return planeDetailsRepository.save(planeClass);
+    public PlaneDetails updatePlaneDetails(PlaneDetails planeDetails) {
+        return planeDetailsRepository.save(planeDetails);
     }
 
     @Override
-    public List<PlaneDetails> getAllPlaneClass() {
+    public void deletePlaneDetails(Long id) {
+        planeDetailsRepository.deleteById(id);
+    }
+
+
+    @Override
+    public List<PlaneDetails> getAllPlaneDetails() {
         return planeDetailsRepository.findAll();
     }
 }

@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface PlaneService {
 
     Plane createPlane(Plane plane);
+    Plane updatePlane(Plane plane);
+    void deletePlane(Long id);
 
     List<Plane> getAllPlane();
 

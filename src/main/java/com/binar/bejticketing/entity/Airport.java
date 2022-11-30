@@ -7,25 +7,28 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "city")
-public class City {
+@Table(name = "airport")
+public class Airport {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_city")
-    private Long idCity;
+    private String airportCode;
 
-    @Column(name = "city_name")
-    private String cityName;
+    @Column(name = "airport_name")
+    private String airportName;
 
-    @Column(name = "city_code")
-    private String cityCode;
+    @Column(name = "city")
+    private String city;
+
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

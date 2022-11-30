@@ -21,6 +21,16 @@ public class PlaneServiceImpl implements PlaneService {
     }
 
     @Override
+    public Plane updatePlane(Plane plane) {
+        return planeRepository.save(plane);
+    }
+
+    @Override
+    public void deletePlane(Long id) {
+        planeRepository.deleteById(id);
+    }
+
+    @Override
     public List<Plane> getAllPlane() {
         return planeRepository.findAll();
     }
