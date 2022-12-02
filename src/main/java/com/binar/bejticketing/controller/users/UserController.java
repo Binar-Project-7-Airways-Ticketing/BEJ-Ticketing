@@ -74,7 +74,7 @@ public class UserController {
         private String username;
         private String roleName;
     }
-    @PostMapping(value = "/upload/{id}" )
+    @PostMapping(value = "/upload/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
     public ResponseEntity<ResponseData> upload(@PathVariable("id") Long id , @RequestParam("image") MultipartFile file)throws IOException {
         byte[] bit = file.getBytes();
         Files.write(Path.of("src/main/java/com/binar/bejticketing/media/profile.jpg"),bit);
