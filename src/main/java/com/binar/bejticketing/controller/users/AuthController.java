@@ -51,9 +51,17 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<Object> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername()
-                        , loginRequest.getPassword()));
+        Authentication authentication = null;
+        if (loginRequest.getEmail() != null){
+            User user = userRepository.findByEmail(loginRequest.getEmail());
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(user.getUsername()
+                            , loginRequest.getPassword()));
+        }else {
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername()
+                            , loginRequest.getPassword()));
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);

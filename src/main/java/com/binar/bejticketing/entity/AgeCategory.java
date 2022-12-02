@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.math.BigInteger;
 import java.util.Date;
 
 @Data
@@ -22,9 +23,12 @@ public class AgeCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategory;
 
-    @Column
+    @Column(name = "name_category")
     @NotBlank(message = "Name Category shouldn't Blank")
     private String nameCategory;
+
+    @Column(name = "amount_passenger")
+    private BigInteger amount;
 
     @OneToOne
     @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")
