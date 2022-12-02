@@ -15,4 +15,5 @@ public interface UserService {
     User findById(Long id);
     Role saveRole(Role role);
     void addRoletoUser(String username, String roleName);
+    void uploadImage(String url, Long id);
 }

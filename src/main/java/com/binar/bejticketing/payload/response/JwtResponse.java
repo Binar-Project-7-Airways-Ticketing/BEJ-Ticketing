@@ -1,8 +1,6 @@
 package com.binar.bejticketing.payload.response;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -21,9 +19,10 @@ public class JwtResponse {
     private String email;
     private String noHp;
     private List<String> role;
+    private String pictureUrl;
 
 
-    public JwtResponse(String token,Long id, String username, String firstname, String lastname,String birthday , String address, String email, String noHp, List<String> role) {
+    public JwtResponse(String token,Long id, String username, String firstname, String lastname,String birthday , String address, String email, String noHp,  List<String> role,String pictureUrl) {
         this.token = token;
         this.id = id;
         this.username = username;
@@ -34,23 +33,10 @@ public class JwtResponse {
         this.email = email;
         this.noHp = noHp;
         this.role = role;
+        this.pictureUrl = pictureUrl;
     }
 
-//    public String getAccessToken() {
-//        return token;
-//    }
-//
-//    public void setAccessToken(String accessToken) {
-//        this.token = accessToken;
-//    }
-//
-//    public String getTokenType() {
-//        return type;
-//    }
-//
-//    public void setTokenType(String tokenType) {
-//        this.type = tokenType;
-//    }
+
 
     public Long getId() {
         return id;

@@ -80,7 +80,8 @@ public class AuthController {
                 userDetails.getAddress(),
                 userDetails.getEmail(),
                 userDetails.getNoHp(),
-                roles));
+                roles,
+                userDetails.getPictureUrl()));
     }
     @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {

@@ -61,6 +61,12 @@ public class UserServiceImpl implements UserService {
         user.setRole(role);
         userRepository.save(user);
     }
+
+    @Override
+    public void uploadImage(String url, Long id) {
+        userRepository.uploadImage(url, id);
+    }
+
     @Override
     public User findById(Long id) {
         Optional<User> search = userRepository.findById(id);
@@ -83,6 +89,7 @@ public class UserServiceImpl implements UserService {
             user.setAddress(user.getAddress());
             user.setBirthday(user.getBirthday());
             user.setEmail(user.getEmail());
+            user.setNoHp(user.getNoHp());
             user.setPassword(user.getPassword());
             userRepository.saveAndFlush(user);
         }

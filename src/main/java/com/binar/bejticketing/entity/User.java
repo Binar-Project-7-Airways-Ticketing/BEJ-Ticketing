@@ -59,14 +59,11 @@ public class User {
     private LocalDate lastLoginDate;
 
     @Column(name = "picture_url")
-    private String pictureUrl;
+    private String pictureUrl="http://res.cloudinary.com/dwncupcal/image/upload/be781f4f-99d1-4dc4-925d-58072f4de335";
 
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
     private Role role;
-
-//    @ManyToMany(fetch = EAGER)
-//    private Collection<Role> roles = new ArrayList<>();
 
     @OneToMany(targetEntity = Booking.class, mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
