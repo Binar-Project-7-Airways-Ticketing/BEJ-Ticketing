@@ -80,7 +80,8 @@ public class AuthController {
                 userDetails.getAddress(),
                 userDetails.getEmail(),
                 userDetails.getNoHp(),
-                roles));
+                roles,
+                userDetails.getPictureUrl()));
     }
     @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
@@ -109,24 +110,23 @@ public class AuthController {
 
         user.setPassword(bCryptPasswordEncoder.encode(signUpRequest.getPassword()));
 
-        Set<String> strRoles = signUpRequest.getRole();
-        Set<Role> roles = new HashSet<>();
+        String strRole = signUpRequest.getRole();
 
-        if (strRoles == null) {
+        if (strRole == null) {
             Role userRole = roleRepository.findByroleStatus(String.valueOf(ERoles.USER_ROLE));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                if ("admin".equals(role)) {
+            user.setRole(userRole);
+        }
+        else{
+            {
+                if ("admin".equals(strRole)) {
                     Role adminRole = roleRepository.findByroleStatus(String.valueOf(ERoles.ADMIN_ROLE));
-                    roles.add(adminRole);
+                    user.setRole(adminRole);
                 } else {
                     Role userRole = roleRepository.findByroleStatus(String.valueOf(ERoles.USER_ROLE));
-                    roles.add(userRole);
+                    user.setRole(userRole);
                 }
-            });
+            }
         }
-        user.setRoles(roles);
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully! "));
