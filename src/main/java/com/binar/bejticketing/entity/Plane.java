@@ -27,7 +27,7 @@ public class Plane {
     @Column(name = "baggage_capacity")
     private Integer baggageCapacity;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name = "id_plane_details", referencedColumnName = "id_plane_details")
     private PlaneDetails planeClass;
 
@@ -36,6 +36,7 @@ public class Plane {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
+    @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @Column(name = "updated_at")
     @UpdateTimestamp
     private Date updatedAt;

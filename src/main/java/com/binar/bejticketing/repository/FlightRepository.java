@@ -2,8 +2,10 @@ package com.binar.bejticketing.repository;
 
 import com.binar.bejticketing.entity.Flight;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -16,4 +18,9 @@ public interface FlightRepository extends JpaRepository<Flight,Long> {
 
     @Query("SELECT f FROM Flight f WHERE f.isActive=true")
     List<Flight> getAllFlight();
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Flight f set f.isActive=false WHERE f.idFlight=:id")
+    void deleteFlightById(Long id);
 }

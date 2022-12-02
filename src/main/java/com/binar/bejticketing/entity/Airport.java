@@ -29,12 +29,15 @@ public class Airport {
     @Column(name = "city")
     private String city;
 
+    @Column(name = "url_photo")
+    private String urlPhoto;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
+    @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @Column(name = "updated_at")
     @UpdateTimestamp
     private Date updatedAt;

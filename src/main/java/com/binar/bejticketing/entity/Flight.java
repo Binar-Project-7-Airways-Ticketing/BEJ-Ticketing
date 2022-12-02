@@ -21,6 +21,8 @@ public class Flight {
     @Column(name = "id_flight")
     private Long idFlight;
 
+    @Column(name = "flight_number")
+    private String flightNumber;
 
     @Column(name = "departure_code")
     private String departureCode;
@@ -48,8 +50,8 @@ public class Flight {
     @ManyToOne
     private Plane plane;
 
-    @Column(name = "flight_number")
-    private String flightNumber;
+    @Column(name = "price")
+    private Long price;
 
     @Column(name = "is_active")
     private Boolean isActive = true;
@@ -59,6 +61,7 @@ public class Flight {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
+    @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @Column(name = "updated_at")
     @UpdateTimestamp
     private Date updatedAt;

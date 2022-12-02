@@ -2,6 +2,7 @@ package com.binar.bejticketing.controller.flight;
 
 import com.binar.bejticketing.entity.Plane;
 import com.binar.bejticketing.entity.PlaneDetails;
+import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.service.PlaneDetailsService;
 import com.binar.bejticketing.service.PlaneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,11 @@ public class PlaneController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/plane")
+    @GetMapping()
     public ResponseEntity<List<Plane>> getAllPlane(){
         return new ResponseEntity<>(planeService.getAllPlane(),HttpStatus.OK);
     }
-    @GetMapping("/plane/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Plane>> getPlaneById(@PathVariable("id")Long id){
         return new ResponseEntity<>(planeService.getPlaneById(id),HttpStatus.OK);
     }
@@ -53,13 +54,13 @@ public class PlaneController {
 
     @PutMapping("/update/plane-details")
     public ResponseEntity<PlaneDetails> updatePlaneDetails(@RequestBody PlaneDetails planeDetails){
-        return new ResponseEntity<>(planeDetailsService.updatePlaneDetails(planeDetails), HttpStatus.CREATED);
+        return new ResponseEntity<>(planeDetailsService.updatePlaneDetails(planeDetails), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/delete/plane-details/{id}")
-    public ResponseEntity<PlaneDetails> deletePlaneDetails(@PathVariable("id") Long id){
-        planeDetailsService.deletePlaneDetails(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<String> deletePlaneDetails(@PathVariable("id") Long id){
+
+        return new ResponseEntity<>(planeDetailsService.deletePlaneDetails(id),HttpStatus.OK);
     }
 
     @GetMapping("/plane-details")
