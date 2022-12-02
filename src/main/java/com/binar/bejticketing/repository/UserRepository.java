@@ -14,8 +14,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying(clearAutomatically = true)
     @Query("UPDATE User u SET u.isActive = false WHERE u.id = :id")
     void deleteUserById(@Param("id") Long id);
-
-
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.pictureUrl =:url WHERE u.id = :id")
+    void uploadImage(String url , Long id);
     @Query("SELECT u FROM User u WHERE u.id = :id AND u.isActive=true")
     User getUserById(Long id);
 

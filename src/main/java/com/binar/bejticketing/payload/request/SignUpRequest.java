@@ -30,7 +30,7 @@ public class SignUpRequest {
 
     private String noHp;
 
-    private Set<String> role=new HashSet<>(Arrays.asList("User"));
+    private String role;
 
     @NotBlank
     @Size(min = 2)
@@ -64,13 +64,13 @@ public class SignUpRequest {
         this.password = password;
     }
 
-    public Set<String> getRole() {
-        return this.role;
-    }
-
-    public void setRole(Set<String> role) {
-        this.role = role;
-    }
+//    public Set<String> getRole() {
+//        return this.role;
+//    }
+//
+//    public void setRole(Set<String> role) {
+//        this.role = role;
+//    }
 
     public Object getBirthday() {
         return birthday;

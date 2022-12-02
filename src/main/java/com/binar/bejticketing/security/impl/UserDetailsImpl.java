@@ -1,15 +1,21 @@
 package com.binar.bejticketing.security.impl;
 
+import com.binar.bejticketing.entity.Role;
 import com.binar.bejticketing.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+@Setter
+@Getter
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -21,13 +27,14 @@ public class UserDetailsImpl implements UserDetails {
     private final String address;
     private final String email;
     private final String noHp;
+    private  final  String pictureUrl;
 
     @JsonIgnore
     private final String password;
 
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(long id, String username, String firstname, String lastname, String birthday, String address, String email, String password, String noHp, List<SimpleGrantedAuthority> authorities) {
+    public UserDetailsImpl(long id, String username, String firstname, String lastname, String birthday, String address, String email, String password, String noHp,String pictureUrl, List<SimpleGrantedAuthority> authorities) {
         this.id=id;
         this.username=username;
         this.firstname=firstname;
@@ -36,13 +43,16 @@ public class UserDetailsImpl implements UserDetails {
         this.address=address;
         this.email=email;
         this.password=password;
-        this.noHp =noHp;
+        this.noHp=noHp;
+        this.pictureUrl=pictureUrl;
         this.authorities=authorities;
     }
 
     public static UserDetailsImpl build(User user) {
-        List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getRoleStatus()))
+        List<Role> roles = new ArrayList<>();
+        roles.add(user.getRole());
+        List<SimpleGrantedAuthority> authorities =roles
+                .stream().map(role -> new SimpleGrantedAuthority(role.getRoleStatus()))
                 .toList();
 
         return new UserDetailsImpl(
@@ -55,6 +65,7 @@ public class UserDetailsImpl implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 user.getNoHp(),
+                user.getPictureUrl(),
                 authorities);
 
     }

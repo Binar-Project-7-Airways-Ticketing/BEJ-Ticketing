@@ -1,21 +1,34 @@
 package com.binar.bejticketing.controller.users;
 
+import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.Role;
 import com.binar.bejticketing.entity.User;
 import com.binar.bejticketing.service.UserService;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+    @Autowired
+    @Value("${CLOUDINARY_URL}")
+    Cloudinary cloudinary;
     @Autowired
     private UserService userService;
 
@@ -34,10 +47,10 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        return new ResponseEntity<>(userService.postUser(user), HttpStatus.CREATED);
-    }
+//    @PostMapping
+//    public ResponseEntity<User> createUser(@RequestBody User user){
+//        return new ResponseEntity<>(userService.postUser(user), HttpStatus.CREATED);
+//    }
 
     @PostMapping("/role/save")
     public ResponseEntity<Role> saveRole(@RequestBody Role role) {
@@ -60,5 +73,22 @@ public class UserController {
     class RoleToUserForm{
         private String username;
         private String roleName;
+    }
+    @PostMapping(value = "/upload/{id}" )
+    public ResponseEntity<ResponseData> upload(@PathVariable("id") Long id , @RequestParam("image") MultipartFile file)throws IOException {
+        byte[] bit = file.getBytes();
+        Files.write(Path.of("src/main/java/com/binar/bejticketing/media/profile.jpg"),bit);
+
+        String filename = String.valueOf(UUID.randomUUID());
+        cloudinary.uploader().upload(new File("src/main/java/com/binar/bejticketing/media/profile.jpg"),
+                ObjectUtils.asMap("public_id", filename));
+
+        String url = cloudinary.url().imageTag(filename);
+        ResponseData<String> responseData = new ResponseData<>();
+        responseData.setStatus(true);
+        responseData.setPayload(url);
+
+        userService.uploadImage(url, id);
+        return ResponseEntity.ok(responseData);
     }
 }
