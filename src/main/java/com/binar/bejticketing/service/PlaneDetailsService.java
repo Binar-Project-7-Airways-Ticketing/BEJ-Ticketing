@@ -2,6 +2,7 @@ package com.binar.bejticketing.service;
 
 
 import com.binar.bejticketing.entity.PlaneDetails;
+import com.binar.bejticketing.exception.DataNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface PlaneDetailsService {
 
     PlaneDetails updatePlaneDetails(PlaneDetails planeDetails);
 
-    void deletePlaneDetails(Long id);
+    String deletePlaneDetails(Long id);
 
     List<PlaneDetails> getAllPlaneDetails();
 }

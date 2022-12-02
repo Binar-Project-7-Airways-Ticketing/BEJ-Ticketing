@@ -1,6 +1,8 @@
 package com.binar.bejticketing.service.Flight;
 
 import com.binar.bejticketing.entity.Flight;
+import com.binar.bejticketing.entity.PlaneDetails;
+import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.FlightRepository;
 import com.binar.bejticketing.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlightServiceImpl implements FlightService {
@@ -22,12 +25,24 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public Flight updateFlight(Flight flight) {
-        return flightRepository.save(flight);
+        Optional<Flight> byId = flightRepository.findById(flight.getIdFlight());
+
+        if (byId.isPresent()){
+            return flightRepository.save(flight);
+        }
+        throw new DataNotFoundException(flight.getIdFlight());
     }
 
     @Override
-    public void deleteFlight(Long id) {
-    flightRepository.deleteById(id);
+    public String deleteFlight(Long id) {
+        Optional<Flight> byId = flightRepository.findById(id);
+
+        if (byId.isPresent()){
+            flightRepository.deleteFlightById(id);
+            return "Delete Success";
+        }
+
+        throw  new DataNotFoundException(id);
     }
 
     @Override

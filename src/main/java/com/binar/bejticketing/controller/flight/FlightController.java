@@ -3,7 +3,9 @@ package com.binar.bejticketing.controller.flight;
 import com.binar.bejticketing.entity.Flight;
 import com.binar.bejticketing.entity.Passenger;
 import com.binar.bejticketing.service.FlightService;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +31,9 @@ public class FlightController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Flight> deleteFlight(@PathVariable("id")Long id){
-        flightService.deleteFlight(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    public ResponseEntity<String> deleteFlight(@PathVariable("id")Long id){
+
+        return new ResponseEntity<>(flightService.deleteFlight(id),HttpStatus.OK);
     }
 
     @GetMapping()
@@ -44,8 +46,10 @@ public class FlightController {
         return new ResponseEntity<>(flightService.findFlightSearch(dCode,aCode), HttpStatus.OK);
     }
 
-    @GetMapping("/{departure-code}/{arrival-code}/{date}")
-    public ResponseEntity<List<Flight>> getFlightSearchDate(@PathVariable("departure-code") String dCode ,@PathVariable("arrival-code") String aCode,@PathVariable("date") Date date  ){
+    @GetMapping("/{departure-code}/{arrival-code}/date")
+    public ResponseEntity<List<Flight>> getFlightSearchDate(@PathVariable("departure-code") String dCode ,
+                                                            @PathVariable("arrival-code") String aCode,
+                                                            @RequestParam("date") @DateTimeFormat(pattern = "dd-MM-yyyy") Date date){
         return new ResponseEntity<>(flightService.findFlightSearchDate(dCode,aCode,date), HttpStatus.OK);
     }
 }
