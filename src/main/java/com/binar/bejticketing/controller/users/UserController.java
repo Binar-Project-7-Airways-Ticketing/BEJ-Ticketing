@@ -48,11 +48,6 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-//    @PostMapping
-//    public ResponseEntity<User> createUser(@RequestBody User user){
-//        return new ResponseEntity<>(userService.postUser(user), HttpStatus.CREATED);
-//    }
-
     @PostMapping("/role/save")
     public ResponseEntity<Role> saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
@@ -61,7 +56,7 @@ public class UserController {
 
     @PostMapping("/role/addToUser")
     public ResponseEntity<String> addRoletoUser(@RequestBody RoleToUserForm form) {
-        userService.addRoletoUser(form.getUsername(), form.getRoleName());
+        userService.addRoletoUser(form.getDisplayname(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
 
@@ -72,7 +67,7 @@ public class UserController {
     }
     @Data
     class RoleToUserForm{
-        private String username;
+        private String displayname;
         private String roleName;
     }
     @PostMapping(value = "/upload/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )

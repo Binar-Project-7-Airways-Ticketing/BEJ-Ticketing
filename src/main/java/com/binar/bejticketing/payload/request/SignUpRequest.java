@@ -1,22 +1,21 @@
 package com.binar.bejticketing.payload.request;
 
-import com.binar.bejticketing.entity.User;
+import com.binar.bejticketing.utils.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
 @Setter
 @Getter
 public class SignUpRequest {
     @NotBlank
     @Size(min = 3)
-    private String username;
+    private String displayName;
 
     @NotBlank
     @Email
@@ -26,54 +25,43 @@ public class SignUpRequest {
 
     private String lastname;
 
-    private String address;
-
-    private String noHp;
-
     private String role;
+
+    private Gender gender;
 
     @NotBlank
     @Size(min = 2)
     private String password;
 
-    @NotBlank
-    @Size(min = 1)
-    private String birthday;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date birthday;
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-//    public Set<String> getRole() {
-//        return this.role;
+//    public String getDisplayName() {
+//        return displayname;
 //    }
 //
-//    public void setRole(Set<String> role) {
-//        this.role = role;
+//    public void setDisplayName(String displayName) {
+//        this.displayname = displayName;
 //    }
-
-    public Object getBirthday() {
-        return birthday;
-    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public Object getBirthday() {
+//        return birthday;
+//    }
 }
 

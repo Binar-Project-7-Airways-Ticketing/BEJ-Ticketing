@@ -2,6 +2,7 @@ package com.binar.bejticketing.security.impl;
 
 import com.binar.bejticketing.entity.Role;
 import com.binar.bejticketing.entity.User;
+import com.binar.bejticketing.utils.Gender;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,10 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Setter
 @Getter
@@ -20,13 +18,12 @@ public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private final Long id;
-    private final String username;
+    private final String displayname;
     private final String firstname;
     private final String lastname;
-    private final String birthday;
-    private final String address;
+    private final Gender gender;
+    private final Date birthday;
     private final String email;
-    private final String noHp;
     private  final  String pictureUrl;
 
     @JsonIgnore
@@ -34,16 +31,15 @@ public class UserDetailsImpl implements UserDetails {
 
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(long id, String username, String firstname, String lastname, String birthday, String address, String email, String password, String noHp,String pictureUrl, List<SimpleGrantedAuthority> authorities) {
+    public UserDetailsImpl(long id, String displayname, String firstname, String lastname, Gender gender, Date birthday, String email, String password, String pictureUrl, List<SimpleGrantedAuthority> authorities) {
         this.id=id;
-        this.username=username;
+        this.displayname=displayname;
         this.firstname=firstname;
         this.lastname=lastname;
+        this.gender=gender;
         this.birthday=birthday;
-        this.address=address;
         this.email=email;
         this.password=password;
-        this.noHp=noHp;
         this.pictureUrl=pictureUrl;
         this.authorities=authorities;
     }
@@ -57,14 +53,13 @@ public class UserDetailsImpl implements UserDetails {
 
         return new UserDetailsImpl(
                 user.getId(),
-                user.getUsername(),
+                user.getDisplayName(),
                 user.getFirstName(),
                 user.getLastName(),
+                user.getGender(),
                 user.getBirthday(),
-                user.getAddress(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getNoHp(),
                 user.getPictureUrl(),
                 authorities);
 
@@ -80,12 +75,6 @@ public class UserDetailsImpl implements UserDetails {
     public String getLastname() {
         return lastname;
     }
-    public String getAddress() {
-        return address;
-    }
-    public String getNoHp(){
-        return noHp;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -99,16 +88,8 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return displayname;
     }
-    public String getEmail(){
-        return email;
-    }
-
-    public String getBirthday(){
-        return birthday;
-    }
-
 
     @Override
     public boolean isAccountNonExpired() {

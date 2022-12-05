@@ -1,5 +1,6 @@
 package com.binar.bejticketing.entity;
 
+import com.binar.bejticketing.utils.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -27,8 +28,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "display_name")
+    private String displayName;
 
     @Column(name = "first_name")
     private String firstName;
@@ -36,11 +37,13 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "birthday")
-    private String birthday;
+    @Column(name = "gender")
+    @Enumerated(EnumType.ORDINAL)
+    private Gender gender;
 
-    @Column(name = "address")
-    private String address;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    @Column(name = "birthday")
+    private Date birthday;
 
     @Column(name = "email")
     @Email(message = "Value must be Email")
@@ -48,9 +51,6 @@ public class User {
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "no_hp")
-    private String noHp;
 
     @Column(name = "is_active")
     private boolean isActive = true;
