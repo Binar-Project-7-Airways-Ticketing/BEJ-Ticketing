@@ -7,6 +7,7 @@ import com.binar.bejticketing.service.UserService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import lombok.Data;
+import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -69,7 +70,7 @@ public class UserController {
         private String displayname;
         private String roleName;
     }
-    @PostMapping(value = "/upload/{id}" )
+    @PostMapping(value = "/upload/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
     public ResponseEntity<ResponseData> upload(@PathVariable("id") Long id , @RequestParam("image") MultipartFile file)throws IOException {
         byte[] bit = file.getBytes();
         Files.write(Path.of("src/main/java/com/binar/bejticketing/media/profile.jpg"),bit);

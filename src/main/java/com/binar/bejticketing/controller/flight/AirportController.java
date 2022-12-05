@@ -70,7 +70,7 @@ public class AirportController {
         return new ResponseEntity<>(airportService.findAirportByCity(city), HttpStatus.OK);
     }
 
-    @PostMapping(value = "/upload/{city}" )
+    @PostMapping(value = "/upload/{city}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ResponseData> upload(@PathVariable("city") String city , @RequestParam("image") MultipartFile file)throws IOException {
         byte[] bit = file.getBytes();
         Files.write(Path.of("src/main/java/com/binar/bejticketing/media/scenery.jpg"),bit);
