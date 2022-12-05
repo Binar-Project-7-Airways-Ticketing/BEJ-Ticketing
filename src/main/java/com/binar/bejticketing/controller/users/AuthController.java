@@ -24,9 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.HashSet;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -55,11 +54,11 @@ public class AuthController {
         if (loginRequest.getEmail() != null){
             User user = userRepository.findByEmail(loginRequest.getEmail());
             authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getUsername()
+                    new UsernamePasswordAuthenticationToken(user.getDisplayName()
                             , loginRequest.getPassword()));
         }else {
             authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername()
+                    new UsernamePasswordAuthenticationToken(loginRequest.getDisplayName()
                             , loginRequest.getPassword()));
         }
 
@@ -73,20 +72,19 @@ public class AuthController {
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
-                userDetails.getUsername(),
+                userDetails.getDisplayname(),
                 userDetails.getFirstname(),
                 userDetails.getLastname(),
                 userDetails.getBirthday(),
-                userDetails.getAddress(),
+                userDetails.getGender(),
                 userDetails.getEmail(),
-                userDetails.getNoHp(),
                 roles,
                 userDetails.getPictureUrl()));
     }
     @PostMapping("/signup")
     public ResponseEntity<Object> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 
-        if (userRepository.existsByUsername(signUpRequest.getUsername()).equals(true)) {
+        if (userRepository.existsByDisplayName(signUpRequest.getDisplayName()).equals(true)) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
@@ -100,29 +98,28 @@ public class AuthController {
 
         // Create new account
         User user = new User();
-        user.setUsername(signUpRequest.getUsername());
+        user.setDisplayName(signUpRequest.getDisplayName());
         user.setFirstName(signUpRequest.getFirstname());
         user.setLastName(signUpRequest.getLastname());
-        user.setBirthday((String) signUpRequest.getBirthday());
-        user.setAddress(signUpRequest.getAddress());
+        user.setGender(signUpRequest.getGender());
+        user.setBirthday((Date) signUpRequest.getBirthday());
         user.setEmail(signUpRequest.getEmail());
-        user.setNoHp(signUpRequest.getNoHp());
 
         user.setPassword(bCryptPasswordEncoder.encode(signUpRequest.getPassword()));
 
         String strRole = signUpRequest.getRole();
 
         if (strRole == null) {
-            Role userRole = roleRepository.findByroleStatus(String.valueOf(ERoles.USER_ROLE));
+            Role userRole = roleRepository.findByRoleStatus(String.valueOf(ERoles.USER_ROLE));
             user.setRole(userRole);
         }
         else{
             {
                 if ("admin".equals(strRole)) {
-                    Role adminRole = roleRepository.findByroleStatus(String.valueOf(ERoles.ADMIN_ROLE));
+                    Role adminRole = roleRepository.findByRoleStatus(String.valueOf(ERoles.ADMIN_ROLE));
                     user.setRole(adminRole);
                 } else {
-                    Role userRole = roleRepository.findByroleStatus(String.valueOf(ERoles.USER_ROLE));
+                    Role userRole = roleRepository.findByRoleStatus(String.valueOf(ERoles.USER_ROLE));
                     user.setRole(userRole);
                 }
             }
@@ -131,6 +128,4 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully! "));
     }
-
-
 }

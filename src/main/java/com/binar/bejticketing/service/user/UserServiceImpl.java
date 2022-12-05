@@ -54,10 +54,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addRoletoUser(String username, String roleName) {
-    log.info("adding role {} to user {}",roleName,username);
-        User user = userRepository.findByUsername(username);
-        Role role = roleRepository.findByroleStatus(roleName);
+    public void addRoletoUser(String displayName, String roleName) {
+    log.info("adding role {} to user {}",roleName,displayName);
+        User user = userRepository.findByDisplayName(displayName);
+        Role role = roleRepository.findByRoleStatus(roleName);
         user.setRole(role);
         userRepository.save(user);
     }
@@ -83,13 +83,12 @@ public class UserServiceImpl implements UserService {
     public User updaterUser(Long id,User user) {
         User users = findById(id);
         if (user != null) {
-            user.setUsername(user.getUsername());
+            user.setDisplayName(user.getDisplayName());
             user.setFirstName(user.getFirstName());
             user.setLastName(user.getLastName());
-            user.setAddress(user.getAddress());
+            user.setGender(user.getGender());
             user.setBirthday(user.getBirthday());
             user.setEmail(user.getEmail());
-            user.setNoHp(user.getNoHp());
             user.setPassword(user.getPassword());
             userRepository.saveAndFlush(user);
         }
