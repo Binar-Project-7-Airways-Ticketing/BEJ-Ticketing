@@ -12,6 +12,5 @@ public class SeatResponseDto {
     private Long id;
     @NotEmpty(message = "Number Seat Don't empty")
     private String numberSeat;
-    @NotEmpty(message = "State Seat Don't empty")
     private SeatUtils stateSeat;
 }
