@@ -24,7 +24,7 @@ public class Seat {
     @Column(name = "number_seat")
     private String numberSeat;
 
-    @Column(name = "is_ready")
+    @Column(name = "state_seat")
     private SeatUtils stateSeat;
 
     @ManyToOne
