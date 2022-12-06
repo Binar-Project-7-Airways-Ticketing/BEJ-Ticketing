@@ -2,6 +2,7 @@ package com.binar.bejticketing.entity;
 
 import com.binar.bejticketing.utils.Gender;
 import com.binar.bejticketing.utils.SpecialRequest;
+import com.binar.bejticketing.utils.TitleUser;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,9 @@ public class Passenger {
     @Column(name = "id_passenger")
     private Long idPassenger;
 
+    @Column(name = "title")
+    private TitleUser titleUser;
+
     @Column(name = "first_name")
     @NotBlank(message = "First Name Not Null")
     private String firstName;
@@ -37,11 +41,6 @@ public class Passenger {
     @Column(name = "contact_number")
     @NotBlank(message = "Contact Number Not Null")
     private String contactNumber;
-
-    @Column(name = "email")
-    @NotBlank(message = "Email Not Null")
-    @Email
-    private String email;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "birthday")
