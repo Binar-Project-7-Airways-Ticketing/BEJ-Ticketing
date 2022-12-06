@@ -5,11 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
+import java.math.BigInteger;
 
 @Getter
 @Setter
-public class SeatResponseDto {
-    @NotEmpty(message = "Number Seat Don't empty")
-    private String numberSeat;
-    private SeatUtils stateSeat;
+public class LuggageDto {
+    private BigInteger capacity;
+    private BigInteger price;
 }
