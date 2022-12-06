@@ -1,5 +1,6 @@
 package com.binar.bejticketing.service.order;
 
+import com.binar.bejticketing.dto.SeatResponseDto;
 import com.binar.bejticketing.entity.Seat;
 import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.SeatRepository;
