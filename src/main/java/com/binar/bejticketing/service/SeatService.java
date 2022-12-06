@@ -1,5 +1,6 @@
 package com.binar.bejticketing.service;
 
+import com.binar.bejticketing.dto.SeatResponseDto;
 import com.binar.bejticketing.entity.Seat;
 import org.springframework.stereotype.Service;
 
