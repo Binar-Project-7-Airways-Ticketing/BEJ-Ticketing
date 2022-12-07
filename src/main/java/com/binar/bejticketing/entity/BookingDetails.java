@@ -37,15 +37,15 @@ public class BookingDetails {
     @JoinColumn(name = "id_payment")
     private Payment payment;
 
-    @OneToOne
+    @OneToOne(mappedBy = "bookingDetails")
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
-    @OneToOne
+    @OneToOne(mappedBy = "bookingDetails")
     @JoinColumn(name = "id_luggage")
     private Luggage luggage;
 
-    @OneToOne
+    @OneToOne(mappedBy = "bookingDetails")
     @JoinColumn(name = "id_flight")
     private Flight flight;
 
