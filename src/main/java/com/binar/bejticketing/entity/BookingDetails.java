@@ -41,7 +41,7 @@ public class BookingDetails {
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_luggage")
     private Luggage luggage;
 
