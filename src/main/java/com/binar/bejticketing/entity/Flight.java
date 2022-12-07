@@ -57,7 +57,7 @@ public class Flight {
     @Column(name = "is_active")
     private Boolean isActive = true;
 
-    @OneToOne
+    @OneToOne(mappedBy = "flight")
     @JoinColumn(name = "id_booking_details", referencedColumnName = "id_booking_details")
     @JsonIgnore
     private BookingDetails bookingDetails;
