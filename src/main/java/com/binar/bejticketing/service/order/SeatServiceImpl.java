@@ -56,13 +56,14 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public Seat updatePlaneDetail(Long idPlane, Seat seat) {
+    public Seat updatePlaneDetail(Long idSeat, Long idPlane) {
         Optional<PlaneDetails> planeDetails = planeDetailsRepository.findById(idPlane);
+        Optional<Seat> seat = seatRepository.findById(idSeat);
 
         if (planeDetails.isEmpty()){
             throw new EntityNotFoundException();
         }
-        seat.setPlaneDetails(planeDetails.get());
-        return seatRepository.saveAndFlush(seat);
+        seat.get().setPlaneDetails(planeDetails.get());
+        return seatRepository.saveAndFlush(seat.get());
     }
 }
