@@ -56,8 +56,7 @@ public class HistoryController {
 
     @PutMapping("/edit/{id-booking}/{state}")
     public ResponseEntity<ResponseData<History>> editHistory(@PathVariable("id-booking")Long idBooking,
-                                                             @PathVariable("state") boolean state,
-                                                             Errors errors){
+                                                             @PathVariable("state") boolean state){
         ResponseData<History> responseData = new ResponseData<>();
         responseData.setStatus(true);
         responseData.setPayload(historyService.updateHistory(idBooking, state));
