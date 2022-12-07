@@ -61,7 +61,7 @@ public class Passenger {
     @Enumerated(EnumType.ORDINAL)
     private SpecialRequest specialRequest;
 
-    @OneToOne(mappedBy = "passenger")
+    @OneToOne(mappedBy = "passenger",cascade = CascadeType.MERGE)
     private AgeCategory ageCategory;
 
     @JoinColumn(name = "id_booking_detail", referencedColumnName = "id_booking_details")

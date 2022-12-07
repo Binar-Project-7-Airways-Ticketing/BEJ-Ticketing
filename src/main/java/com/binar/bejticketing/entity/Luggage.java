@@ -37,7 +37,7 @@ public class Luggage {
     private BookingDetails booking;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_plane_detail", referencedColumnName = "id_plane_details")
     private PlaneDetails planeDetails;
 
