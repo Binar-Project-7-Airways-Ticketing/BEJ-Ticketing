@@ -31,7 +31,7 @@ public class Luggage {
     @Column(name = "is_ready")
     private boolean isReady = true;
 
-    @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
+    @JoinColumn(name = "id_booking_details", referencedColumnName = "id_booking_details")
     @OneToOne(mappedBy = "luggage")
     @JsonIgnore
     private BookingDetails booking;
