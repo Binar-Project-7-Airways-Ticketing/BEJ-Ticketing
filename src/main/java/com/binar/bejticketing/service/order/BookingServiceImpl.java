@@ -1,7 +1,6 @@
 package com.binar.bejticketing.service.order;
 
 import com.binar.bejticketing.entity.Booking;
-import com.binar.bejticketing.entity.BookingDetails;
 import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.BookingDetailsRepository;
 import com.binar.bejticketing.repository.BookingRepository;
@@ -35,26 +34,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public BookingDetails createBookingDetail(Long idBooking, BookingDetails bookingDetails) {
-        Optional<Booking> booking = bookingRepository.findById(idBooking);
-        Optional<BookingDetails> bookingDetailsCheck = bookingDetailsRepository.findById(bookingDetails.getIdBookingDetails());
-        if (booking.isEmpty()){
+    public Booking updateBookingDetails(Long idBooking, Booking booking) {
+        Optional<Booking> bookingChecking = bookingRepository.findById(idBooking);
+        if (bookingChecking.isEmpty()){
             throw new DataNotFoundException(idBooking);
-        } else if (bookingDetailsCheck.isPresent()) {
-            throw new RuntimeException("Data has been already");
         }
-        booking.get().setBookingDetails(bookingDetails);
-        return bookingDetailsRepository.saveAndFlush(booking.get().getBookingDetails());
-    }
-
-    @Override
-    public Booking updateBookingDetails(Long idBooking, Long idBookingDetails) {
-        Optional<Booking> booking = bookingRepository.findById(idBooking);
-        Optional<BookingDetails> bookingDetails = bookingDetailsRepository.findById(idBookingDetails);
-        if (booking.isEmpty() && bookingDetails.isEmpty()){
-            throw new DataNotFoundException(idBooking, idBookingDetails);
-        }
-        booking.get().setBookingDetails(bookingDetails.get());
-        return booking.get();
+        return bookingRepository.saveAndFlush(booking);
     }
 }
