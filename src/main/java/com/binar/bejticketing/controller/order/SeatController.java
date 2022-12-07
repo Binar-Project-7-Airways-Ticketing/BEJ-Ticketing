@@ -83,24 +83,13 @@ public class SeatController {
         return ResponseEntity.ok(responseData);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<ResponseData<Seat>> updatePlaneDetails(@PathVariable("id") Long idPlane,
-                                                                       @Valid @RequestBody SeatResponseDto seatDto,
-                                                                Errors errors){
+    @PutMapping("/{id-seat}/update/{id-plane}")
+    public ResponseEntity<ResponseData<Seat>> updatePlaneDetails(@PathVariable("id-seat") Long idSeat,
+                                                                 @PathVariable("id-plane") Long idPlane){
         ResponseData<Seat> responseData = new ResponseData<>();
-
-        if (errors.hasErrors()){
-            for (ObjectError error: errors.getAllErrors()){
-                responseData.getMessages().add(error.getDefaultMessage());
-            }
-            responseData.setStatus(false);
-            responseData.setPayload(null);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
-        }
         responseData.setStatus(true);
 
-        Seat seat = modelMapper.map(seatDto, Seat.class);
-        responseData.setPayload(seatService.updatePlaneDetail(idPlane, seat));
+        responseData.setPayload(seatService.updatePlaneDetail(idSeat,idPlane));
         return ResponseEntity.ok(responseData);
     }
 }

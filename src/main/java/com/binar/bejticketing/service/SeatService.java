@@ -14,5 +14,5 @@ public interface SeatService {
     List<Seat> createSeats(List<Seat> seats);
 //    Seat updateSeat(Long id);
     List<Seat> getSeatByNumber(String numberSeat);
-    Seat updatePlaneDetail(Long idPlane, Seat seat);
+    Seat updatePlaneDetail(Long idSeat, Long idPlane);
 }
