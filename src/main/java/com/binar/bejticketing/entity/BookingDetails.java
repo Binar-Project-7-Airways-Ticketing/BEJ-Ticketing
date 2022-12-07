@@ -33,19 +33,19 @@ public class BookingDetails {
     @JsonIgnore
     private Booking booking;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_payment")
     private Payment payment;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_luggage")
     private Luggage luggage;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_flight")
     private Flight flight;
 
