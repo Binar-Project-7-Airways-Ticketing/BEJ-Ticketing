@@ -14,6 +14,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -72,8 +73,34 @@ public class SeatController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
         }
         responseData.setStatus(true);
-        List<Seat> seat = (List<Seat>) modelMapper.map(seats, Seat.class);
-        responseData.setPayload(seatService.createSeats(seat));
+        Seat seat;
+        List<Seat> seatList = new ArrayList<>();
+        for(SeatResponseDto s: seats){
+            seat = modelMapper.map(s, Seat.class);
+            seatList.add(seat);
+        }
+        responseData.setPayload(seatService.createSeats(seatList));
+        return ResponseEntity.ok(responseData);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ResponseData<Seat>> updatePlaneDetails(@PathVariable("id") Long idPlane,
+                                                                       @Valid @RequestBody SeatResponseDto seatDto,
+                                                                Errors errors){
+        ResponseData<Seat> responseData = new ResponseData<>();
+
+        if (errors.hasErrors()){
+            for (ObjectError error: errors.getAllErrors()){
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+
+        Seat seat = modelMapper.map(seatDto, Seat.class);
+        responseData.setPayload(seatService.updatePlaneDetail(idPlane, seat));
         return ResponseEntity.ok(responseData);
     }
 }
