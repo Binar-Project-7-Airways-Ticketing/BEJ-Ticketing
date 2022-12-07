@@ -27,8 +27,8 @@ public class AgeCategory {
     @NotBlank(message = "Name Category shouldn't Blank")
     private String nameCategory;
 
-    @Column(name = "amount_passenger")
-    private BigInteger amount;
+    @Column(name = "price")
+    private BigInteger price;
 
     @OneToOne
     @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")

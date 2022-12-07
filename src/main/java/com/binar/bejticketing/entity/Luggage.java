@@ -36,6 +36,11 @@ public class Luggage {
     @JsonIgnore
     private BookingDetails booking;
 
+
+    @ManyToOne
+    @JoinColumn(name = "id_plane_detail", referencedColumnName = "id_plane_details")
+    private PlaneDetails planeDetails;
+
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
