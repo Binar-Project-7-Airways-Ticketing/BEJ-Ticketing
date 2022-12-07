@@ -34,7 +34,7 @@ public class Luggage {
     @JoinColumn(name = "id_booking_details", referencedColumnName = "id_booking_details")
     @OneToOne(cascade = CascadeType.MERGE)
     @JsonIgnore
-    private BookingDetails booking;
+    private BookingDetails bookingDetails;
 
 
     @ManyToOne(cascade = CascadeType.MERGE)
