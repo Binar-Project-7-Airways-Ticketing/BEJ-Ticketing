@@ -2,8 +2,6 @@ package com.binar.bejticketing.controller.order;
 
 import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.Booking;
-import com.binar.bejticketing.entity.BookingDetails;
-import com.binar.bejticketing.entity.Flight;
 import com.binar.bejticketing.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +10,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -43,13 +39,8 @@ public class BookingController {
 
     @PostMapping("/create")
     public ResponseEntity<ResponseData<Booking>> createBooking(@RequestBody @Valid Booking booking,
-                                                               Errors errors,
-                                                               HttpServletRequest request){
+                                                               Errors errors){
         ResponseData<Booking> responseData = new ResponseData<>();
-        Flight flight = booking.getBookingDetails().getFlight();
-        if (flight == null){
-            request.getSession().setAttribute("SESSION",null);
-        }
         if (errors.hasErrors()){
             for (ObjectError error: errors.getAllErrors()){
                 responseData.getMessages().add(error.getDefaultMessage());
@@ -58,8 +49,6 @@ public class BookingController {
             responseData.setPayload(null);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
         }
-
-        request.getSession().setAttribute("SESSION", flight);
 
         responseData.setStatus(true);
         responseData.setPayload(bookingService.createBooking(booking));
@@ -67,11 +56,11 @@ public class BookingController {
     }
 
     @PutMapping("/{id}/create/booking-details")
-    public ResponseEntity<ResponseData<BookingDetails>> createBookingDetails(
+    public ResponseEntity<ResponseData<Booking>> createBookingDetails(
             @PathVariable("id") Long id,
-            @RequestBody @Valid BookingDetails bookingDetails,
+            @RequestBody @Valid Booking booking,
             Errors errors){
-        ResponseData<BookingDetails> responseData = new ResponseData<>();
+        ResponseData<Booking> responseData = new ResponseData<>();
 
         if (errors.hasErrors()){
             for (ObjectError error: errors.getAllErrors()){
@@ -84,7 +73,7 @@ public class BookingController {
 
 
         responseData.setStatus(true);
-        responseData.setPayload(bookingService.createBookingDetail(id, bookingDetails));
+        responseData.setPayload(bookingService.updateBookingDetails(id, booking));
         return ResponseEntity.ok(responseData);
     }
 }
