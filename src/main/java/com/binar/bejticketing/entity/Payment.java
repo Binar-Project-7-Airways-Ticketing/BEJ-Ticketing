@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -33,10 +34,10 @@ public class Payment {
     @Column(name = "is_paying")
     private boolean isPaying = false;
 
-    @OneToOne(mappedBy = "payment")
-    @JoinColumn(referencedColumnName = "id_booking", name = "id_booking")
-//    @JsonIgnore
-    private Booking booking;
+    @OneToMany(mappedBy = "payment")
+    @JoinColumn(referencedColumnName = "id_booking_details", name = "id_booking_detail")
+    @JsonIgnore
+    private List<BookingDetails> booking;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

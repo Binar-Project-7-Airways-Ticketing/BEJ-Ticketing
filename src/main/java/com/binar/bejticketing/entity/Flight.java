@@ -1,6 +1,7 @@
 package com.binar.bejticketing.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -55,6 +56,10 @@ public class Flight {
 
     @Column(name = "is_active")
     private Boolean isActive = true;
+
+    @OneToOne
+    @JsonIgnore
+    private BookingDetails bookingDetails;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
