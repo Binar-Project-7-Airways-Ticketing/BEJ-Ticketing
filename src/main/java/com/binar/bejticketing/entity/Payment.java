@@ -35,9 +35,8 @@ public class Payment {
     private boolean isPaying = false;
 
     @OneToMany(mappedBy = "payment")
-    @JoinColumn(referencedColumnName = "id_booking_details", name = "id_booking_detail")
     @JsonIgnore
-    private List<BookingDetails> booking;
+    private List<BookingDetails> bookingDetails;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
