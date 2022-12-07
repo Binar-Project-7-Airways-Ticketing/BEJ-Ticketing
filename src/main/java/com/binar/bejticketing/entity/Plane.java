@@ -27,7 +27,7 @@ public class Plane {
     @Column(name = "baggage_capacity")
     private Integer baggageCapacity;
 
-    @OneToOne(cascade=CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_plane_details", referencedColumnName = "id_plane_details")
     private PlaneDetails planeClass;
 
