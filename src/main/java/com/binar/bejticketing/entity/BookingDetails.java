@@ -33,6 +33,22 @@ public class BookingDetails {
     @JsonIgnore
     private Booking booking;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_payment")
+    private Payment payment;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_passenger")
+    private Passenger passenger;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_luggage")
+    private Luggage luggage;
+
+    @OneToOne(mappedBy = "bookingDetails")
+    @JoinColumn(name = "id_flight")
+    private Flight flight;
+
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

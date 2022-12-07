@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Date;
 
 @Data
@@ -25,20 +26,12 @@ public class Booking {
     @JoinColumn(name = "id_booking_details")
     private BookingDetails bookingDetails;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_payment")
-    private Payment payment;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_passenger")
-    private Passenger passenger;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_luggage")
-    private Luggage luggage;
 
     @Column(name = "is_valid")
     private boolean isValid = true;
+
+    @Column(name = "session")
+    private BigInteger session;
 
     @ManyToOne
     @JoinColumn(name = "id_user")

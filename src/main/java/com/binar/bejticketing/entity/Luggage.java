@@ -34,7 +34,7 @@ public class Luggage {
     @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
     @OneToOne(mappedBy = "luggage")
     @JsonIgnore
-    private Booking booking;
+    private BookingDetails booking;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
