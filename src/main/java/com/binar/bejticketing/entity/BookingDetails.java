@@ -45,7 +45,7 @@ public class BookingDetails {
     @JoinColumn(name = "id_luggage")
     private Luggage luggage;
 
-    @OneToOne(mappedBy = "bookingDetails")
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_flight")
     private Flight flight;
 

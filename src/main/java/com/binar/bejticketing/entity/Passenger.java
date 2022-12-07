@@ -67,7 +67,7 @@ public class Passenger {
     @JoinColumn(name = "id_booking_detail", referencedColumnName = "id_booking_details")
     @OneToOne
     @JsonIgnore
-    private BookingDetails booking;
+    private BookingDetails bookingDetails;
 
     @OneToOne
     @JoinColumn(name = "id_payment", referencedColumnName = "id_payment")
