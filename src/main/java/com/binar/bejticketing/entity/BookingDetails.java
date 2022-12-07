@@ -37,15 +37,15 @@ public class BookingDetails {
     @JoinColumn(name = "id_payment")
     private Payment payment;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name = "id_luggage")
     private Luggage luggage;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne
     @JoinColumn(name = "id_flight")
     private Flight flight;
 
