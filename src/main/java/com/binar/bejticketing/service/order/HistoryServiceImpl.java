@@ -1,6 +1,8 @@
 package com.binar.bejticketing.service.order;
 
+import com.binar.bejticketing.entity.Booking;
 import com.binar.bejticketing.entity.History;
+import com.binar.bejticketing.repository.BookingRepository;
 import com.binar.bejticketing.repository.HistoryRepository;
 import com.binar.bejticketing.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +16,22 @@ import java.util.Optional;
 public class HistoryServiceImpl implements HistoryService {
     @Autowired
     private HistoryRepository historyRepository;
+    @Autowired
+    private BookingRepository bookingRepository;
     @Override
     public History addHistory(History history) {
         return historyRepository.saveAndFlush(history);
     }
 
     @Override
-    public History updateHistory(Long idBooking, boolean state) {
-        Optional<History> historyChecking = historyRepository.findById(idBooking);
-        if (historyChecking.isEmpty()){
+    public History updateHistory(Long idHistory, Long idBooking, boolean state) {
+        Optional<Booking> bookingChecking = bookingRepository.findById(idBooking);
+        Optional<History> history = historyRepository.findById(idHistory);
+        if (bookingChecking.isEmpty()){
             throw new EntityNotFoundException();
         }
-        historyChecking.get().getBooking().getBookingDetails().setStatePricing(state);
-        return historyRepository.saveAndFlush(historyChecking.get());
+        history.get().getBooking().getBookingDetails().setStatePricing(state);
+        return historyRepository.saveAndFlush(history.get());
     }
 
     @Override
