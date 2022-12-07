@@ -37,11 +37,11 @@ public class BookingDetails {
     @JoinColumn(name = "id_payment")
     private Payment payment;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_luggage")
     private Luggage luggage;
 
