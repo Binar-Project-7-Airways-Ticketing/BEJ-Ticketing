@@ -27,7 +27,7 @@ public class Seat {
     @Column(name = "state_seat")
     private SeatUtils stateSeat;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_plane_detail", referencedColumnName = "id_plane_details")
     private PlaneDetails planeDetails;
 
