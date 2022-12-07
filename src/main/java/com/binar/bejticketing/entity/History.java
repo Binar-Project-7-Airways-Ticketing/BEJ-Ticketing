@@ -25,7 +25,7 @@ public class History {
     @JoinColumn(name = "id_user", referencedColumnName = "id")
     private User user;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
     private Booking booking;
 

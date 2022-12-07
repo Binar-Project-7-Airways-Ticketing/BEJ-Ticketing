@@ -6,7 +6,9 @@ import com.binar.bejticketing.service.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HistoryServiceImpl implements HistoryService {
@@ -15,6 +17,16 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public History addHistory(History history) {
         return historyRepository.saveAndFlush(history);
+    }
+
+    @Override
+    public History updateHistory(Long idBooking, boolean state) {
+        Optional<History> historyChecking = historyRepository.findById(idBooking);
+        if (historyChecking.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        historyChecking.get().getBooking().getBookingDetails().setStatePricing(state);
+        return historyRepository.saveAndFlush(historyChecking.get());
     }
 
     @Override
