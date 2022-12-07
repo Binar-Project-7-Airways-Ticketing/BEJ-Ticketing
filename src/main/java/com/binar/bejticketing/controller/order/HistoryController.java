@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/history/")
 public class HistoryController {
-    @Autowired
-    private HistoryService historyService;
+//    @Autowired
+//    private HistoryService historyService;
 }
