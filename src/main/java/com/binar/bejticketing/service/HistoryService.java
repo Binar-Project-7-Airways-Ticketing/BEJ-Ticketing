@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface HistoryService {
     History addHistory(History history);
-    History updateHistory(Long idBooking,boolean state);
+    History updateHistory(Long idHistory, Long idBooking,boolean state);
     List<History> getAllHistory();
 
     History getHistoryById(Long id);
