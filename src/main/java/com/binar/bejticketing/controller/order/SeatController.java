@@ -2,9 +2,9 @@ package com.binar.bejticketing.controller.order;
 import com.binar.bejticketing.dto.ResponseData;
 
 import com.binar.bejticketing.dto.SeatResponseDto;
-import com.binar.bejticketing.entity.Passenger;
 import com.binar.bejticketing.entity.Seat;
 import com.binar.bejticketing.service.SeatService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/seat")
 public class SeatController {
     @Autowired

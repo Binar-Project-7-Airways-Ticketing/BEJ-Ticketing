@@ -2,16 +2,10 @@ package com.binar.bejticketing.controller.flight;
 
 import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.Airport;
-import com.binar.bejticketing.entity.Booking;
 import com.binar.bejticketing.service.AirportService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.apache.tomcat.util.json.JSONParser;
-import org.cloudinary.json.JSONException;
-import org.cloudinary.json.JSONObject;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -25,10 +19,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/airport")
 public class AirportController {
 

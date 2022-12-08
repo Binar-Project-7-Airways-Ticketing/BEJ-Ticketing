@@ -1,9 +1,9 @@
 package com.binar.bejticketing.controller.order;
 
 import com.binar.bejticketing.dto.ResponseData;
-import com.binar.bejticketing.entity.Booking;
 import com.binar.bejticketing.entity.History;
 import com.binar.bejticketing.service.HistoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/history")
 public class HistoryController {
     @Autowired

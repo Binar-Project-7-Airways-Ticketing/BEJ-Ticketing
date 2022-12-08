@@ -2,9 +2,9 @@ package com.binar.bejticketing.controller.flight;
 
 import com.binar.bejticketing.entity.Plane;
 import com.binar.bejticketing.entity.PlaneDetails;
-import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.service.PlaneDetailsService;
 import com.binar.bejticketing.service.PlaneService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/plane")
 public class PlaneController {
     @Autowired

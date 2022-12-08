@@ -1,9 +1,8 @@
 package com.binar.bejticketing.controller.flight;
 
 import com.binar.bejticketing.entity.Flight;
-import com.binar.bejticketing.entity.Passenger;
 import com.binar.bejticketing.service.FlightService;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/flight")
 public class FlightController {
 

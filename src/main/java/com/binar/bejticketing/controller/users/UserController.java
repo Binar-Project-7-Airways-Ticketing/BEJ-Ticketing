@@ -6,6 +6,7 @@ import com.binar.bejticketing.entity.User;
 import com.binar.bejticketing.service.UserService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.Data;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/user")
 public class UserController {
     @Autowired
@@ -56,7 +58,7 @@ public class UserController {
 
     @PostMapping("/role/addToUser")
     public ResponseEntity<String> addRoletoUser(@RequestBody RoleToUserForm form) {
-        userService.addRoletoUser(form.getDisplayname(), form.getRoleName());
+        userService.addRoletoUser(form.getDisplayName(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
 
@@ -67,7 +69,7 @@ public class UserController {
     }
     @Data
     class RoleToUserForm{
-        private String displayname;
+        private String displayName;
         private String roleName;
     }
     @PostMapping(value = "/upload/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )

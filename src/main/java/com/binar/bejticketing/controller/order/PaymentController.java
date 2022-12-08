@@ -2,6 +2,7 @@ package com.binar.bejticketing.controller.order;
 
 import com.binar.bejticketing.entity.Payment;
 import com.binar.bejticketing.service.PaymentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/payment")
 public class PaymentController {
     @Autowired

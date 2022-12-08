@@ -3,8 +3,8 @@ package com.binar.bejticketing.controller.order;
 import com.binar.bejticketing.dto.LuggageDto;
 import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.Luggage;
-import com.binar.bejticketing.entity.Seat;
 import com.binar.bejticketing.service.LuggageService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/luggage")
 public class LuggageController {
     @Autowired

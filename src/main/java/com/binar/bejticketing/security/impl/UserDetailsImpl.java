@@ -18,7 +18,7 @@ public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private final Long id;
-    private final String displayname;
+    private final String displayName;
     private final String firstname;
     private final String lastname;
     private final Gender gender;
@@ -31,9 +31,9 @@ public class UserDetailsImpl implements UserDetails {
 
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(long id, String displayname, String firstname, String lastname, Gender gender, Date birthday, String email, String password, String pictureUrl, List<SimpleGrantedAuthority> authorities) {
+    public UserDetailsImpl(long id, String displayName, String firstname, String lastname, Gender gender, Date birthday, String email, String password, String pictureUrl, List<SimpleGrantedAuthority> authorities) {
         this.id=id;
-        this.displayname=displayname;
+        this.displayName = displayName;
         this.firstname=firstname;
         this.lastname=lastname;
         this.gender=gender;
@@ -88,7 +88,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return displayname;
+        return displayName;
     }
 
     @Override

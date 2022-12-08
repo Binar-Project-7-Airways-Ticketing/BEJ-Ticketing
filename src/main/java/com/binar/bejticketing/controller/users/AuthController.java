@@ -11,6 +11,7 @@ import com.binar.bejticketing.repository.RoleRepository;
 import com.binar.bejticketing.repository.UserRepository;
 import com.binar.bejticketing.security.JwtUtils;
 import com.binar.bejticketing.security.impl.UserDetailsImpl;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
@@ -72,7 +74,7 @@ public class AuthController {
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
-                userDetails.getDisplayname(),
+                userDetails.getDisplayName(),
                 userDetails.getFirstname(),
                 userDetails.getLastname(),
                 userDetails.getBirthday(),
@@ -115,7 +117,7 @@ public class AuthController {
         }
         else{
             {
-                if ("admin".equals(strRole)) {
+                if ("ADMIN_ROLE".equals(strRole)) {
                     Role adminRole = roleRepository.findByRoleStatus(String.valueOf(ERoles.ADMIN_ROLE));
                     user.setRole(adminRole);
                 } else {

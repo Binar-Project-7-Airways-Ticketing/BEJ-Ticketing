@@ -18,8 +18,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration @EnableWebSecurity @RequiredArgsConstructor
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig  extends WebSecurityConfigurerAdapter{
+    private static final String ADMIN = "ADMIN_ROLE";
+    private static final String USER = "USER_ROLE";
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
@@ -47,16 +51,48 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin","/film/getall","/api/**").permitAll()
-                .antMatchers("/film/create","/film/update","/film/delete",
-                        "/user/users","user/getall", "user/delete/{id}"
-                        ,"/role/addToUser").hasRole("ADMIN")
-                .antMatchers("user/update{id}").hasRole("USER")
+                .authorizeRequests()
+                .antMatchers("/api/auth/signin"
+                        ,"/api/auth/signup").permitAll()
+                .antMatchers("/api/airport/name/**"
+                        ,"/api/airport/city/**").permitAll()
                 .antMatchers("/swagger-ui/**").permitAll()
+
+                //user role
+                .antMatchers("/api/user/**").hasAnyAuthority(USER,ADMIN)
+                .antMatchers("/api/booking/**").hasAnyAuthority(USER,ADMIN)
+                .antMatchers("/api/history/**").hasAnyAuthority(USER)
+                .antMatchers("/api/luggage/**").hasAnyAuthority(USER,ADMIN)
+                .antMatchers("/api/payment/update/**").hasAnyAuthority(USER)
+                .antMatchers("/api/passenger/create/passenger"
+                        ,"/api/passenger/create/passengers"
+                        ,"/api/passenger/edit/passenger"
+                        ,"/api/passenger/edit/passenger/**"
+                        ,"/api/passenger/delete/passenger/**").hasAnyAuthority(USER)
+                .antMatchers("/api/seat/**").hasAnyAuthority(USER,ADMIN)
+
+                //admin role
+                .antMatchers("/api/airport/create"
+                        ,"/api/airport/update,/api/airport/delete/**"
+                        ,"/api/airport/upload/**").hasAnyAuthority(ADMIN)
+                .antMatchers("/api/flight/create"
+                        ,"/api/flight/update"
+                        ,"/api/flight/delete/**").hasAnyAuthority(ADMIN)
+                .antMatchers("/api/plane/create"
+                        ,"/api/plane/update,/api/plane/delete/**"
+                        ,"/api/plane/create/plane-details"
+                        ,"/api/plane/update/plane-details"
+                        ,"/api/plane/delete/plane-details/**").hasAnyAuthority(ADMIN)
+//                .antMatchers("/api/user/role/save,/api/user/role/addToUser").hasAnyAuthority(ADMIN)
+                .antMatchers("/api/payment/create").hasAnyAuthority(ADMIN)
+                .antMatchers("/api/passenger/create/age-category"
+                        ,"/api/passenger/edit/age-category"
+                        ,"/api/passenger/delete/age-category/**").hasAnyAuthority(ADMIN)
                 .anyRequest().authenticated()
             .and()
                 .authenticationProvider(authenticationProvider())
-                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(authenticationJwtTokenFilter(),
+                        UsernamePasswordAuthenticationFilter.class);
 
     }
 

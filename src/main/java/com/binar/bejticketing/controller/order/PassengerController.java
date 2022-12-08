@@ -5,7 +5,7 @@ import com.binar.bejticketing.entity.AgeCategory;
 import com.binar.bejticketing.entity.Passenger;
 import com.binar.bejticketing.service.AgeCategoryService;
 import com.binar.bejticketing.service.PassengerService;
-import com.binar.bejticketing.utils.Helper;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/passenger")
 public class PassengerController {
     @Autowired
