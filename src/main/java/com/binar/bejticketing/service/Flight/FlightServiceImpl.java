@@ -47,6 +47,7 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public List<Flight> findFlightSearchDate(String departureCode , String arrivalCode , Date date) {
+        System.out.println("awal "+date);
         return flightRepository.getFlightSearchDate(departureCode,arrivalCode,date);
     }
 

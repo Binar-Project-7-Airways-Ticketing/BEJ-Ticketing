@@ -1,6 +1,7 @@
 package com.binar.bejticketing.service.Flight;
 
 
+import com.binar.bejticketing.dto.PlaneClassEnum;
 import com.binar.bejticketing.entity.AgeCategory;
 import com.binar.bejticketing.entity.PlaneDetails;
 import com.binar.bejticketing.exception.DataNotFoundException;
@@ -17,6 +18,11 @@ public class PlaneDetailsServiceImpl implements PlaneDetailsService {
 
     @Autowired
     PlaneDetailsRepository planeDetailsRepository;
+
+    @Override
+    public PlaneDetails findByName(String planeClassEnum) {
+        return planeDetailsRepository.findByName(planeClassEnum);
+    }
 
     @Override
     public PlaneDetails createPlaneDetails(PlaneDetails planeDetails) {

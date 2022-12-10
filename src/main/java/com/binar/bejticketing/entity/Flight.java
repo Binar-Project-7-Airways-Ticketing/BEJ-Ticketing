@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,17 +32,24 @@ public class Flight {
     @Column(name = "arrival_code")
     private String arrivalCode;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     @Column(name = "departure_date")
     private Date departureDate;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     @Column(name = "arrival_date")
     private Date arrivalDate;
 
+    @DateTimeFormat(pattern="hh:mm")
     @JsonFormat(pattern = "hh:mm")
     @Column(name = "departure_time")
     private Date departureTime;
+
+
 
     @JsonFormat(pattern = "hh:mm")
     @Column(name = "arrival_time")
@@ -62,12 +70,12 @@ public class Flight {
     @JsonIgnore
     private BookingDetails bookingDetails;
 
-    @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
     @Column(name = "updated_at")
     @UpdateTimestamp
     private Date updatedAt;

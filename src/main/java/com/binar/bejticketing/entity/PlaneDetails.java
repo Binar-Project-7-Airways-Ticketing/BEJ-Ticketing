@@ -1,5 +1,6 @@
 package com.binar.bejticketing.entity;
 
+import com.binar.bejticketing.dto.PlaneClassEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -25,8 +26,17 @@ public class PlaneDetails {
     private Long idPlaneClass;
 
     @Column(name = "plane_class_name")
-    private String PlaneClassName;
+    private String planeClass;
 
+    @Column(name = "price")
+    private Long price;
+
+
+    @ManyToMany
+    @JsonIgnore
+    private List<Plane> plane;
+
+    @Column
     @OneToMany
     @JsonIgnore
     private List<Seat> seat;
@@ -35,13 +45,5 @@ public class PlaneDetails {
     @JsonIgnore
     private List<Luggage> luggage;
 
-    @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private Date createdAt;
 
-    @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
-    @Column(name = "updated_at")
-    @UpdateTimestamp
-    private Date updatedAt;
 }
