@@ -23,6 +23,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 
 @Configuration @EnableWebSecurity @RequiredArgsConstructor
@@ -57,6 +58,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
             cors.setAllowedOrigins(List.of(request.getHeader("Origin")));
             cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
             cors.setAllowedHeaders(List.of("*"));
+            cors.setMaxAge(Duration.parse("3600"));
             return cors;
         }).and()
             .csrf().disable()
