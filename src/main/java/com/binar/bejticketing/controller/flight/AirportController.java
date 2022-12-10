@@ -1,17 +1,12 @@
 package com.binar.bejticketing.controller.flight;
 
+import com.binar.bejticketing.dto.AirportDto;
 import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.Airport;
-import com.binar.bejticketing.entity.Booking;
 import com.binar.bejticketing.service.AirportService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.apache.tomcat.util.json.JSONParser;
-import org.cloudinary.json.JSONException;
-import org.cloudinary.json.JSONObject;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -25,14 +20,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/airport")
 public class AirportController {
 
-
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     AirportService airportService;
 
@@ -41,7 +37,8 @@ public class AirportController {
     Cloudinary cloudinary;
 
     @PostMapping("/create")
-    public ResponseEntity<Airport> createAirport(@RequestBody Airport airport){
+    public ResponseEntity<Airport> createAirport(@RequestBody AirportDto airportDTO){
+        Airport airport = modelMapper.map(airportDTO,Airport.class) ;
         return new ResponseEntity<>(airportService.createAirport(airport), HttpStatus.CREATED);
     }
 
@@ -68,6 +65,11 @@ public class AirportController {
     @GetMapping("/city/{city}")
     public ResponseEntity<List<Airport>> getAirportByCity(@PathVariable("city") String city){
         return new ResponseEntity<>(airportService.findAirportByCity(city), HttpStatus.OK);
+    }
+
+    @GetMapping("/code/{code}")
+    public ResponseEntity<Optional<Airport>> getAirportByCode(@PathVariable("code") String code){
+        return new ResponseEntity<>(airportService.findAirportByCode(code), HttpStatus.OK);
     }
 
     @PostMapping(value = "/upload/{city}" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

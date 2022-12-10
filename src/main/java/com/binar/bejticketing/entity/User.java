@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -41,7 +42,8 @@ public class User {
     @Enumerated(EnumType.ORDINAL)
     private Gender gender;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    @JsonFormat(pattern = "MM/dd-yyyy")
     @Column(name = "birthday")
     private Date birthday;
 

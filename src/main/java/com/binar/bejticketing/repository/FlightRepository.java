@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface FlightRepository extends JpaRepository<Flight,Long> {
-    @Query("SELECT f FROM Flight f WHERE f.departureCode = :departureCode AND f.arrivalCode =:arrivalCode AND f.isActive=true AND f.departureDate=:date")
+    @Query("SELECT f FROM Flight f WHERE f.departureCode = :departureCode AND f.arrivalCode =:arrivalCode AND f.isActive=true AND f.departureDate =:date")
     List<Flight> getFlightSearchDate(String departureCode , String arrivalCode , Date date);
 
     @Query("SELECT f FROM Flight f WHERE f.departureCode = :departureCode AND f.arrivalCode =:arrivalCode AND f.isActive=true ")

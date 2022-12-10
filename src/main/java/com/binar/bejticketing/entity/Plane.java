@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -27,16 +28,16 @@ public class Plane {
     @Column(name = "baggage_capacity")
     private Integer baggageCapacity;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade=CascadeType.MERGE)
     @JoinColumn(name = "id_plane_details", referencedColumnName = "id_plane_details")
-    private PlaneDetails planeClass;
+    private List<PlaneDetails> planeClass;
 
-    @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
     @Column(name = "updated_at")
     @UpdateTimestamp
     private Date updatedAt;

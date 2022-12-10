@@ -5,6 +5,7 @@ import com.binar.bejticketing.exception.DataNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface AirportService {
@@ -15,6 +16,7 @@ public interface AirportService {
     List<Airport> findAirportByCity(String city);
     List<Airport> findAllAirport();
 
+    Optional<Airport> findAirportByCode(String code);
     void setImage(String url , String city);
 
 

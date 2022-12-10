@@ -62,6 +62,11 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
+    public Optional<Airport> findAirportByCode(String code) {
+        return airportRepository.getAirportFromCode(code);
+    }
+
+    @Override
     public void setImage(String url, String city) {
 
         airportRepository.uploadImage(url,city);
