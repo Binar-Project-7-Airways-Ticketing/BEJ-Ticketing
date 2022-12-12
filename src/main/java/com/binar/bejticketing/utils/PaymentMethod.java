@@ -5,5 +5,6 @@ public enum PaymentMethod {
     BCA,
     BNI,
     DANA,
+    MANDIRI,
     OVO
 }

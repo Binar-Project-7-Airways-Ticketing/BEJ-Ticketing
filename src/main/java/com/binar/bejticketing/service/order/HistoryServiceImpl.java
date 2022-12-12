@@ -30,7 +30,7 @@ public class HistoryServiceImpl implements HistoryService {
         if (bookingChecking.isEmpty()){
             throw new EntityNotFoundException();
         }
-        history.get().getBooking().getBookingDetails().setStatePricing(state);
+        history.get().getBooking().setValid(state);
         return historyRepository.saveAndFlush(history.get());
     }
 
