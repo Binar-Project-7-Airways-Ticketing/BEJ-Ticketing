@@ -62,7 +62,7 @@ public class LuggageController {
         return new ResponseEntity<>(luggageService.updateStateLuggage(id), HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/update{idLuggage}/plane-detail/{idPlane}")
+    @PutMapping("/update/{idLuggage}/plane-detail/{idPlane}")
     public ResponseEntity<Luggage> updatePlaneDetailInLuggage(@PathVariable("idLuggage") Long idLuggage,
                                                               @PathVariable("idPlane") Long idPlane){
         return new ResponseEntity<>(luggageService.updatePlaneDetailLuggage(idLuggage, idPlane), HttpStatus.ACCEPTED);
