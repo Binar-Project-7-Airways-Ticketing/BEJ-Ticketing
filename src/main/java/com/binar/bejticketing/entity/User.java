@@ -43,7 +43,7 @@ public class User {
     private Gender gender;
 
     @DateTimeFormat(pattern="MM/dd/yyyy")
-    @JsonFormat(pattern = "MM/dd-yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     @Column(name = "birthday")
     private Date birthday;
 

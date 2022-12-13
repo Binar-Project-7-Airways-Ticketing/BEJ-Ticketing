@@ -1,17 +1,15 @@
 package com.binar.bejticketing.dto;
 
-import com.binar.bejticketing.entity.Plane;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
-
 
 import java.util.Date;
 
-@Getter
 @Setter
-public class FlightDto {
+@Getter
+public class FlightUpdateDTO {
+    private Long idFlight;
     private String flightNumber;
     private String departureCode;
     private String arrivalCode;

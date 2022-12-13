@@ -1,11 +1,11 @@
 package com.binar.bejticketing.controller.flight;
 
 import com.binar.bejticketing.dto.FlightDto;
-import com.binar.bejticketing.entity.Airport;
-import com.binar.bejticketing.entity.Flight;
-import com.binar.bejticketing.entity.Passenger;
-import com.binar.bejticketing.entity.Plane;
+import com.binar.bejticketing.dto.FlightUpdateDTO;
+import com.binar.bejticketing.dto.PriceDto;
+import com.binar.bejticketing.entity.*;
 import com.binar.bejticketing.service.FlightService;
+import com.binar.bejticketing.service.PlaneDetailsService;
 import com.binar.bejticketing.service.PlaneService;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.modelmapper.ModelMapper;
@@ -28,6 +28,8 @@ public class FlightController {
     FlightService flightService;
 
     @Autowired
+    PlaneDetailsService planeDetailsService;
+    @Autowired
     PlaneService planeService;
     @PostMapping("/create")
     public ResponseEntity<Flight> createFlight(@RequestBody FlightDto flightDto){
@@ -40,7 +42,10 @@ public class FlightController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Flight> updateFlight(@RequestBody Flight flight){
+    public ResponseEntity<Flight> updateFlight(@RequestBody FlightUpdateDTO flightUpdateDTO){
+        Flight flight = modelMapper.map(flightUpdateDTO ,Flight.class) ;
+        Optional<Plane> plane = planeService.getPlaneById(flightUpdateDTO.getPlane());
+        flight.setPlane(plane.orElse(flightService.findFlightById(flightUpdateDTO.getIdFlight()).getPlane()));
         return new ResponseEntity<>(flightService.updateFlight(flight), HttpStatus.ACCEPTED);
     }
 
@@ -64,7 +69,18 @@ public class FlightController {
     public ResponseEntity<List<Flight>> getFlightSearchDate(@PathVariable("departure-code") String dCode ,
                                                             @PathVariable("arrival-code") String aCode,
                                                             @RequestParam("date")@DateTimeFormat(pattern="MM/dd/yyyy") Date date){
-        System.out.println("awal "+date);
+
         return new ResponseEntity<>(flightService.findFlightSearchDate(dCode,aCode,date), HttpStatus.OK);
+    }
+
+    @GetMapping("/price/{id}")
+    public ResponseEntity<PriceDto> getPrice(@PathVariable("id") Long id){
+        PriceDto priceDto = new PriceDto();
+        Flight flight = flightService.findFlightById(id);
+        PlaneDetails planeDetails = planeDetailsService.findByName("BUSINESS");
+        priceDto.setEconomy(flight.getPrice());
+        priceDto.setBusiness(flight.getPrice()+planeDetails.getPrice());
+
+        return new ResponseEntity<>(priceDto,HttpStatus.OK);
     }
 }

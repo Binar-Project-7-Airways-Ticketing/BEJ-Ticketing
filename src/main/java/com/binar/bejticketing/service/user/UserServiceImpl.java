@@ -1,5 +1,6 @@
 package com.binar.bejticketing.service.user;
 
+import com.binar.bejticketing.dto.UserUpdateDto;
 import com.binar.bejticketing.entity.Role;
 import com.binar.bejticketing.entity.User;
 import com.binar.bejticketing.exception.EntityNotFoundException;
@@ -79,8 +80,14 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
     @Override
-    public User updaterUser(Long id,User user) {
+    public void changePassword(String password, Long id) {
+        userRepository.changePassword(password,id);
+    }
+
+    @Override
+    public User updaterUser(Long id, UserUpdateDto user) {
         User users = findById(id);
         if (user != null) {
             user.setDisplayName(user.getDisplayName());
@@ -89,11 +96,11 @@ public class UserServiceImpl implements UserService {
             user.setGender(user.getGender());
             user.setBirthday(user.getBirthday());
             user.setEmail(user.getEmail());
-            user.setPassword(user.getPassword());
-            userRepository.saveAndFlush(user);
+            userRepository.saveAndFlush(users);
         }
-        return user;
+        return users;
     }
+
 
     static User unwrapUser(Optional<User> entity, Long id){
         if (entity.isPresent()) return entity.get();

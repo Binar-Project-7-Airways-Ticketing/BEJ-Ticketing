@@ -33,18 +33,16 @@ public class Flight {
     private String arrivalCode;
 
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="MM/dd/yyyy")
     @JsonFormat(pattern = "MM/dd/yyyy")
     @Column(name = "departure_date")
     private Date departureDate;
 
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="MM/dd/yyyy")
     @JsonFormat(pattern = "MM/dd/yyyy")
     @Column(name = "arrival_date")
     private Date arrivalDate;
 
-    @DateTimeFormat(pattern="hh:mm")
+
     @JsonFormat(pattern = "hh:mm")
     @Column(name = "departure_time")
     private Date departureTime;

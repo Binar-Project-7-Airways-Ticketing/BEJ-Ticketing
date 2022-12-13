@@ -15,5 +15,6 @@ public interface FlightService {
     List<Flight> findFlightSearchDate(String departureCode , String arrivalCode , Date date);
     List<Flight> findFlightSearch(String departureCode , String arrivalCode );
 
+    Flight findFlightById(Long Id);
     List<Flight> findAllFlightAvailable();
 }

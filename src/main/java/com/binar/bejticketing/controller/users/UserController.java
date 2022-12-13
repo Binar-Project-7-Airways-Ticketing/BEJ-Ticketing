@@ -1,17 +1,22 @@
 package com.binar.bejticketing.controller.users;
 
+import com.binar.bejticketing.dto.PasswordDto;
 import com.binar.bejticketing.dto.ResponseData;
+import com.binar.bejticketing.dto.UserUpdateDto;
 import com.binar.bejticketing.entity.Role;
 import com.binar.bejticketing.entity.User;
+import com.binar.bejticketing.payload.response.MessageResponse;
 import com.binar.bejticketing.service.UserService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import lombok.Data;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -33,6 +38,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
@@ -43,7 +54,7 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable Long id){
         userService.deleteUser(id);
     }
@@ -62,8 +73,9 @@ public class UserController {
 
 
     @PutMapping("/update/{id}")
-    public User update(@PathVariable Long id, @RequestBody User users){
-        return userService.updaterUser(id,users);
+    public User update(@PathVariable Long id, @RequestBody UserUpdateDto userUpdateDto){
+
+        return userService.updaterUser(id,userUpdateDto);
     }
     @Data
     class RoleToUserForm{
@@ -80,6 +92,9 @@ public class UserController {
                 ObjectUtils.asMap("public_id", filename));
 
         String url = cloudinary.url().imageTag(filename);
+        url = url.replaceAll("<img src='","");
+        url = url.replaceAll("'\\/>","");
+
         ResponseData<String> responseData = new ResponseData<>();
         responseData.setStatus(true);
         responseData.setPayload(url);
@@ -87,4 +102,13 @@ public class UserController {
         userService.uploadImage(url, id);
         return ResponseEntity.ok(responseData);
     }
+
+    @PutMapping("/update/password/{id}")
+    public MessageResponse changePassword(@PathVariable Long id, @RequestBody PasswordDto password){
+        String pass = bCryptPasswordEncoder.encode(password.getPass());
+        userService.changePassword(pass , id);
+        return new MessageResponse("Password Change Successfully");
+    }
+
+
 }

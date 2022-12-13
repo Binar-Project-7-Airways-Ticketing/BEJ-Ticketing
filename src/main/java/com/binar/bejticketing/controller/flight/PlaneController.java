@@ -2,6 +2,7 @@ package com.binar.bejticketing.controller.flight;
 
 import com.binar.bejticketing.dto.PlaneClassEnum;
 import com.binar.bejticketing.dto.PlaneDto;
+import com.binar.bejticketing.dto.PlaneUpdateDto;
 import com.binar.bejticketing.entity.Airport;
 import com.binar.bejticketing.entity.Plane;
 import com.binar.bejticketing.entity.PlaneDetails;
@@ -40,7 +41,12 @@ public class PlaneController {
     }
 
     @PutMapping("/update/plane")
-    public ResponseEntity<Plane> updatePlane(@RequestBody Plane plane){
+    public ResponseEntity<Plane> updatePlane(@RequestBody PlaneUpdateDto planeUpdateDto){
+        Plane plane = modelMapper.map(planeUpdateDto,Plane.class) ;
+        List<PlaneDetails> planeDetails = new ArrayList<>();
+        planeDetails.add(planeDetailsService.findByName(String.valueOf(PlaneClassEnum.BUSINESS)));
+        planeDetails.add(planeDetailsService.findByName(String.valueOf(PlaneClassEnum.ECONOMY)));
+        plane.setPlaneClass(planeDetails);
         return new ResponseEntity<>(planeService.updatePlane(plane), HttpStatus.CREATED);
     }
 

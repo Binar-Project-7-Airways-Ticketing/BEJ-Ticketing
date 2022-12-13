@@ -1,6 +1,7 @@
 package com.binar.bejticketing.controller.flight;
 
 import com.binar.bejticketing.dto.AirportDto;
+import com.binar.bejticketing.dto.AirportUpdateDto;
 import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.Airport;
 import com.binar.bejticketing.service.AirportService;
@@ -43,7 +44,8 @@ public class AirportController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Airport> updateAirport(@RequestBody Airport airport){
+    public ResponseEntity<Airport> updateAirport(@RequestBody AirportUpdateDto airportUpdateDto){
+        Airport airport = modelMapper.map(airportUpdateDto,Airport.class) ;
         return new ResponseEntity<>(airportService.updateAirport(airport), HttpStatus.ACCEPTED);
     }
 
@@ -82,6 +84,8 @@ public class AirportController {
                 ObjectUtils.asMap("public_id", filename));
 
         String url = cloudinary.url().imageTag(filename);
+        url = url.replaceAll("<img src='","");
+        url = url.replaceAll("'\\/>","");
         ResponseData<String> responseData = new ResponseData<>();
         responseData.setStatus(true);
         responseData.setPayload(url);
