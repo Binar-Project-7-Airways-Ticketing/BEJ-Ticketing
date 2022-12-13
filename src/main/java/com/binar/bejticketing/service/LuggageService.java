@@ -13,4 +13,5 @@ public interface LuggageService {
 
     Luggage createLuggage(Luggage luggage);
     Luggage updateStateLuggage(Long id);
+    Luggage updatePlaneDetailLuggage(Long idLuggage, Long idPlane);
 }
