@@ -48,7 +48,6 @@ public class LuggageServiceImpl implements LuggageService {
         Optional<PlaneDetails> planeDetails = planeDetailsRepository.findById(idPlane);
         Optional<Luggage> luggageCheck = luggageRepository.findById(idLuggage);
 
-
         if (planeDetails.isEmpty()){
             throw new EntityNotFoundException();
         }
