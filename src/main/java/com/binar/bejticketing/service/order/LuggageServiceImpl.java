@@ -18,6 +18,11 @@ public class LuggageServiceImpl implements LuggageService {
     }
 
     @Override
+    public List<Luggage> getLuggageByIdPlane(Long idPlane) {
+        return luggageRepository.findLuggageByIdPlane(idPlane);
+    }
+
+    @Override
     public List<Luggage> getLuggageByState(boolean state) {
         return luggageRepository.findLuggageByStateTrue(state);
     }

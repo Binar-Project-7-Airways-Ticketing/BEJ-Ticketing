@@ -9,6 +9,7 @@ import java.util.List;
 @Service
 public interface SeatService {
     List<Seat> getAllSeats();
+    List<Seat> getSeatsByIdPlane(Long idPlane);
     Seat getSeat(Long id);
     Seat createSeat(Seat seat);
     List<Seat> createSeats(List<Seat> seats);

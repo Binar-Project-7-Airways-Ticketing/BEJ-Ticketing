@@ -11,4 +11,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Modifying
     @Query("UPDATE Booking b SET b.isValid = false WHERE b.idBooking = :idBooking")
     Booking updateBookingValid(Long idBooking);
+
+    @Query("WHERE b FROM Booking WHERE b.isValid = true AND idBooking = :idBooking")
+    Booking getBookingForTicket(Long idBooking);
 }

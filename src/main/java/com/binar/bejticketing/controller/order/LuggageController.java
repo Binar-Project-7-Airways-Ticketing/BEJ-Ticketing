@@ -28,6 +28,11 @@ public class LuggageController {
         return new ResponseEntity<>(luggageService.getAllLuggage(), HttpStatus.OK);
     }
 
+    @GetMapping("/plane-detail/{idPlane}")
+    public ResponseEntity<List<Luggage>> getLuggageByIdPlane(@PathVariable("idPlane") Long idPlane){
+        return new ResponseEntity<>(luggageService.getLuggageByIdPlane(idPlane), HttpStatus.OK);
+    }
+
     @GetMapping("/state")
     public ResponseEntity<List<Luggage>> getLuggageByState(@RequestParam boolean state){
         return new ResponseEntity<>(luggageService.getLuggageByState(state), HttpStatus.OK);
