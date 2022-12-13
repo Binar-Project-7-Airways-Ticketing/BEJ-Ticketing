@@ -11,4 +11,5 @@ public interface BookingService {
     Booking getBookingById(Long id);
     Booking createBooking(Booking booking);
     Booking updateBookingDetails(Long idBooking, Booking booking);
+    Booking getBookingForTicket(Long idBooking);
 }

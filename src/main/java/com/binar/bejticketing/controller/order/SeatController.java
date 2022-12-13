@@ -30,6 +30,11 @@ public class SeatController {
         return new ResponseEntity<>(seatService.getSeat(id),HttpStatus.OK);
     }
 
+    @GetMapping("/plane-detail/{idPlane}")
+    public ResponseEntity<List<Seat>> getSeatByIdPlane(@PathVariable("idPlane") Long idPlane){
+        return new ResponseEntity<>(seatService.getSeatsByIdPlane(idPlane),HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<Seat>> getAllSeats(){
         return new ResponseEntity<>(seatService.getAllSeats(), HttpStatus.OK);

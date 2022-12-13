@@ -27,6 +27,11 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
+    public List<Seat> getSeatsByIdPlane(Long idPlane) {
+        return seatRepository.getSeatsByIdPlane(idPlane);
+    }
+
+    @Override
     public Seat getSeat(Long id) {
         return seatRepository.findById(id).get();
     }

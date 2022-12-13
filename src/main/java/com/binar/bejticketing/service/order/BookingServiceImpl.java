@@ -41,4 +41,9 @@ public class BookingServiceImpl implements BookingService {
         }
         return bookingRepository.saveAndFlush(booking);
     }
+
+    @Override
+    public Booking getBookingForTicket(Long idBooking) {
+        return bookingRepository.getBookingForTicket(idBooking);
+    }
 }
