@@ -33,7 +33,7 @@ public class SignUpRequest {
     @Size(min = 2)
     private String password;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private Date birthday;
 
 //    public String getDisplayName() {

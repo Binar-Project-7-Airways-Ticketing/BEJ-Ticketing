@@ -22,7 +22,7 @@ public class SwaggerConfig {
                 .version("0.1")
 
 
-        ).servers(List.of(new Server().url("https://bej-ticketing-production.up.railway.app/")));
+        );//.servers(List.of(new Server().url("https://bej-ticketing-production.up.railway.app/")));
     }
 
 

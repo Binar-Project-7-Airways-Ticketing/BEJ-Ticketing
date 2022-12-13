@@ -18,7 +18,7 @@ public class JwtResponse {
     private String firstname;
     private String lastname;
     private Gender gender;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private Date birthday;
     private String email;
     private List<String> role;
