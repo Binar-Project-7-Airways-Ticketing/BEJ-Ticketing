@@ -1,12 +1,10 @@
 package com.binar.bejticketing.controller.flight;
 
-import com.binar.bejticketing.dto.PlaneClassEnum;
+import com.binar.bejticketing.utils.PlaneClassEnum;
 import com.binar.bejticketing.dto.PlaneDto;
 import com.binar.bejticketing.dto.PlaneUpdateDto;
-import com.binar.bejticketing.entity.Airport;
 import com.binar.bejticketing.entity.Plane;
 import com.binar.bejticketing.entity.PlaneDetails;
-import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.service.PlaneDetailsService;
 import com.binar.bejticketing.service.PlaneService;
 import org.modelmapper.ModelMapper;

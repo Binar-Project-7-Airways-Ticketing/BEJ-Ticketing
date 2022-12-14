@@ -1,9 +1,7 @@
 package com.binar.bejticketing.service;
 
 
-import com.binar.bejticketing.dto.PlaneClassEnum;
 import com.binar.bejticketing.entity.PlaneDetails;
-import com.binar.bejticketing.exception.DataNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

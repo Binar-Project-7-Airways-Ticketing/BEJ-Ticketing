@@ -1,4 +1,4 @@
-package com.binar.bejticketing.dto;
+package com.binar.bejticketing.utils;
 
 public enum PlaneClassEnum {
     ECONOMY,

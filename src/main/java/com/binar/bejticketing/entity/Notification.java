@@ -22,6 +22,11 @@ public class Notification {
     @Column(name = "id_notification")
     private Long idNotification;
 
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
     @Column(name = "title")
     private String title;
 
