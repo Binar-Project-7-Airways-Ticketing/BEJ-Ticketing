@@ -1,8 +1,6 @@
 package com.binar.bejticketing.service.Flight;
 
 
-import com.binar.bejticketing.dto.PlaneClassEnum;
-import com.binar.bejticketing.entity.AgeCategory;
 import com.binar.bejticketing.entity.PlaneDetails;
 import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.PlaneDetailsRepository;

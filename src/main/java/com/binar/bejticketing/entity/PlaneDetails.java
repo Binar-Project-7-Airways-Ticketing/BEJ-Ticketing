@@ -1,17 +1,11 @@
 package com.binar.bejticketing.entity;
 
-import com.binar.bejticketing.dto.PlaneClassEnum;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 
 @Data
