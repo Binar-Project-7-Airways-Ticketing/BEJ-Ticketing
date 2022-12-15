@@ -12,4 +12,6 @@ public interface BookingService {
     Booking createBooking(Booking booking);
     Booking updateBookingDetails(Long idBooking, Booking booking);
     Booking getBookingForTicket(Long idBooking);
+    Booking updateStatePaymentBooking(Long idBooking, boolean state);
+    Booking updatePictureBooking(Long idBooking, String url);
 }

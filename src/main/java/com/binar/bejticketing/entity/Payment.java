@@ -38,10 +38,6 @@ public class Payment {
     @JsonIgnore
     private List<BookingDetails> bookingDetails;
 
-    @OneToOne(targetEntity = History.class)
-    @JsonIgnore
-    private History history;
-
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

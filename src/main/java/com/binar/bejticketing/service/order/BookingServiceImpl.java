@@ -46,4 +46,26 @@ public class BookingServiceImpl implements BookingService {
     public Booking getBookingForTicket(Long idBooking) {
         return bookingRepository.getBookingForTicket(idBooking);
     }
+
+    @Override
+    public Booking updateStatePaymentBooking(Long idBooking, boolean state) {
+        Optional<Booking> bookingChecking = bookingRepository.findById(idBooking);
+        if (bookingChecking.isEmpty()){
+            throw new DataNotFoundException(idBooking);
+        }
+        bookingChecking.get().setValid(state);
+        bookingChecking.get().getBookingDetails().setStatePricing(state);
+        bookingChecking.get().getBookingDetails().getPayment().setPaying(state);
+        return bookingRepository.saveAndFlush(bookingChecking.get());
+    }
+
+    @Override
+    public Booking updatePictureBooking(Long idBooking, String url) {
+        Optional<Booking> bookingChecking = bookingRepository.findById(idBooking);
+        if (bookingChecking.isEmpty()){
+            throw new DataNotFoundException(idBooking);
+        }
+        bookingChecking.get().setPictureUrl(url);
+        return bookingRepository.saveAndFlush(bookingChecking.get());
+    }
 }
