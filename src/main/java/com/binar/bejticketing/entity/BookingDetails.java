@@ -46,6 +46,10 @@ public class BookingDetails {
     private Luggage luggage;
 
     @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_seat")
+    private Seat seat;
+
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_flight")
     private Flight flight;
 

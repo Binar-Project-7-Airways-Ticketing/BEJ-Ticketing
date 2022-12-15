@@ -1,7 +1,6 @@
 package com.binar.bejticketing.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +22,9 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBooking;
 
+    @Column(name = "picture_url")
+    private String pictureUrl;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_booking_details")
     private BookingDetails bookingDetails;
@@ -34,13 +36,9 @@ public class Booking {
     @Column(name = "session")
     private BigInteger session;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_user")
     private User user;
-
-    @OneToOne(targetEntity = History.class)
-    @JsonIgnore
-    private History history;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

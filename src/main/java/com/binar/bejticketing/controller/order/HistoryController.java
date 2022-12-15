@@ -2,65 +2,72 @@ package com.binar.bejticketing.controller.order;
 
 import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.Booking;
-import com.binar.bejticketing.entity.History;
-import com.binar.bejticketing.service.HistoryService;
+import com.binar.bejticketing.service.BookingService;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/history")
 public class HistoryController {
     @Autowired
-    private HistoryService historyService;
+    private BookingService bookingService;
+    @Autowired
+    @Value("${CLOUDINARY_URL}")
+    Cloudinary cloudinary;
 
     @GetMapping
-    public ResponseEntity<ResponseData<List<History>>> getAllHistory(){
-        ResponseData<List<History>> responseData = new ResponseData<>();
+    public ResponseEntity<ResponseData<List<Booking>>> getAllHistoryBooking(){
+        ResponseData<List<Booking>> responseData = new ResponseData<>();
 
         responseData.setStatus(true);
-        responseData.setPayload(historyService.getAllHistory());
+        responseData.setPayload(bookingService.getAllBooking());
         return ResponseEntity.ok(responseData);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseData<History>> getHistoryById(@PathVariable("id") Long id){
-        ResponseData<History> responseData = new ResponseData<>();
+    public ResponseEntity<ResponseData<Booking>> getHistoryBookingById(@PathVariable("id") Long id){
+        ResponseData<Booking> responseData = new ResponseData<>();
 
         responseData.setStatus(true);
-        responseData.setPayload(historyService.getHistoryById(id));
+        responseData.setPayload(bookingService.getBookingById(id));
         return ResponseEntity.ok(responseData);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<ResponseData<History>> getHistoryById(@Valid @RequestBody History history,
-                                                                Errors errors){
-        ResponseData<History> responseData = new ResponseData<>();
-        if (errors.hasErrors()){
-            for (ObjectError error: errors.getAllErrors()){
-                responseData.getMessages().add(error.getDefaultMessage());
-            }
-            responseData.setStatus(false);
-            responseData.setPayload(null);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
-        }
+    @PutMapping("/update/{id-booking}")
+    public ResponseEntity<ResponseData<Booking>> editHistoryBooking(@PathVariable("id-booking")Long idBooking,
+                                                                    @RequestParam("state") boolean state){
+        ResponseData<Booking> responseData = new ResponseData<>();
         responseData.setStatus(true);
-        responseData.setPayload(historyService.addHistory(history));
+        responseData.setPayload(bookingService.updateStatePaymentBooking(idBooking, state));
+        return ResponseEntity.ok(responseData);
+    }
+    @PutMapping("/update/photo/{id-booking}")
+    public ResponseEntity<ResponseData<Booking>> editPhotoHistoryBooking(@PathVariable("id-booking")Long idBooking,
+                                                                         @RequestParam("picture-url") MultipartFile file)
+            throws IOException {
+        byte[] bit = file.getBytes();
+        Files.write(Path.of("C:\\Users\\fathanazka\\Downloads\\diamond.png"),bit);
+
+        String filename = String.valueOf(UUID.randomUUID());
+        cloudinary.uploader().upload(new File("C:\\Users\\fathanazka\\Downloads\\diamond.png"),
+                ObjectUtils.asMap("public_id", filename));
+
+        String url = cloudinary.url().imageTag(filename);
+        ResponseData<Booking> responseData = new ResponseData<>();
+        responseData.setStatus(true);
+        responseData.setPayload(bookingService.updatePictureBooking(idBooking, url));
         return ResponseEntity.ok(responseData);
     }
 
-    @PutMapping("/{id-history}/update/{id-booking}")
-    public ResponseEntity<ResponseData<History>> editHistory(@PathVariable("id-history")Long idHistory,
-                                                             @PathVariable("id-booking")Long idBooking,
-                                                             @RequestParam("state") boolean state){
-        ResponseData<History> responseData = new ResponseData<>();
-        responseData.setStatus(true);
-        responseData.setPayload(historyService.updateHistory(idHistory,idBooking, state));
-        return ResponseEntity.ok(responseData);
-    }
 }
