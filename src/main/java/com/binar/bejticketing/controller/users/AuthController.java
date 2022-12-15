@@ -124,8 +124,6 @@ public class AuthController {
                 }
             }
         }
-        userRepository.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("User registered successfully! "));
+        return ResponseEntity.ok(userRepository.save(user));
     }
 }
