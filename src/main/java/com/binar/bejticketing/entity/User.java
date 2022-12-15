@@ -71,10 +71,6 @@ public class User {
     @JsonIgnore
     private List<Booking> bookings;
 
-    @OneToOne(targetEntity = History.class)
-    @JsonIgnore
-    private History history;
-
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
