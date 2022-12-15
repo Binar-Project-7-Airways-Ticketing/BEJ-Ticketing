@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ticket_capstone" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="678396d8-0ae3-47ba-bc90-ad0c82c69a55">
+    <property name="com.jaspersoft.studio.data.sql.tables">
+    </property>
+    <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="386"/>
+    <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="608"/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ticket2"/>
+<!--    <queryString language="SQL">-->
+<!--        <![CDATA[SELECT passengers.first_name,-->
+<!--	passengers.last_name,-->
+<!--	plane.id_plane,-->
+<!--	seats.number_seat,-->
+<!--	flight.arrival_date,-->
+<!--	flight.arrival_time,-->
+<!--	flight.departure_date,-->
+<!--	flight.departure_time,-->
+<!--	flight.departure_code,-->
+<!--	flight.arrival_code,-->
+<!--	flight.id_flight,-->
+<!--	plane.id_plane-->
+<!--FROM passengers,-->
+<!--	luggage,-->
+<!--	seats,-->
+<!--	flight-->
+<!--	INNER JOIN plane ON -->
+<!--	 flight.id_plane = plane.id_plane]]>-->
+<!--    </queryString>-->
+    <field name="firstName" class="java.lang.String"/>
+<!--    <field name="lastName" class="java.lang.String"/>-->
+<!--    <field name="idPlane" class="java.lang.Long"/>-->
+    <field name="numberSeat" class="java.lang.String"/>
+<!--    <field name="arrivalDate" class="java.util.Date"/>-->
+<!--    <field name="arrivalTime" class="java.util.Date"/>-->
+    <field name="departureDate" class="java.util.Date"/>
+    <field name="departureTime" class="java.util.Date"/>
+    <field name="departureCode" class="java.lang.String"/>
+    <field name="arrivalCode" class="java.lang.String"/>
+    <field name="idFlight" class="java.lang.Long"/>
+<!--    <field name="COLUMN_12" class="java.lang.Long"/>-->
+    <group name="first_name">
+        <groupExpression><![CDATA[$F{firstName}]]></groupExpression>
+    </group>
+<!--    <group name="last_name">-->
+<!--        <groupExpression><![CDATA[$F{lastName}]]></groupExpression>-->
+<!--    </group>-->
+<!--    <group name="id_plane">-->
+<!--        <groupExpression><![CDATA[$F{idPlane}]]></groupExpression>-->
+<!--    </group>-->
+    <group name="number_seat">
+        <groupExpression><![CDATA[$F{numberSeat}]]></groupExpression>
+    </group>
+<!--    <group name="arrival_date">-->
+<!--        <groupExpression><![CDATA[$F{arrivalDate}]]></groupExpression>-->
+<!--    </group>-->
+<!--    <group name="arrival_time">-->
+<!--        <groupExpression><![CDATA[$F{arrivalTime}]]></groupExpression>-->
+<!--    </group>-->
+    <group name="departure_date">
+        <groupExpression><![CDATA[$F{departureDate}]]></groupExpression>
+    </group>
+    <group name="departure_time">
+        <groupExpression><![CDATA[$F{departureTime}]]></groupExpression>
+    </group>
+    <group name="departure_code">
+        <groupExpression><![CDATA[$F{departureCode}]]></groupExpression>
+    </group>
+    <group name="arrival_code">
+        <groupExpression><![CDATA[$F{arrivalCode}]]></groupExpression>
+    </group>
+    <group name="id_flight">
+        <groupExpression><![CDATA[$F{idFlight}]]></groupExpression>
+    </group>
+<!--    <group name="COLUMN_12">-->
+<!--        <groupExpression><![CDATA[$F{COLUMN_12}]]></groupExpression>-->
+<!--    </group>-->
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="92" splitType="Stretch">
+            <rectangle>
+                <reportElement x="-20" y="-20" width="842" height="112" forecolor="#CC9900" backcolor="#E8E8E8" uuid="65b7d3ea-a005-40a8-9bb1-3405ba2fd676"/>
+            </rectangle>
+            <image>
+                <reportElement x="0" y="-10" width="70" height="60" uuid="6b17cb8a-e9f3-4439-b118-fa020476abab"/>
+                <imageExpression><![CDATA["src/main/resources/assets/logo1-01.png"]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="0" y="57" width="101" height="30" forecolor="#050505" uuid="d1ca120e-dca2-4838-aef1-20ae4e2336c0"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Passenger]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="160" y="57" width="101" height="30" forecolor="#050505" uuid="78b5e503-7c8a-4de3-9fd0-64ea0343b40e"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Flight]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="330" y="57" width="101" height="30" forecolor="#050505" backcolor="#FFFFFF" uuid="31cbe4aa-1216-495e-bc12-43182486ec61"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Seat]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="660" y="57" width="101" height="30" forecolor="#050505" uuid="3fa11ba8-c98c-4ff0-8d64-43b60ea86592"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Passenger]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="35" splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="296" splitType="Stretch">
+            <rectangle>
+                <reportElement x="-20" y="-35" width="842" height="315" uuid="aaa273ea-d5b1-4106-92bb-f4a9bc774108"/>
+            </rectangle>
+            <image>
+                <reportElement x="-20" y="-35" width="620" height="315" uuid="82ee710b-ecd8-4361-9261-edfc72c81377"/>
+                <imageExpression><![CDATA["src/main/resources/assets/imageedit_2_9837585885.png"]]></imageExpression>
+            </image>
+            <textField evaluationTime="Group" evaluationGroup="departure_code">
+                <reportElement x="10" y="39" width="156" height="71" uuid="011e1b6a-7f54-4b49-8c41-60be690210fc"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="55"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{departureCode}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Group" evaluationGroup="arrival_code">
+                <reportElement x="340" y="40" width="160" height="71" uuid="0ce0ccb8-12af-44d4-9258-b1a094c1ce14"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="55"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{departureCode}]]></textFieldExpression>
+            </textField>
+            <image>
+                <reportElement x="230" y="50" width="50" height="50" uuid="1c672a37-e624-42f5-a7e3-cf523c0667f9"/>
+                <imageExpression><![CDATA["src/main/resources/assets/plane.png"]]></imageExpression>
+            </image>
+            <textField evaluationTime="Group" evaluationGroup="first_name">
+                <reportElement x="0" y="-30" width="100" height="30" uuid="2b44cd95-fb1d-426b-8f43-2d3cf5b8fec1"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="24"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{firstName}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Group" evaluationGroup="id_flight">
+                <reportElement x="160" y="-30" width="100" height="30" uuid="9df60eac-d3a5-42af-96df-8ef3b5df4240"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="24"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{idFlight}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Group" evaluationGroup="number_seat">
+                <reportElement x="330" y="-30" width="100" height="30" uuid="7a38f99f-3b5f-47ec-90e9-13610ac4ceff"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="24"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{numberSeat}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement mode="Transparent" x="100" y="133" width="101" height="30" forecolor="#525252" uuid="19c6e2a7-1903-43fa-94fa-c7d858a8c788"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Gate]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="100" y="170" width="101" height="30" uuid="6c13a53b-0bf1-432b-b500-3959e8e548f9"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[GE001]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Transparent" x="330" y="133" width="101" height="30" forecolor="#525252" uuid="c4dcd677-e428-4f59-81e8-62814df12afe"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Departure]]></text>
+            </staticText>
+            <textField evaluationTime="Group" evaluationGroup="id_flight">
+                <reportElement x="330" y="170" width="170" height="30" uuid="5d0be622-df7c-4449-b148-300f67c4966f"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{departureTime}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Group" evaluationGroup="id_flight">
+                <reportElement x="330" y="200" width="170" height="30" uuid="d71bd9c1-fb4d-4654-b16a-038accc1c4a7"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{departureDate}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Group" evaluationGroup="first_name">
+                <reportElement x="610" y="-30" width="100" height="30" uuid="0f95b853-dc16-4188-aa12-4204c3ba0a10"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="24"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{firstName}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Group" evaluationGroup="id_flight">
+                <reportElement x="609" y="50" width="71" height="30" uuid="7ccb2389-8681-4cc2-b083-f3a14bf9deb3"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="24"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{idFlight}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="609" y="20" width="71" height="30" forecolor="#595959" uuid="2310721a-3521-473e-a3fb-c3c21d4f0b38"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Flight]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="730" y="20" width="71" height="30" forecolor="#595959" uuid="32fe1e60-6a10-47d8-b550-57d9cc912f80"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Seat]]></text>
+            </staticText>
+            <textField evaluationTime="Group" evaluationGroup="number_seat">
+                <reportElement x="730" y="50" width="71" height="30" uuid="c4095597-0f6d-46cd-97ff-7988d668d824"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="24"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{numberSeat}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement mode="Transparent" x="610" y="100" width="101" height="30" forecolor="#525252" uuid="5638c1b2-5253-4a37-9821-8501bc66859d"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Departure]]></text>
+            </staticText>
+            <textField evaluationTime="Group" evaluationGroup="id_flight">
+                <reportElement x="609" y="130" width="91" height="30" uuid="a8076e86-59f3-4742-891a-84552b488ec6"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{departureTime}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Group" evaluationGroup="id_flight">
+                <reportElement x="710" y="130" width="100" height="30" uuid="6889f5e7-e565-4c2e-aeb6-d2605d81ac07"/>
+                <textElement >
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{departureDate}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement mode="Transparent" x="610" y="163" width="101" height="30" forecolor="#525252" uuid="00211563-0db2-4f37-941b-55eb0b1650c5"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[Gate]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="610" y="200" width="101" height="30" uuid="f03dcd46-49f9-4f50-9d1a-90355e8ac33c"/>
+                <textElement>
+                    <font fontName="Berlin Sans FB" size="20"/>
+                </textElement>
+                <text><![CDATA[GE001]]></text>
+            </staticText>
+<!--            <componentElement>-->
+<!--                <reportElement x="610" y="240" width="130" height="30" uuid="b49fc927-7809-4820-9efc-c7ecb292b9ed"/>-->
+<!--&lt;!&ndash;                <jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="2of7" drawText="false" checksumRequired="false">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>&ndash;&gt;-->
+<!--&lt;!&ndash;                </jr:barbecue>&ndash;&gt;-->
+<!--            </componentElement>-->
+        </band>
+    </columnHeader>
+</jasperReport>

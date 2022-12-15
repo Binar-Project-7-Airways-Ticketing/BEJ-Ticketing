@@ -1,6 +1,8 @@
 package com.binar.bejticketing.service.order;
 
+import com.binar.bejticketing.dto.TicketDto;
 import com.binar.bejticketing.entity.Booking;
+import com.binar.bejticketing.entity.BookingDetails;
 import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.BookingDetailsRepository;
 import com.binar.bejticketing.repository.BookingRepository;
@@ -43,8 +45,24 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking getBookingForTicket(Long idBooking) {
-        return bookingRepository.getBookingForTicket(idBooking);
+    public TicketDto getBookingForTicket(Long idBooking) {
+        TicketDto ticketDto = new TicketDto();
+
+        Optional<Booking> bookingChecking = bookingRepository.findById(idBooking);
+        if (bookingChecking.isEmpty()){
+            throw new DataNotFoundException(idBooking);
+        }
+        BookingDetails bookingDetails = bookingChecking.get().getBookingDetails();
+
+        ticketDto.setFirstName(bookingDetails.getPassenger().getFirstName());
+        ticketDto.setArrivalCode(bookingDetails.getFlight().getArrivalCode());
+        ticketDto.setDepartureCode(bookingDetails.getFlight().getDepartureCode());
+        ticketDto.setDepartureDate(bookingDetails.getFlight().getDepartureDate());
+        ticketDto.setDepartureTime(bookingDetails.getFlight().getDepartureTime());
+        ticketDto.setIdFlight(bookingDetails.getFlight().getIdFlight());
+        ticketDto.setNumberSeat(bookingDetails.getSeat().getNumberSeat());
+
+        return ticketDto;
     }
 
     @Override

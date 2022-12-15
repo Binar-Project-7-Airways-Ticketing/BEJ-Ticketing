@@ -1,5 +1,6 @@
 package com.binar.bejticketing.service;
 
+import com.binar.bejticketing.dto.TicketDto;
 import com.binar.bejticketing.entity.Booking;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ public interface BookingService {
     Booking getBookingById(Long id);
     Booking createBooking(Booking booking);
     Booking updateBookingDetails(Long idBooking, Booking booking);
-    Booking getBookingForTicket(Long idBooking);
+    TicketDto getBookingForTicket(Long idBooking);
     Booking updateStatePaymentBooking(Long idBooking, boolean state);
     Booking updatePictureBooking(Long idBooking, String url);
 }
