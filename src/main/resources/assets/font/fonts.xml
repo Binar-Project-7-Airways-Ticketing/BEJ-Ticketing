@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fontFamilies>
+
     <fontFamily name="Berlin Sans FB">
-        <normal><![CDATA[assets/font/berlin_sans.ttf]]></normal>
+        <normal><![CDATA[assets/font/BRLNSR.TTF]]></normal>
         <pdfEmbedded><![CDATA[true]]></pdfEmbedded>
-        <exportFonts/>
     </fontFamily>
-</fontFamilies>
