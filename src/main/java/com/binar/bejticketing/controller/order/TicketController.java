@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/api/ticket")
@@ -23,7 +24,7 @@ public class TicketController {
     private BookingService bookingService;
 
     @GetMapping(value = "/{idBooking}",produces = MediaType.APPLICATION_PDF_VALUE,consumes = MediaType.ALL_VALUE)
-    public ResponseEntity<byte[]> getBookingForTicket(@PathVariable("idBooking") Long idBooking) throws JRException, FileNotFoundException {
+    public ResponseEntity<byte[]> getBookingForTicket(@PathVariable("idBooking") Long idBooking) throws JRException, FileNotFoundException, ParseException {
         JRBeanArrayDataSource jrBeanArrayDataSource = new JRBeanArrayDataSource(new TicketDto[]{bookingService.getBookingForTicket(idBooking)});
 
             var generatePDF = new GeneratePdf();

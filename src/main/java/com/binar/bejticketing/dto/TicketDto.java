@@ -11,8 +11,8 @@ public class TicketDto {
     private Long idFlight;
     private String firstName;
     private String numberSeat;
-    private Date departureDate;
-    private Date departureTime;
+    private String departureDate;
+    private String departureTime;
     private String departureCode;
     private String arrivalCode;
 }

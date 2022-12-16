@@ -7,9 +7,14 @@ import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.BookingDetailsRepository;
 import com.binar.bejticketing.repository.BookingRepository;
 import com.binar.bejticketing.service.BookingService;
+import com.binar.bejticketing.utils.ConvertDateToTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -60,7 +65,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public TicketDto getBookingForTicket(Long idBooking) {
+    public TicketDto getBookingForTicket(Long idBooking) throws ParseException {
         TicketDto ticketDto = new TicketDto();
 
         Optional<Booking> bookingChecking = bookingRepository.findById(idBooking);
@@ -72,8 +77,21 @@ public class BookingServiceImpl implements BookingService {
         ticketDto.setFirstName(bookingDetails.getPassenger().getFirstName());
         ticketDto.setArrivalCode(bookingDetails.getFlight().getArrivalCode());
         ticketDto.setDepartureCode(bookingDetails.getFlight().getDepartureCode());
-        ticketDto.setDepartureDate(bookingDetails.getFlight().getDepartureDate());
-        ticketDto.setDepartureTime(bookingDetails.getFlight().getDepartureTime());
+
+
+        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+        DateFormat dateTime = new SimpleDateFormat("hh:mm:ss");
+        ConvertDateToTime convertDateToTime = new ConvertDateToTime();
+
+        System.out.println(bookingDetails.getFlight().getDepartureDate());
+        System.out.println(bookingDetails.getFlight().getDepartureTime());
+
+        Date departureDateConvert = convertDateToTime.convertDate(bookingDetails.getFlight().getDepartureDate());
+        Date departureTimeConvert = convertDateToTime.convertTime(bookingDetails.getFlight().getDepartureTime());
+
+        ticketDto.setDepartureDate(dateFormat.format(departureDateConvert));
+        ticketDto.setDepartureTime(dateTime.format(departureTimeConvert));
+
         ticketDto.setIdFlight(bookingDetails.getFlight().getIdFlight());
         ticketDto.setNumberSeat(bookingDetails.getSeat().getNumberSeat());
 

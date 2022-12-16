@@ -6,56 +6,19 @@
     <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="386"/>
     <property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="608"/>
     <property name="com.jaspersoft.studio.data.defaultdataadapter" value="Ticket2"/>
-<!--    <queryString language="SQL">-->
-<!--        <![CDATA[SELECT passengers.first_name,-->
-<!--	passengers.last_name,-->
-<!--	plane.id_plane,-->
-<!--	seats.number_seat,-->
-<!--	flight.arrival_date,-->
-<!--	flight.arrival_time,-->
-<!--	flight.departure_date,-->
-<!--	flight.departure_time,-->
-<!--	flight.departure_code,-->
-<!--	flight.arrival_code,-->
-<!--	flight.id_flight,-->
-<!--	plane.id_plane-->
-<!--FROM passengers,-->
-<!--	luggage,-->
-<!--	seats,-->
-<!--	flight-->
-<!--	INNER JOIN plane ON -->
-<!--	 flight.id_plane = plane.id_plane]]>-->
-<!--    </queryString>-->
     <field name="firstName" class="java.lang.String"/>
-<!--    <field name="lastName" class="java.lang.String"/>-->
-<!--    <field name="idPlane" class="java.lang.Long"/>-->
     <field name="numberSeat" class="java.lang.String"/>
-<!--    <field name="arrivalDate" class="java.util.Date"/>-->
-<!--    <field name="arrivalTime" class="java.util.Date"/>-->
-    <field name="departureDate" class="java.util.Date"/>
-    <field name="departureTime" class="java.util.Date"/>
+    <field name="departureDate" class="java.lang.String"/>
+    <field name="departureTime" class="java.lang.String"/>
     <field name="departureCode" class="java.lang.String"/>
     <field name="arrivalCode" class="java.lang.String"/>
     <field name="idFlight" class="java.lang.Long"/>
-<!--    <field name="COLUMN_12" class="java.lang.Long"/>-->
     <group name="first_name">
         <groupExpression><![CDATA[$F{firstName}]]></groupExpression>
     </group>
-<!--    <group name="last_name">-->
-<!--        <groupExpression><![CDATA[$F{lastName}]]></groupExpression>-->
-<!--    </group>-->
-<!--    <group name="id_plane">-->
-<!--        <groupExpression><![CDATA[$F{idPlane}]]></groupExpression>-->
-<!--    </group>-->
     <group name="number_seat">
         <groupExpression><![CDATA[$F{numberSeat}]]></groupExpression>
     </group>
-<!--    <group name="arrival_date">-->
-<!--        <groupExpression><![CDATA[$F{arrivalDate}]]></groupExpression>-->
-<!--    </group>-->
-<!--    <group name="arrival_time">-->
-<!--        <groupExpression><![CDATA[$F{arrivalTime}]]></groupExpression>-->
-<!--    </group>-->
     <group name="departure_date">
         <groupExpression><![CDATA[$F{departureDate}]]></groupExpression>
     </group>
@@ -71,9 +34,6 @@
     <group name="id_flight">
         <groupExpression><![CDATA[$F{idFlight}]]></groupExpression>
     </group>
-<!--    <group name="COLUMN_12">-->
-<!--        <groupExpression><![CDATA[$F{COLUMN_12}]]></groupExpression>-->
-<!--    </group>-->
     <background>
         <band splitType="Stretch"/>
     </background>
