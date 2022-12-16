@@ -10,10 +10,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -42,7 +44,8 @@ public class Passenger {
     @NotBlank(message = "Contact Number Not Null")
     private String contactNumber;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern="MM/dd/yyyy")
     @Column(name = "birthday")
     private Date birthday;
 
@@ -51,6 +54,7 @@ public class Passenger {
 
     @Column(name = "gender")
     @Enumerated(EnumType.ORDINAL)
+    @NotNull(message = "Gender Cannot null")
     private Gender gender;
 
     @Column(name = "nationality")
