@@ -44,6 +44,16 @@ public class HistoryController {
         return ResponseEntity.ok(responseData);
     }
 
+    @GetMapping("/{id-booking}/user/{id-user}")
+    public ResponseEntity<ResponseData<List<Booking>>> getHistoryBookingById(@PathVariable("id-booking") Long idBooking,
+                                                                       @PathVariable("id-user") Long idUser){
+        ResponseData<List<Booking>> responseData = new ResponseData<>();
+
+        responseData.setStatus(true);
+        responseData.setPayload(bookingService.getBookingHistoryById(idBooking, idUser));
+        return ResponseEntity.ok(responseData);
+    }
+
     @PutMapping("/update/{id-booking}")
     public ResponseEntity<ResponseData<Booking>> editHistoryBooking(@PathVariable("id-booking")Long idBooking,
                                                                     @RequestParam("state") boolean state){
