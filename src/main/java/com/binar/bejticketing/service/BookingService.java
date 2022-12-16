@@ -9,7 +9,8 @@ import java.util.List;
 @Service
 public interface BookingService {
     List<Booking> getAllBooking();
-    Booking getBookingById(Long id);
+    List<Booking> getBookingHistoryById(Long idBooking, Long idUser);
+    Booking getBookingById(Long idBooking);
     Booking createBooking(Booking booking);
     Booking updateBookingDetails(Long idBooking, Booking booking);
     TicketDto getBookingForTicket(Long idBooking);

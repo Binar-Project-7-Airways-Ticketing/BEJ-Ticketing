@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -26,8 +27,22 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public Booking getBookingById(Long id) {
-        return bookingRepository.findById(id).get();
+    public List<Booking> getBookingHistoryById(Long idBooking, Long idUser) {
+
+        Optional<Booking> bookingChecking = bookingRepository.findById(idBooking);
+        if (bookingChecking.isEmpty()){
+            throw new DataNotFoundException(idBooking);
+        }
+        Long idUserBooking = bookingChecking.get().getUser().getId();
+        if (!Objects.equals(idUserBooking, idUser)){
+            throw new DataNotFoundException(idUser);
+        }
+        return (List<Booking>) bookingChecking.get();
+    }
+
+    @Override
+    public Booking getBookingById(Long idBooking) {
+        return bookingRepository.findById(idBooking).get();
     }
 
     @Override
