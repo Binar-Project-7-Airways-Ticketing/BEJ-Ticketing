@@ -46,15 +46,6 @@ public class SeatServiceImpl implements SeatService {
         return seatRepository.saveAllAndFlush(seats);
     }
 
-//    @Override
-//    public Seat updateSeat(Long id) {
-//        var seat = seatRepository.findById(id);
-//        if (seat.isEmpty()){
-//            throw new DataNotFoundException(id);
-//        }
-//        return seatRepository.saveAndFlush(seat);
-//    }
-
     @Override
     public List<Seat> getSeatByNumber(String numberSeat) {
         return seatRepository.getSeatsByNumber(numberSeat);
@@ -70,5 +61,15 @@ public class SeatServiceImpl implements SeatService {
         }
         seat.get().setPlaneDetails(planeDetails.get());
         return seatRepository.saveAndFlush(seat.get());
+    }
+
+    @Override
+    public Seat updateStatePlaneDetail(Long idSeat, String state) {
+        Optional<Seat> seat = seatRepository.findById(idSeat);
+
+        if (seat.isEmpty()){
+            throw new DataNotFoundException(idSeat);
+        }
+        return seatRepository.updateSeatByState(idSeat, state);
     }
 }

@@ -16,4 +16,5 @@ public interface SeatService {
 //    Seat updateSeat(Long id);
     List<Seat> getSeatByNumber(String numberSeat);
     Seat updatePlaneDetail(Long idSeat, Long idPlane);
+    Seat updateStatePlaneDetail(Long idSeat, String state);
 }

@@ -97,4 +97,14 @@ public class SeatController {
         responseData.setPayload(seatService.updatePlaneDetail(idSeat,idPlane));
         return ResponseEntity.ok(responseData);
     }
+
+    @PutMapping("/update/{id-seat}/{state}")
+    public ResponseEntity<ResponseData<Seat>> updatePlaneDetails(@PathVariable("id-seat") Long idSeat,
+                                                                 @PathVariable("state") String state){
+        ResponseData<Seat> responseData = new ResponseData<>();
+        responseData.setStatus(true);
+
+        responseData.setPayload(seatService.updateStatePlaneDetail(idSeat,state));
+        return ResponseEntity.ok(responseData);
+    }
 }
