@@ -37,7 +37,7 @@ public class BookingDetails {
     @JoinColumn(name = "id_payment")
     private Payment payment;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
