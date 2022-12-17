@@ -7,6 +7,7 @@ import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.PlaneDetailsRepository;
 import com.binar.bejticketing.repository.SeatRepository;
 import com.binar.bejticketing.service.SeatService;
+import com.binar.bejticketing.utils.SeatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,12 +65,13 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public Seat updateStatePlaneDetail(Long idSeat, String state) {
+    public Seat updateStatePlaneDetail(Long idSeat, SeatUtils state) {
         Optional<Seat> seat = seatRepository.findById(idSeat);
 
         if (seat.isEmpty()){
             throw new DataNotFoundException(idSeat);
         }
-        return seatRepository.updateSeatByState(idSeat, state);
+        seat.get().setStateSeat(state);
+        return seatRepository.saveAndFlush(seat.get());
     }
 }

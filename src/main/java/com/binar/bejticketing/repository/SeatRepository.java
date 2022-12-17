@@ -15,8 +15,8 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
     @Query("SELECT s FROM Seat s WHERE s.numberSeat = :number")
     List<Seat> getSeatsByNumber(String number);
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE Seat s SET s.stateSeat = :state WHERE s.idSeat = :idSeat")
-    Seat updateSeatByState(Long idSeat, String state);
+//    @Transactional
+//    @Modifying
+//    @Query("UPDATE Seat s SET s.stateSeat = :state WHERE s.idSeat = :idSeat")
+//    Seat updateSeatByState(Long idSeat, String state);
 }
