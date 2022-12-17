@@ -5,6 +5,7 @@ import com.binar.bejticketing.dto.SeatResponseDto;
 import com.binar.bejticketing.entity.Passenger;
 import com.binar.bejticketing.entity.Seat;
 import com.binar.bejticketing.service.SeatService;
+import com.binar.bejticketing.utils.SeatUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -100,7 +101,7 @@ public class SeatController {
 
     @PutMapping("/update/{id-seat}/{state}")
     public ResponseEntity<ResponseData<Seat>> updatePlaneDetails(@PathVariable("id-seat") Long idSeat,
-                                                                 @PathVariable("state") String state){
+                                                                 @PathVariable("state") SeatUtils state){
         ResponseData<Seat> responseData = new ResponseData<>();
         responseData.setStatus(true);
 
