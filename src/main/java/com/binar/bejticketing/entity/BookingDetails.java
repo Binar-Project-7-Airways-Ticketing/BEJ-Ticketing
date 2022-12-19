@@ -28,10 +28,9 @@ public class BookingDetails {
     @Column(name = "state_pricing")
     private boolean statePricing = false;
 
-    @OneToOne(mappedBy = "bookingDetails")
-    @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
-    @JsonIgnore
-    private Booking booking;
+//    @ManyToOne
+//    @JsonIgnore
+//    private Booking booking;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_payment")
