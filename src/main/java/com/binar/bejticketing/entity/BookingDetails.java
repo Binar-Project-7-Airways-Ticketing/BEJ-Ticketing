@@ -28,8 +28,8 @@ public class BookingDetails {
     @Column(name = "state_pricing")
     private boolean statePricing = false;
 
-    @ManyToOne
-    @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_booking")
     @JsonIgnore
     private Booking booking;
 
