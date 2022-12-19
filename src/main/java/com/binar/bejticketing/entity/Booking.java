@@ -25,7 +25,7 @@ public class Booking {
     @Column(name = "picture_url")
     private String pictureUrl;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_booking_details")
     private BookingDetails bookingDetails;
 

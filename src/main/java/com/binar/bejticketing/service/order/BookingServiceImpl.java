@@ -46,6 +46,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public List<BookingDetails> createBookingDetails(List<BookingDetails> bookingDetails) {
+        return bookingDetailsRepository.saveAll(bookingDetails);
+    }
+
+    @Override
     public Booking getBookingById(Long idBooking) {
         return bookingRepository.findById(idBooking).get();
     }
