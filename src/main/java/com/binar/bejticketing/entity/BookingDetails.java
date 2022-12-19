@@ -28,7 +28,7 @@ public class BookingDetails {
     @Column(name = "state_pricing")
     private boolean statePricing = false;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_booking")
     @JsonIgnore
     private Booking booking;
