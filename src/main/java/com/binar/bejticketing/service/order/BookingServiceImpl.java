@@ -77,28 +77,26 @@ public class BookingServiceImpl implements BookingService {
         if (bookingChecking.isEmpty()){
             throw new DataNotFoundException(idBooking);
         }
-        BookingDetails bookingDetails = bookingChecking.get().getBookingDetails();
+        for (BookingDetails bookingDetails: bookingChecking.get().getBookingDetails()){
+            ticketDto.setFirstName(bookingDetails.getPassenger().getFirstName());
+            ticketDto.setArrivalCode(bookingDetails.getFlight().getArrivalCode());
+            ticketDto.setDepartureCode(bookingDetails.getFlight().getDepartureCode());
 
-        ticketDto.setFirstName(bookingDetails.getPassenger().getFirstName());
-        ticketDto.setArrivalCode(bookingDetails.getFlight().getArrivalCode());
-        ticketDto.setDepartureCode(bookingDetails.getFlight().getDepartureCode());
+            DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+            DateFormat dateTime = new SimpleDateFormat("hh:mm:ss");
+            ConvertDateToTime convertDateToTime = new ConvertDateToTime();
 
 
-        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
-        DateFormat dateTime = new SimpleDateFormat("hh:mm:ss");
-        ConvertDateToTime convertDateToTime = new ConvertDateToTime();
+            Date departureDateConvert = convertDateToTime.convertDate(bookingDetails.getFlight().getDepartureDate());
+            Date departureTimeConvert = convertDateToTime.convertTime(bookingDetails.getFlight().getDepartureTime());
+            ticketDto.setDepartureDate(dateFormat.format(departureDateConvert));
+            ticketDto.setDepartureTime(dateTime.format(departureTimeConvert));
 
-        System.out.println(bookingDetails.getFlight().getDepartureDate());
-        System.out.println(bookingDetails.getFlight().getDepartureTime());
+            ticketDto.setIdFlight(bookingDetails.getFlight().getIdFlight());
+            ticketDto.setNumberSeat(bookingDetails.getSeat().getNumberSeat());
+        }
 
-        Date departureDateConvert = convertDateToTime.convertDate(bookingDetails.getFlight().getDepartureDate());
-        Date departureTimeConvert = convertDateToTime.convertTime(bookingDetails.getFlight().getDepartureTime());
 
-        ticketDto.setDepartureDate(dateFormat.format(departureDateConvert));
-        ticketDto.setDepartureTime(dateTime.format(departureTimeConvert));
-
-        ticketDto.setIdFlight(bookingDetails.getFlight().getIdFlight());
-        ticketDto.setNumberSeat(bookingDetails.getSeat().getNumberSeat());
 
         return ticketDto;
     }
@@ -110,8 +108,10 @@ public class BookingServiceImpl implements BookingService {
             throw new DataNotFoundException(idBooking);
         }
         bookingChecking.get().setValid(state);
-        bookingChecking.get().getBookingDetails().setStatePricing(state);
-        bookingChecking.get().getBookingDetails().getPayment().setPaying(state);
+        for (BookingDetails bookingDetails: bookingChecking.get().getBookingDetails()){
+            bookingDetails.setStatePricing(state);
+            bookingDetails.getPayment().setPaying(state);
+        }
         return bookingRepository.saveAndFlush(bookingChecking.get());
     }
 
