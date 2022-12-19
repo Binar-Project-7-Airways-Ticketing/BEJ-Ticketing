@@ -26,9 +26,8 @@ public class Booking {
     @Column(name = "picture_url")
     private String pictureUrl;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_booking_details")
-    private BookingDetails bookingDetails;
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+    private List<BookingDetails> bookingDetails;
 
 
     @Column(name = "is_valid")
