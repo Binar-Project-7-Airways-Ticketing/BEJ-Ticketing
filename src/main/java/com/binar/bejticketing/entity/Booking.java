@@ -1,7 +1,6 @@
 package com.binar.bejticketing.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,8 +26,7 @@ public class Booking {
     @Column(name = "picture_url")
     private String pictureUrl;
 
-    @OneToMany
-    @JsonIgnore
+    @OneToMany(mappedBy = "booking",cascade = CascadeType.ALL)
     @JoinColumn(name = "id_booking_details")
     private List<BookingDetails> bookingDetails;
 
