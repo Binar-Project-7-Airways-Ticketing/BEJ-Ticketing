@@ -6,7 +6,9 @@ import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.FlightRepository;
 import com.binar.bejticketing.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 import java.util.Date;
 import java.util.List;
@@ -64,5 +66,10 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public List<Flight> findAllFlightAvailable() {
         return flightRepository.getAllFlight();
+    }
+
+    @Override
+    public Iterable<Flight> findFlightSearchDatePaging(String departureCode, String arrivalCode, Date date, Pageable pageable) {
+        return flightRepository.getFlightSearchDatePaging(departureCode,arrivalCode,date,pageable);
     }
 }
