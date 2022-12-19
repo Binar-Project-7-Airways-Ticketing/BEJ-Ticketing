@@ -28,8 +28,8 @@ public class BookingDetails {
     @Column(name = "state_pricing")
     private boolean statePricing = false;
 
-    @ManyToOne
-    @JsonIgnore
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
     private Booking booking;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

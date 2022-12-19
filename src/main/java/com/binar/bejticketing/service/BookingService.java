@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public interface BookingService {
     List<Booking> getAllBooking();
+    List<BookingDetails> getAllBookingDetails();
     List<Booking> getBookingHistoryById(Long idBooking, Long idUser);
     List<BookingDetails> createBookingDetails(List<BookingDetails> bookingDetails);
     Booking getBookingById(Long idBooking);
