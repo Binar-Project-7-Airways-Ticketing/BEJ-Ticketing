@@ -30,7 +30,7 @@ public class BookingDetails {
 
     @ManyToOne
     @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
-//    @JsonIgnore
+    @JsonIgnore
     private Booking booking;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
