@@ -28,7 +28,7 @@ public class BookingDetails {
     @Column(name = "state_pricing")
     private boolean statePricing = false;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "id_booking", referencedColumnName = "id_booking")
     private Booking booking;
 
