@@ -27,7 +27,8 @@ public class Booking {
     @Column(name = "picture_url")
     private String pictureUrl;
 
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = BookingDetails.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_booking_details", referencedColumnName = "id_booking_details")
     private List<BookingDetails> bookingDetails;
 
 
