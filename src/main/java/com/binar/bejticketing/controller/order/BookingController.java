@@ -2,6 +2,7 @@ package com.binar.bejticketing.controller.order;
 
 import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.Booking;
+import com.binar.bejticketing.entity.BookingDetails;
 import com.binar.bejticketing.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,15 @@ public class BookingController {
 
         responseData.setStatus(true);
         responseData.setPayload(bookingService.getAllBooking());
+        return ResponseEntity.ok(responseData);
+    }
+
+    @GetMapping("/booking-detail")
+    public ResponseEntity<ResponseData<List<BookingDetails>>> getAllBookingDetails(){
+        ResponseData<List<BookingDetails>> responseData = new ResponseData<>();
+
+        responseData.setStatus(true);
+        responseData.setPayload(bookingService.getAllBookingDetails());
         return ResponseEntity.ok(responseData);
     }
 

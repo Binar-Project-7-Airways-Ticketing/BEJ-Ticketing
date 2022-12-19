@@ -32,6 +32,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public List<BookingDetails> getAllBookingDetails() {
+        return bookingDetailsRepository.findAll();
+    }
+
+    @Override
     public List<Booking> getBookingHistoryById(Long idBooking, Long idUser) {
 
         Optional<Booking> bookingChecking = bookingRepository.findById(idBooking);
