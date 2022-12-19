@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,9 +26,9 @@ public class Booking {
     @Column(name = "picture_url")
     private String pictureUrl;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "booking",cascade = CascadeType.ALL)
     @JoinColumn(name = "id_booking_details")
-    private BookingDetails bookingDetails;
+    private List<BookingDetails> bookingDetails;
 
 
     @Column(name = "is_valid")
