@@ -20,12 +20,10 @@ import java.util.List;
 @Table(name = "payments")
 public class Payment {
     @Id
-    @SequenceGenerator(name = "test_seq", sequenceName = "test_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "test_seq")
     @Column(name = "id_payment")
     private Long idPayment;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true,mappedBy = "payment")
+    @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JoinColumn(name = "id_passenger",referencedColumnName = "id_passenger")
     private Passenger passenger;
 
