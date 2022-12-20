@@ -52,6 +52,6 @@ public class LuggageServiceImpl implements LuggageService {
             throw new EntityNotFoundException();
         }
         luggageCheck.get().setPlaneDetails(planeDetails.get());
-        return luggageCheck.get();
+        return luggageRepository.saveAndFlush(luggageCheck.get());
     }
 }
