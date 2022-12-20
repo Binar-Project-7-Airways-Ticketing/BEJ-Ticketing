@@ -25,7 +25,6 @@ public class AgeCategory {
     private Long idCategory;
 
     @Column(name = "name_category")
-    @NotBlank(message = "Name Category shouldn't Blank")
     private AgeCategoryName nameCategory;
 
     @Column(name = "price")
