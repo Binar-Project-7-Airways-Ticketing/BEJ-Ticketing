@@ -71,14 +71,14 @@ public class Passenger {
     @JoinColumn(name = "id_age_category", referencedColumnName = "id_category")
     private AgeCategory ageCategory;
 
-    @JoinColumn(name = "id_booking_detail")
-    @OneToOne
-    @JsonIgnore
-    private BookingDetails bookingDetails;
-
-    @OneToOne(mappedBy = "passenger")
-    @JsonIgnore
-    private Payment payment;
+//    @JoinColumn(name = "id_booking_detail")
+//    @OneToOne
+//    @JsonIgnore
+//    private BookingDetails bookingDetails;
+//
+//    @OneToOne(mappedBy = "passenger")
+//    @JsonIgnore
+//    private Payment payment;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

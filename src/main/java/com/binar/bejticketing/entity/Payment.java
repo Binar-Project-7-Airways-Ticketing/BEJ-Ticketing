@@ -20,12 +20,12 @@ import java.util.List;
 @Table(name = "payments")
 public class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_payment")
     private Long idPayment;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_passenger")
+    @OneToOne
+    @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")
     private Passenger passenger;
 
     @Column(name = "payment_method")
@@ -35,9 +35,9 @@ public class Payment {
     @Column(name = "is_paying")
     private boolean isPaying = false;
 
-    @OneToMany(mappedBy = "payment")
-    @JsonIgnore
-    private List<BookingDetails> bookingDetails;
+//    @OneToOne(mappedBy = "payment")
+//    @JsonIgnore
+//    private BookingDetails bookingDetails;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
