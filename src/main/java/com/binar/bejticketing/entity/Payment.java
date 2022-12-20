@@ -35,9 +35,6 @@ public class Payment {
     @Column(name = "is_paying")
     private boolean isPaying = false;
 
-//    @OneToOne(mappedBy = "payment")
-//    @JsonIgnore
-//    private BookingDetails bookingDetails;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
