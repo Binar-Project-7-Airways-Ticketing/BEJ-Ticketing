@@ -25,7 +25,7 @@ public class Payment {
     private Long idPayment;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_passenger",referencedColumnName = "id_passenger")
+    @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
     @Column(name = "payment_method")
