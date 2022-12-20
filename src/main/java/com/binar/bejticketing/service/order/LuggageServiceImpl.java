@@ -2,6 +2,7 @@ package com.binar.bejticketing.service.order;
 
 import com.binar.bejticketing.entity.Luggage;
 import com.binar.bejticketing.entity.PlaneDetails;
+import com.binar.bejticketing.entity.Seat;
 import com.binar.bejticketing.repository.LuggageRepository;
 import com.binar.bejticketing.repository.PlaneDetailsRepository;
 import com.binar.bejticketing.service.LuggageService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,20 @@ public class LuggageServiceImpl implements LuggageService {
 
     @Override
     public List<Luggage> getLuggageByIdPlane(Long idPlane) {
-        return luggageRepository.findLuggageByIdPlane(idPlane);
+        Optional<PlaneDetails> planeDetails = planeDetailsRepository.findById(idPlane);
+        if (planeDetails.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        List<Luggage> luggages = luggageRepository.findAll();
+        List<Luggage> arraySeat = new ArrayList<>();
+        luggages.forEach(luggage -> {
+            Long idPlaneClass = luggage.getPlaneDetails().getIdPlaneClass();
+            System.out.println(idPlaneClass);
+            if (idPlaneClass.equals(idPlane)){
+                arraySeat.add(luggage);
+            }
+        });
+        return arraySeat;
     }
 
     @Override
