@@ -28,7 +28,7 @@ public class Payment {
     private Passenger passenger;
 
     @Column(name = "payment_method")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
     @Column(name = "is_paying")
