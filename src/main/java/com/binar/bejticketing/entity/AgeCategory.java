@@ -21,7 +21,8 @@ import java.util.Date;
 @Table(name = "age_category")
 public class AgeCategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "test_seq", sequenceName = "test_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "test_seq")
     @Column(name = "id_category")
     private Long idCategory;
 
