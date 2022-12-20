@@ -24,7 +24,8 @@ public class Payment {
     @Column(name = "id_payment")
     private Long idPayment;
 
-    @OneToOne(mappedBy = "payment", cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
     @Column(name = "payment_method")
