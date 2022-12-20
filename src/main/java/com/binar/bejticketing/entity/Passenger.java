@@ -60,7 +60,7 @@ public class Passenger {
     @NotBlank(message = "Nationality Not Null")
     private String nationality;
 
-    @Column(name = "special_request")
+    @Column(name = "special_requests")
     @Enumerated(EnumType.STRING)
     private SpecialRequest specialRequest;
 
