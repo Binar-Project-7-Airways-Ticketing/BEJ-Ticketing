@@ -83,7 +83,6 @@ public class BookingServiceImpl implements BookingService {
             throw new DataNotFoundException(idBooking);
         }
         for (BookingDetails bookingDetails: bookingChecking.get().getBookingDetails()){
-            ticketDto.setFirstName(bookingDetails.getPassenger().getFirstName());
             ticketDto.setArrivalCode(bookingDetails.getFlight().getArrivalCode());
             ticketDto.setDepartureCode(bookingDetails.getFlight().getDepartureCode());
 
