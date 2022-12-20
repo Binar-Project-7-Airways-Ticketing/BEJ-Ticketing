@@ -20,7 +20,8 @@ import java.util.List;
 @Table(name = "payments")
 public class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "test_seq", sequenceName = "test_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "test_seq")
     @Column(name = "id_payment")
     private Long idPayment;
 

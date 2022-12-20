@@ -25,7 +25,8 @@ import java.util.Date;
 @Table(name = "passengers")
 public class Passenger {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "test_seq", sequenceName = "test_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "test_seq")
     @Column(name = "id_passenger")
     private Long idPassenger;
 
