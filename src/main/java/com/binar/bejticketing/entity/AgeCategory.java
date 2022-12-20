@@ -32,6 +32,7 @@ public class AgeCategory {
     private BigInteger price;
 
     @OneToOne
+    @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")
     @JsonIgnore
     private Passenger passenger;
 

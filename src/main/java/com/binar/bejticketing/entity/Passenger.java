@@ -68,9 +68,10 @@ public class Passenger {
     private String passport;
 
     @OneToOne(mappedBy = "passenger",cascade = CascadeType.MERGE)
+    @JoinColumn
     private AgeCategory ageCategory;
 
-    @JoinColumn(name = "id_booking_detail", referencedColumnName = "id_booking_details")
+    @JoinColumn(name = "id_booking_detail")
     @OneToOne
     @JsonIgnore
     private BookingDetails bookingDetails;
