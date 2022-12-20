@@ -76,9 +76,9 @@ public class Passenger {
     @JsonIgnore
     private BookingDetails bookingDetails;
 
-//    @OneToOne
-//    @JsonIgnore
-//    private Payment payment;
+    @OneToOne(mappedBy = "passenger")
+    @JsonIgnore
+    private Payment payment;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
