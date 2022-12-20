@@ -53,7 +53,7 @@ public class Passenger {
     private boolean isDeleted = false;
 
     @Column(name = "gender")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     @NotNull(message = "Gender Cannot null")
     private Gender gender;
 
@@ -62,7 +62,7 @@ public class Passenger {
     private String nationality;
 
     @Column(name = "special_request")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private SpecialRequest specialRequest;
 
     @Column(name = "passport")
