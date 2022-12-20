@@ -20,6 +20,7 @@ import java.util.List;
 @Table(name = "payments")
 public class Payment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_payment")
     private Long idPayment;
 

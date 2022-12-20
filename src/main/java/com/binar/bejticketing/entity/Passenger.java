@@ -25,7 +25,7 @@ import java.util.Date;
 @Table(name = "passengers")
 public class Passenger {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_passenger")
     private Long idPassenger;
 
