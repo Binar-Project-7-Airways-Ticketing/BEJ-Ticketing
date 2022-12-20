@@ -1,5 +1,6 @@
 package com.binar.bejticketing.entity;
 
+import com.binar.bejticketing.utils.AgeCategoryName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ public class AgeCategory {
 
     @Column(name = "name_category")
     @NotBlank(message = "Name Category shouldn't Blank")
-    private String nameCategory;
+    private AgeCategoryName nameCategory;
 
     @Column(name = "price")
     private BigInteger price;

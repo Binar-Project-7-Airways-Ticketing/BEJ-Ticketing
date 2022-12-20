@@ -65,6 +65,9 @@ public class Passenger {
     @Enumerated(EnumType.ORDINAL)
     private SpecialRequest specialRequest;
 
+    @Column(name = "passport")
+    private String passport;
+
     @OneToOne(mappedBy = "passenger",cascade = CascadeType.MERGE)
     private AgeCategory ageCategory;
 
