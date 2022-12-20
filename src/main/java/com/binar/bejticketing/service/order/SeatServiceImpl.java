@@ -31,17 +31,25 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public List<Seat> getSeatsByIdPlane(Long idPlane) {
         Optional<PlaneDetails> planeDetails = planeDetailsRepository.findById(idPlane);
+
         if (planeDetails.isEmpty()){
-            throw new DataNotFoundException(idPlane);
+            throw new EntityNotFoundException();
         }
         List<Seat> seat = seatRepository.findAll();
         List<Seat> arraySeat = new ArrayList<>();
-        for (Seat s: seat){
-            Long idPlaneClass = s.getPlaneDetails().getIdPlaneClass();
+//        for (Seat s: seat){
+//            Long idPlaneClass = s.getPlaneDetails().getIdPlaneClass();
+//            if (idPlaneClass.equals(idPlane)){
+//                arraySeat.add(s);
+//            }
+//        }
+        seat.stream().forEach(seat1 -> {
+            Long idPlaneClass = seat1.getPlaneDetails().getIdPlaneClass();
+            System.out.println(idPlaneClass);
             if (idPlaneClass.equals(idPlane)){
-                arraySeat.add(s);
+                arraySeat.add(seat1);
             }
-        }
+        });
 
         return arraySeat;
     }
