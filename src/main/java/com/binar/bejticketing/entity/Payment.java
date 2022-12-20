@@ -24,8 +24,8 @@ public class Payment {
     @Column(name = "id_payment")
     private Long idPayment;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_passenger")
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true,mappedBy = "payment")
+    @JoinColumn(name = "id_passenger",referencedColumnName = "id_passenger")
     private Passenger passenger;
 
     @Column(name = "payment_method")
