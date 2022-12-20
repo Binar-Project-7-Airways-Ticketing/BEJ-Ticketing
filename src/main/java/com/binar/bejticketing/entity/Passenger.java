@@ -53,9 +53,9 @@ public class Passenger {
     private boolean isDeleted = false;
 
     @Column(name = "gender")
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @NotNull(message = "Gender Cannot null")
-    private Gender gender;
+    private String gender;
 
     @Column(name = "nationality")
     @NotBlank(message = "Nationality Not Null")
