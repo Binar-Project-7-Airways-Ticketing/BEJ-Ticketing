@@ -1,10 +1,16 @@
 package com.binar.bejticketing.controller.order;
 
+import com.binar.bejticketing.dto.LuggageDto;
+import com.binar.bejticketing.dto.ResponseData;
 import com.binar.bejticketing.entity.Luggage;
+import com.binar.bejticketing.entity.Seat;
 import com.binar.bejticketing.service.LuggageService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +20,17 @@ import java.util.List;
 public class LuggageController {
     @Autowired
     private LuggageService luggageService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping
     public ResponseEntity<List<Luggage>> getAllLuggage(){
         return new ResponseEntity<>(luggageService.getAllLuggage(), HttpStatus.OK);
+    }
+
+    @GetMapping("/plane-detail/{idPlane}")
+    public ResponseEntity<List<Luggage>> getLuggageByIdPlane(@PathVariable("idPlane") Long idPlane){
+        return new ResponseEntity<>(luggageService.getLuggageByIdPlane(idPlane), HttpStatus.OK);
     }
 
     @GetMapping("/state")
@@ -26,12 +39,32 @@ public class LuggageController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Luggage> createLuggage(@RequestBody Luggage luggage){
-        return new ResponseEntity<>(luggageService.createLuggage(luggage), HttpStatus.CREATED);
+    public ResponseEntity<ResponseData<Luggage>> createLuggage(@RequestBody LuggageDto luggageDto,
+                                                               Errors errors){
+        ResponseData<Luggage> responseData = new ResponseData<>();
+
+        if (errors.hasErrors()){
+            for (ObjectError error: errors.getAllErrors()){
+                responseData.getMessages().add(error.getDefaultMessage());
+            }
+            responseData.setStatus(false);
+            responseData.setPayload(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseData);
+        }
+        responseData.setStatus(true);
+        Luggage luggage = modelMapper.map(luggageDto, Luggage.class);
+        responseData.setPayload(luggageService.createLuggage(luggage));
+        return ResponseEntity.ok(responseData);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Luggage> updateStateLuggage(@PathVariable Long id){
         return new ResponseEntity<>(luggageService.updateStateLuggage(id), HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/update/{idLuggage}/plane-detail/{idPlane}")
+    public ResponseEntity<Luggage> updatePlaneDetailInLuggage(@PathVariable("idLuggage") Long idLuggage,
+                                                              @PathVariable("idPlane") Long idPlane){
+        return new ResponseEntity<>(luggageService.updatePlaneDetailLuggage(idLuggage, idPlane), HttpStatus.ACCEPTED);
     }
 }

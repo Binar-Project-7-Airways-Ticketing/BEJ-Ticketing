@@ -17,6 +17,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
 
 @Configuration @EnableWebSecurity @RequiredArgsConstructor
 public class SecurityConfig  extends WebSecurityConfigurerAdapter{
@@ -44,7 +52,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.cors().and().csrf().disable()
+
+        http
+            .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin","/film/getall","/api/**").permitAll()
@@ -53,7 +63,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
                         ,"/role/addToUser").hasRole("ADMIN")
                 .antMatchers("user/update{id}").hasRole("USER")
                 .antMatchers("/swagger-ui/**").permitAll()
-                .anyRequest().authenticated().and()
+                .anyRequest().authenticated()
+            .and()
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 

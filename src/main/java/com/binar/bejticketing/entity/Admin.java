@@ -20,8 +20,8 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "display_name")
+    private String displayname;
 
     @Column(name = "first_name")
     private String firstName;
@@ -34,9 +34,6 @@ public class Admin {
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "no_hp")
-    private String noHp;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

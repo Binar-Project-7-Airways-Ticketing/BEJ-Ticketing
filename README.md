@@ -5,3 +5,4 @@ In this project we have 3 person/member to finish this capstone, among other:
   1. Fathan Azka Pradana
   2. Muhammad Rizky Akbar
   3. Jamal Ritonga
+ 

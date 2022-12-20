@@ -13,4 +13,7 @@ public class DataNotFoundException extends RuntimeException{
     public DataNotFoundException() {
 
     }
+    public DataNotFoundException(String code){
+        super("The data using code '"+ code + "' does not exists");
+    }
 }

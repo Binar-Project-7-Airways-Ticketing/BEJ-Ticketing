@@ -1,5 +1,6 @@
 package com.binar.bejticketing.service.user;
 
+import com.binar.bejticketing.dto.UserUpdateDto;
 import com.binar.bejticketing.entity.Role;
 import com.binar.bejticketing.entity.User;
 import com.binar.bejticketing.exception.EntityNotFoundException;
@@ -54,12 +55,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addRoletoUser(String username, String roleName) {
-    log.info("adding role {} to user {}",roleName,username);
-        User user = userRepository.findByUsername(username);
-        Role role = roleRepository.findByroleStatus(roleName);
-        user.getRoles().add(role);
+    public void addRoletoUser(String displayName, String roleName) {
+    log.info("adding role {} to user {}",roleName,displayName);
+        User user = userRepository.findByDisplayName(displayName);
+        Role role = roleRepository.findByRoleStatus(roleName);
+        user.setRole(role);
+        userRepository.save(user);
     }
+
+    @Override
+    public void uploadImage(String url, Long id) {
+        userRepository.uploadImage(url, id);
+    }
+
     @Override
     public User findById(Long id) {
         Optional<User> search = userRepository.findById(id);
@@ -72,21 +80,27 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
     @Override
-    public User updaterUser(Long id,User user) {
+    public void changePassword(String password, Long id) {
+        userRepository.changePassword(password,id);
+    }
+
+    @Override
+    public User updaterUser(Long id, UserUpdateDto user) {
         User users = findById(id);
         if (user != null) {
-            user.setUsername(user.getUsername());
-            user.setFirstName(user.getFirstName());
-            user.setLastName(user.getLastName());
-            user.setAddress(user.getAddress());
-            user.setBirthday(user.getBirthday());
-            user.setEmail(user.getEmail());
-            user.setPassword(user.getPassword());
-            userRepository.saveAndFlush(user);
+            users.setDisplayName(user.getDisplayName());
+            users.setFirstName(user.getFirstName());
+            users.setLastName(user.getLastName());
+            users.setGender(user.getGender());
+            users.setBirthday(user.getBirthday());
+            users.setEmail(user.getEmail());
+            userRepository.saveAndFlush(users);
         }
-        return user;
+        return users;
     }
+
 
     static User unwrapUser(Optional<User> entity, Long id){
         if (entity.isPresent()) return entity.get();

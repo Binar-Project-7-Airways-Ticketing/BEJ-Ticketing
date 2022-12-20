@@ -1,6 +1,8 @@
 package com.binar.bejticketing.entity;
 
+import com.binar.bejticketing.utils.SeatUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,8 +25,17 @@ public class Seat {
     @Column(name = "number_seat")
     private String numberSeat;
 
-    @Column(name = "is_ready")
-    private boolean isReady = true;
+    @Column(name = "state_seat")
+    private SeatUtils stateSeat;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_plane_detail", referencedColumnName = "id_plane_details")
+    private PlaneDetails planeDetails;
+
+    @JoinColumn(name = "id_booking_details", referencedColumnName = "id_booking_details")
+    @OneToOne
+    @JsonIgnore
+    private BookingDetails bookingDetails;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
