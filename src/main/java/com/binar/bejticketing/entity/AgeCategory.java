@@ -31,8 +31,7 @@ public class AgeCategory {
     @Column(name = "price")
     private BigInteger price;
 
-    @OneToOne
-    @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")
+    @OneToOne(mappedBy = "ageCategory")
     @JsonIgnore
     private Passenger passenger;
 
