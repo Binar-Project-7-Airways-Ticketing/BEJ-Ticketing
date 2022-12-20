@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,20 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public List<Seat> getSeatsByIdPlane(Long idPlane) {
-        return seatRepository.getSeatsByIdPlane(idPlane);
+        Optional<PlaneDetails> planeDetails = planeDetailsRepository.findById(idPlane);
+        if (planeDetails.isEmpty()){
+            throw new DataNotFoundException(idPlane);
+        }
+        List<Seat> seat = seatRepository.findAll();
+        List<Seat> arraySeat = new ArrayList<>();
+        for (Seat s: seat){
+            Long idPlaneClass = s.getPlaneDetails().getIdPlaneClass();
+            if (idPlaneClass.equals(idPlane)){
+                arraySeat.add(s);
+            }
+        }
+
+        return arraySeat;
     }
 
     @Override
