@@ -25,8 +25,7 @@ import java.util.Date;
 @Table(name = "passengers")
 public class Passenger {
     @Id
-    @SequenceGenerator(name = "test_seq", sequenceName = "test_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "test_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_passenger")
     private Long idPassenger;
 
@@ -77,9 +76,9 @@ public class Passenger {
     @JsonIgnore
     private BookingDetails bookingDetails;
 
-    @OneToOne
-    @JsonIgnore
-    private Payment payment;
+//    @OneToOne
+//    @JsonIgnore
+//    private Payment payment;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
