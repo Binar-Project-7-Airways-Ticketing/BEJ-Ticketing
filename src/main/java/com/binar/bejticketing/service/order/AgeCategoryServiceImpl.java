@@ -20,15 +20,15 @@ public class AgeCategoryServiceImpl implements AgeCategoryService {
 
     @Override
     public AgeCategory createAgeCategory(AgeCategory ageCategory) {
-        ageCategoryRepository.isCheckedByUsername(String.valueOf(ageCategory.getNameCategory()))
-                .ifPresent(data ->
-                        ageCategory1 = Objects.equals(data.getNameCategory(), ageCategory.getNameCategory())
-                );
-        System.out.println(ageCategory1);
-        if (ageCategory1){
-            System.out.println("Failed to Save");
-            throw  new DataAlreadyExistException(ageCategory.getNameCategory());
-        }
+//        ageCategoryRepository.isCheckedByUsername(String.valueOf(ageCategory.getNameCategory()))
+//                .ifPresent(data ->
+//                        ageCategory1 = Objects.equals(data.getNameCategory(), ageCategory.getNameCategory())
+//                );
+//        System.out.println(ageCategory1);
+//        if (ageCategory1){
+//            System.out.println("Failed to Save");
+//            throw  new DataAlreadyExistException(ageCategory.getNameCategory());
+//        }
         return ageCategoryRepository.save(ageCategory);
     }
 
