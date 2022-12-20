@@ -82,7 +82,7 @@ public class FlightController {
                                                                   @PathVariable("page") int page,
                                                             @RequestParam("date")@DateTimeFormat(pattern="MM/dd/yyyy") Date date){
 
-        Pageable pageable = PageRequest.of(page,size);
+        Pageable pageable = PageRequest.of(page-1,size);
         return new ResponseEntity<>(flightService.findFlightSearchDatePaging(dCode,aCode,date,pageable), HttpStatus.OK);
     }
 
