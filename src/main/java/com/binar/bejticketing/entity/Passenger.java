@@ -52,7 +52,7 @@ public class Passenger {
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
 
-    @Column(name = "gender")
+    @Column(name = "genders")
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
