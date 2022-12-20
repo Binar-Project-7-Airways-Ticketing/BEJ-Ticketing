@@ -25,7 +25,7 @@ public class AgeCategory {
     private Long idCategory;
 
     @Column(name = "name_category")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private AgeCategoryName nameCategory;
 
     @Column(name = "price")
