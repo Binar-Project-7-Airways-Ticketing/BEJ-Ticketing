@@ -36,6 +36,7 @@ public class PlaneDetails {
     private List<Seat> seat;
 
     @OneToMany
+    @Column
     @JsonIgnore
     private List<Luggage> luggage;
 
