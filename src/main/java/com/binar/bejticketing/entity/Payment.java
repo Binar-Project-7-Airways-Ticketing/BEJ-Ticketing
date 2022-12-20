@@ -24,7 +24,7 @@ public class Payment {
     @Column(name = "id_payment")
     private Long idPayment;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_passenger")
     private Passenger passenger;
 
