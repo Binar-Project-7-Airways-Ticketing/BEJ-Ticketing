@@ -19,7 +19,7 @@ import java.util.Date;
 public class BookingDetails {
     @Id
     @Column(name = "id_booking_details")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idBookingDetails;
 
     @Column(name = "price")
@@ -33,13 +33,13 @@ public class BookingDetails {
     @JsonIgnore
     private Booking booking;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_payment")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_payment", referencedColumnName = "id_payment")
     private Payment payment;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_passenger")
-    private Passenger passenger;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "id_passenger")
+//    private Passenger passenger;
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_luggage")

@@ -21,7 +21,7 @@ import java.util.Date;
 @Table(name = "age_category")
 public class AgeCategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_category")
     private Long idCategory;
 
@@ -32,9 +32,9 @@ public class AgeCategory {
     @Column(name = "price")
     private BigInteger price;
 
-    @OneToOne(mappedBy = "ageCategory")
-    @JsonIgnore
-    private Passenger passenger;
+//    @OneToOne(mappedBy = "ageCategory")
+//    @JsonIgnore
+//    private Passenger passenger;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
