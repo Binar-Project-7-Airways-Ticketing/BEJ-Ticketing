@@ -67,8 +67,8 @@ public class Passenger {
     @Column(name = "passport")
     private String passport;
 
-    @OneToOne(mappedBy = "passenger",cascade = CascadeType.MERGE)
-    @JoinColumn
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_age_category", referencedColumnName = "id_category")
     private AgeCategory ageCategory;
 
     @JoinColumn(name = "id_booking_detail")

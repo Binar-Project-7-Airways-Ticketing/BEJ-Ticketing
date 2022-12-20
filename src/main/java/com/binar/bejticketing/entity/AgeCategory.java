@@ -22,6 +22,7 @@ import java.util.Date;
 public class AgeCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_category")
     private Long idCategory;
 
     @Column(name = "name_category")
@@ -31,8 +32,7 @@ public class AgeCategory {
     @Column(name = "price")
     private BigInteger price;
 
-    @OneToOne
-    @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")
+    @OneToOne(mappedBy = "ageCategory")
     @JsonIgnore
     private Passenger passenger;
 
