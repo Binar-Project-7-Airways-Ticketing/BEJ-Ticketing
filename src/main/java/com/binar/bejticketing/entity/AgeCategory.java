@@ -21,7 +21,7 @@ import java.util.Date;
 @Table(name = "age_category")
 public class AgeCategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idCategory;
 
     @Column(name = "name_category")
