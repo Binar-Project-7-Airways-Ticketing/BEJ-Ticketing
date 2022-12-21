@@ -12,6 +12,9 @@ public interface LuggageRepository extends JpaRepository<Luggage, Long> {
     @Query("SELECT l FROM Luggage l WHERE l.isReady = :state")
     List<Luggage> findLuggageByStateTrue(boolean state);
 
+    @Query("SELECT l FROM Luggage l WHERE l.planeDetails = :idPlane")
+    List<Luggage> findLuggageByIdPlane(Long idPlane);
+
     @Transactional
     @Modifying
     @Query("UPDATE Luggage l SET l.isReady = false WHERE l.idLuggage = :idLuggage")

@@ -14,7 +14,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying(clearAutomatically = true)
     @Query("UPDATE User u SET u.isActive = false WHERE u.id = :id")
     void deleteUserById(@Param("id") Long id);
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.pictureUrl =:url WHERE u.id = :id")
+    void uploadImage(String url , Long id);
 
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE User u SET u.password =:password WHERE u.id = :id")
+    void changePassword(String password , Long id);
 
     @Query("SELECT u FROM User u WHERE u.id = :id AND u.isActive=true")
     User getUserById(Long id);
@@ -23,7 +32,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User u SET u.isActive = false where u.lastLoginDate <:date")
     void deactivateUsersNotLoggedInSince(@Param("date") LocalDate date);
-    User findByUsername(String username);
-    Boolean existsByUsername(String username);
+    User findByDisplayName(String displayName);
+
+    User findByEmail(String email);
+    Boolean existsByDisplayName(String displayName);
     Boolean existsByEmail(String email);
 }

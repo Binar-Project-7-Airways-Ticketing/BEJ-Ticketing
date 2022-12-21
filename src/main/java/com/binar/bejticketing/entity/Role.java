@@ -1,5 +1,6 @@
 package com.binar.bejticketing.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +21,11 @@ public class Role {
     @Column(name = "role_status")
     private String roleStatus;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<User> users;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<Admin> admins;
 }

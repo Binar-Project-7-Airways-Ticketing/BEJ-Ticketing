@@ -2,6 +2,7 @@ package com.binar.bejticketing.entity;
 
 import com.binar.bejticketing.utils.Gender;
 import com.binar.bejticketing.utils.SpecialRequest;
+import com.binar.bejticketing.utils.TitleUser;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -9,10 +10,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -22,9 +25,12 @@ import java.util.Date;
 @Table(name = "passengers")
 public class Passenger {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_passenger")
     private Long idPassenger;
+
+    @Column(name = "title")
+    private TitleUser titleUser;
 
     @Column(name = "first_name")
     @NotBlank(message = "First Name Not Null")
@@ -38,37 +44,41 @@ public class Passenger {
     @NotBlank(message = "Contact Number Not Null")
     private String contactNumber;
 
-    @Column(name = "email")
-    @NotBlank(message = "Email Not Null")
-    @Email
-    private String email;
-
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern="MM/dd/yyyy")
     @Column(name = "birthday")
     private Date birthday;
 
     @Column(name = "is_deleted")
     private boolean isDeleted = false;
 
-    @Column(name = "gender")
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "genders")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @Column(name = "nationality")
     @NotBlank(message = "Nationality Not Null")
     private String nationality;
 
-    @Column(name = "special_request")
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "special_requests")
+    @Enumerated(EnumType.STRING)
     private SpecialRequest specialRequest;
 
-    @OneToOne(mappedBy = "passenger")
+    @Column(name = "passport")
+    private String passport;
+
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_age_category", referencedColumnName = "id_category")
     private AgeCategory ageCategory;
 
-    @OneToOne
-    @JoinColumn(name = "id_payment", referencedColumnName = "id_payment")
-    @JsonIgnore
-    private Payment payment;
+//    @JoinColumn(name = "id_booking_detail")
+//    @OneToOne
+//    @JsonIgnore
+//    private BookingDetails bookingDetails;
+//
+//    @OneToOne(mappedBy = "passenger")
+//    @JsonIgnore
+//    private Payment payment;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

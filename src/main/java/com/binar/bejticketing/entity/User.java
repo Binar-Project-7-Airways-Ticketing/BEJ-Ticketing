@@ -1,15 +1,20 @@
 package com.binar.bejticketing.entity;
 
+import com.binar.bejticketing.utils.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import static javax.persistence.FetchType.EAGER;
 
@@ -24,8 +29,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "display_name")
+    private String displayName;
 
     @Column(name = "first_name")
     private String firstName;
@@ -33,20 +38,21 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "birthday")
-    private String birthday;
+    @Column(name = "gender")
+    @Enumerated(EnumType.ORDINAL)
+    private Gender gender;
 
-    @Column(name = "address")
-    private String address;
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    @JsonFormat(pattern = "MM/dd/yyyy")
+    @Column(name = "birthday")
+    private Date birthday;
 
     @Column(name = "email")
+    @Email(message = "Value must be Email")
     private String email;
 
     @Column(name = "password")
     private String password;
-
-    @Column(name = "no_hp")
-    private String noHp;
 
     @Column(name = "is_active")
     private boolean isActive = true;
@@ -54,12 +60,16 @@ public class User {
     @Column(name = "last_login_date")
     private LocalDate lastLoginDate;
 
+    @Column(name = "picture_url")
+    private String pictureUrl="http://res.cloudinary.com/dwncupcal/image/upload/be781f4f-99d1-4dc4-925d-58072f4de335";
+
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
     private Role role;
 
-    @ManyToMany(fetch = EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+    @OneToMany(targetEntity = Booking.class, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Booking> bookings;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
