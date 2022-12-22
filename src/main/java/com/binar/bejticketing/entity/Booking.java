@@ -31,9 +31,15 @@ public class Booking {
 //    @JoinColumn(name = "id_booking_details", referencedColumnName = "id_booking_details")
     private List<BookingDetails> bookingDetails;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_payment", referencedColumnName = "id_payment")
+    private Payment payment;
 
     @Column(name = "is_valid")
     private boolean isValid = true;
+
+    @Column(name = "is_paying")
+    private boolean isPaying = false;
 
     @Column(name = "session")
     private BigInteger session;

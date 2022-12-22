@@ -30,12 +30,4 @@ public class PaymentController {
         return new ResponseEntity<>(paymentService.createPayment(payment), HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{idPayment}/passenger/{idPassenger}")
-    public ResponseEntity<Payment> updateStatePaying(@PathVariable("idPayment") Long idPayment,
-                                                     @PathVariable("idPassenger") Long idPassenger)
-    {
-        return new ResponseEntity<>(paymentService.updatePaymentPassenger(idPayment, idPassenger), HttpStatus.CREATED);
-    }
-
-
 }

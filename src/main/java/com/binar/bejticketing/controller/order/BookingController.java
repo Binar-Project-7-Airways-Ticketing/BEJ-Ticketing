@@ -86,4 +86,5 @@ public class BookingController {
         responseData.setPayload(bookingService.updateBookingDetails(id, booking));
         return ResponseEntity.ok(responseData);
     }
+
 }

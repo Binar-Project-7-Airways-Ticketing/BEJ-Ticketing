@@ -17,6 +17,7 @@ public interface BookingService {
     Booking getBookingById(Long idBooking);
     Booking createBooking(Booking booking);
     Booking updateBookingDetails(Long idBooking, Booking booking);
+    Booking updateBookingState(Long idBooking, boolean state);
     TicketDto getBookingForTicket(Long idBooking) throws ParseException;
     Booking updateStatePaymentBooking(Long idBooking, boolean state);
     Booking updatePictureBooking(Long idBooking, String url);

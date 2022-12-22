@@ -33,13 +33,9 @@ public class BookingDetails {
     @JsonIgnore
     private Booking booking;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_payment", referencedColumnName = "id_payment")
-    private Payment payment;
-
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "id_passenger")
-//    private Passenger passenger;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")
+    private Passenger passenger;
 
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_luggage")

@@ -10,5 +10,4 @@ public interface PaymentService {
     List<Payment> getAllPayments();
     Payment getPaymentById(Long id);
     Payment createPayment(Payment payment);
-    Payment updatePaymentPassenger(Long idPayment, Long idPassenger);
 }
