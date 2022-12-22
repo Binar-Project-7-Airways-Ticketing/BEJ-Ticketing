@@ -31,6 +31,10 @@ public class Booking {
 //    @JoinColumn(name = "id_booking_details", referencedColumnName = "id_booking_details")
     private List<BookingDetails> bookingDetails;
 
+
+    @Column(name = "price")
+    private Double price;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_payment", referencedColumnName = "id_payment")
     private Payment payment;
