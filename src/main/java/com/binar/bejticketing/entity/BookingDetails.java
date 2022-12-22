@@ -22,9 +22,6 @@ public class BookingDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idBookingDetails;
 
-    @Column(name = "price")
-    private Double price;
-
     @Column(name = "state_pricing")
     private boolean statePricing = false;
 
