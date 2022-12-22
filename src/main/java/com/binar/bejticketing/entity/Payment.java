@@ -24,17 +24,9 @@ public class Payment {
     @Column(name = "id_payment")
     private Long idPayment;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_passenger", referencedColumnName = "id_passenger")
-    private Passenger passenger;
-
     @Column(name = "payment_method")
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
-
-    @Column(name = "is_paying")
-    private boolean isPaying = false;
-
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp

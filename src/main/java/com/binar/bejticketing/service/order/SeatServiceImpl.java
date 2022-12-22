@@ -1,6 +1,5 @@
 package com.binar.bejticketing.service.order;
 
-import com.binar.bejticketing.dto.SeatResponseDto;
 import com.binar.bejticketing.entity.PlaneDetails;
 import com.binar.bejticketing.entity.Seat;
 import com.binar.bejticketing.exception.DataNotFoundException;
@@ -37,15 +36,8 @@ public class SeatServiceImpl implements SeatService {
         }
         List<Seat> seat = seatRepository.findAll();
         List<Seat> arraySeat = new ArrayList<>();
-//        for (Seat s: seat){
-//            Long idPlaneClass = s.getPlaneDetails().getIdPlaneClass();
-//            if (idPlaneClass.equals(idPlane)){
-//                arraySeat.add(s);
-//            }
-//        }
         seat.stream().forEach(seat1 -> {
             Long idPlaneClass = seat1.getPlaneDetails().getIdPlaneClass();
-            System.out.println(idPlaneClass);
             if (idPlaneClass.equals(idPlane)){
                 arraySeat.add(seat1);
             }

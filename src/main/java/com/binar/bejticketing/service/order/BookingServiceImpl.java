@@ -75,6 +75,11 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public Booking updateBookingState(Long idBooking, boolean state) {
+        return null;
+    }
+
+    @Override
     public TicketDto getBookingForTicket(Long idBooking) throws ParseException {
         TicketDto ticketDto = new TicketDto();
 
@@ -111,10 +116,9 @@ public class BookingServiceImpl implements BookingService {
         if (bookingChecking.isEmpty()){
             throw new DataNotFoundException(idBooking);
         }
-        bookingChecking.get().setValid(state);
+        bookingChecking.get().setPaying(state);
         for (BookingDetails bookingDetails: bookingChecking.get().getBookingDetails()){
             bookingDetails.setStatePricing(state);
-            bookingDetails.getPayment().setPaying(state);
         }
         return bookingRepository.saveAndFlush(bookingChecking.get());
     }
