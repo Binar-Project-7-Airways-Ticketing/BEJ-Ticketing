@@ -57,8 +57,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
             .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin","/api/passenger/**","/api/luggage/**",
-                        "/api/seat/**","/api/flight/**","/api/booking/**","/api/airport/**","/api/ticket/**","/api/plane/**").permitAll()
+                .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin","/api/passenger/**","/api/luggage/**","/api/seat/**","/api/flight/**","/api/booking/**","/api/airport/**","/api/ticket/**","/api/plane/**").permitAll()
 //                .antMatchers("/film/create","/film/update","/film/delete",
 //                        "/user/users","user/getall", "user/delete/{id}"
 //                        ,"/role/addToUser").hasRole("ADMIN").
