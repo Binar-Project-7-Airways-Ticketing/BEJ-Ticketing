@@ -5,6 +5,7 @@ import com.binar.bejticketing.entity.Booking;
 import com.binar.bejticketing.service.BookingService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/history")
 public class HistoryController {
     @Autowired

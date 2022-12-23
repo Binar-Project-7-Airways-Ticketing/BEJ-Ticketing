@@ -26,7 +26,9 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
-@Configuration @EnableWebSecurity @RequiredArgsConstructor
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig  extends WebSecurityConfigurerAdapter{
     private static final String ADMIN = "ADMIN_ROLE";
     private static final String USER = "USER_ROLE";
