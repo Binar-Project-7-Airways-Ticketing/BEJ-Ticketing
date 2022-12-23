@@ -1,6 +1,5 @@
 package com.binar.bejticketing.service.order;
 
-import com.binar.bejticketing.dto.SeatResponseDto;
 import com.binar.bejticketing.entity.PlaneDetails;
 import com.binar.bejticketing.entity.Seat;
 import com.binar.bejticketing.exception.DataNotFoundException;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +29,21 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public List<Seat> getSeatsByIdPlane(Long idPlane) {
-        return seatRepository.getSeatsByIdPlane(idPlane);
+        Optional<PlaneDetails> planeDetails = planeDetailsRepository.findById(idPlane);
+
+        if (planeDetails.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        List<Seat> seat = seatRepository.findAll();
+        List<Seat> arraySeat = new ArrayList<>();
+        seat.stream().forEach(seat1 -> {
+            Long idPlaneClass = seat1.getPlaneDetails().getIdPlaneClass();
+            if (idPlaneClass.equals(idPlane)){
+                arraySeat.add(seat1);
+            }
+        });
+
+        return arraySeat;
     }
 
     @Override
