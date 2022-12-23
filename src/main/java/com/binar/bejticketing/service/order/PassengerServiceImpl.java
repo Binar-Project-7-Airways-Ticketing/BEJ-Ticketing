@@ -70,7 +70,6 @@ public class PassengerServiceImpl implements PassengerService {
         if (checkDataAge.isEmpty() && checkDataPassenger.isEmpty()){
             throw new DataNotFoundException(idAgeCategory, idPassenger);
         }
-        System.out.println(checkDataAge.get());
         checkDataPassenger.get().setAgeCategory(checkDataAge.get());
         return passengerRepository.saveAndFlush(checkDataPassenger.get());
     }

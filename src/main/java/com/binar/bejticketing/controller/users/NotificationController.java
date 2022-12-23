@@ -2,14 +2,12 @@ package com.binar.bejticketing.controller.users;
 
 import com.binar.bejticketing.dto.NotificationDto;
 import com.binar.bejticketing.dto.NotificationUpdateDto;
-import com.binar.bejticketing.dto.PlaneDto;
-import com.binar.bejticketing.entity.Flight;
 import com.binar.bejticketing.entity.Notification;
-import com.binar.bejticketing.entity.Plane;
 import com.binar.bejticketing.entity.User;
 import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.service.NotificationService;
 import com.binar.bejticketing.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/notification")
 public class NotificationController {
     @Autowired
