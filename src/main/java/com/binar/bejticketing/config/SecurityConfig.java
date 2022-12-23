@@ -62,6 +62,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin").permitAll()
+                .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/api/passenger/**").permitAll()
                 .antMatchers("/api/luggage/**").permitAll()
                 .antMatchers("/api/seat/**").permitAll()
@@ -70,6 +71,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
                 .antMatchers("/api/airport/**").permitAll()
                 .antMatchers("/api/ticket/**").permitAll()
                 .antMatchers("/api/plane/**").permitAll()
+                .antMatchers("/api/payment/**").permitAll()
 
                 .antMatchers("/api/notification/**").hasAnyAuthority(USER,ADMIN)
                 .antMatchers("/api/history/**").hasAnyAuthority(USER,ADMIN)
