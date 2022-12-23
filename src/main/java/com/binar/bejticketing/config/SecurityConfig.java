@@ -28,6 +28,8 @@ import java.util.List;
 
 @Configuration @EnableWebSecurity @RequiredArgsConstructor
 public class SecurityConfig  extends WebSecurityConfigurerAdapter{
+    private static final String ADMIN = "ADMIN_ROLE";
+    private static final String USER = "USER_ROLE";
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
@@ -57,12 +59,18 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
             .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin","/api/passenger/**","/api/luggage/**","/api/seat/**","/api/flight/**","/api/booking/**","/api/airport/**","/api/ticket/**","/api/plane/**").permitAll()
-//                .antMatchers("/film/create","/film/update","/film/delete",
-//                        "/user/users","user/getall", "user/delete/{id}"
-//                        ,"/role/addToUser").hasRole("ADMIN").
-//                antMatchers("/api").hasRole("USER")
-//                .antMatchers("user/update{id}").hasRole("USER")
+                .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin").permitAll()
+                .antMatchers("/api/passenger/**").permitAll()
+                .antMatchers("/api/luggage/**").permitAll()
+                .antMatchers("/api/seat/**").permitAll()
+                .antMatchers("/api/flight/**").permitAll()
+                .antMatchers("/api/booking/**").permitAll()
+                .antMatchers("/api/airport/**").permitAll()
+                .antMatchers("/api/ticket/**").permitAll()
+                .antMatchers("/api/plane/**").permitAll()
+
+                .antMatchers("/api/notification/**").hasAnyAuthority(USER,ADMIN)
+                .antMatchers("/api/history/**").hasAnyAuthority(USER,ADMIN)
                 .antMatchers("/swagger-ui/**").permitAll()
                 .anyRequest().authenticated()
             .and()
