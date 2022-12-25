@@ -4,6 +4,7 @@ import com.binar.bejticketing.utils.SeatUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,6 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "seats")
 public class Seat {
     @Id
@@ -39,10 +41,18 @@ public class Seat {
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at",nullable = false,  updatable = false)
     private Date createdAt;
 
     @Column(name = "updated_at")
     @UpdateTimestamp
     private Date updatedAt;
+
+    public Seat(long idSeat, SeatUtils seatState, String numberSeat, Date createdAt, Date updatedAt) {
+        this.idSeat = idSeat;
+        this.stateSeat = seatState;
+        this.numberSeat = numberSeat;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }

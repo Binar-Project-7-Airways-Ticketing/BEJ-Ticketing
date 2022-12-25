@@ -5,6 +5,7 @@ import com.binar.bejticketing.exception.DataAlreadyExistException;
 import com.binar.bejticketing.exception.DataNotFoundException;
 import com.binar.bejticketing.repository.AgeCategoryRepository;
 import com.binar.bejticketing.service.AgeCategoryService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,22 +14,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class AgeCategoryServiceImpl implements AgeCategoryService {
-    @Autowired
+//    @Autowired
     AgeCategoryRepository ageCategoryRepository;
-    private boolean ageCategory1;
 
     @Override
     public AgeCategory createAgeCategory(AgeCategory ageCategory) {
-//        ageCategoryRepository.isCheckedByUsername(String.valueOf(ageCategory.getNameCategory()))
-//                .ifPresent(data ->
-//                        ageCategory1 = Objects.equals(data.getNameCategory(), ageCategory.getNameCategory())
-//                );
-//        System.out.println(ageCategory1);
-//        if (ageCategory1){
-//            System.out.println("Failed to Save");
-//            throw  new DataAlreadyExistException(ageCategory.getNameCategory());
-//        }
         return ageCategoryRepository.save(ageCategory);
     }
 

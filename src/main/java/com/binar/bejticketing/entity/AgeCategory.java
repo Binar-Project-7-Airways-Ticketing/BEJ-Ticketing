@@ -4,6 +4,7 @@ import com.binar.bejticketing.utils.AgeCategoryName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,6 +19,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "age_category")
 public class AgeCategory {
     @Id
@@ -32,9 +34,6 @@ public class AgeCategory {
     @Column(name = "price")
     private BigInteger price;
 
-//    @OneToOne(mappedBy = "ageCategory")
-//    @JsonIgnore
-//    private Passenger passenger;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:MM:ss")
     @CreationTimestamp
