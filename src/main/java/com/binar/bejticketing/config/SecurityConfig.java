@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -57,8 +59,16 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
 
 
-        http
-            .csrf().disable()
+        http.cors().configurationSource(request -> {
+            CorsConfiguration cors = new CorsConfiguration();
+            cors.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "OPTIONS", "DELETE"));
+            cors.setAllowedHeaders(Collections.singletonList("*"));
+            cors.setAllowedOrigins(Collections.singletonList("*"));
+            cors.setMaxAge(3600L);
+            cors.applyPermitDefaultValues();
+                return cors;
+        });
+            http.csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin").permitAll()
