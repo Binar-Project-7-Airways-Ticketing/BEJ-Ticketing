@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 public interface AgeCategoryRepository extends JpaRepository<AgeCategory, Long> {
-    @Query("SELECT a FROM AgeCategory a WHERE a.nameCategory = :username")
-    Optional<AgeCategory> isCheckedByUsername(String username);
 
     @Modifying
     @Query("UPDATE AgeCategory a SET a.nameCategory = :username WHERE a.idCategory = :id")
