@@ -36,10 +36,10 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
             response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
             response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
+            response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE,PATCH, HEAD");
             response.setHeader("Access-Control-Max-Age", "3600");
             response.setHeader("Access-Control-Allow-Headers", "*");
-            response.setHeader("Access-Control-Expose-Headers","xsrf-token,X-Total-Results,Authorization");
+            response.setHeader("Access-Control-Expose-Headers","xsrf-token,X-Total-Results,Authorization,Access-Control-Allow-Origin,Access-Control-Allow-Credentials");
             String jwt = parseJwt(request);
 
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
