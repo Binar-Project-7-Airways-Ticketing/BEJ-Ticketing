@@ -1,7 +1,6 @@
 package com.binar.bejticketing.service.flight;
 
 import com.binar.bejticketing.entity.Airport;
-import com.binar.bejticketing.entity.Plane;
 import com.binar.bejticketing.repository.AirportRepository;
 import com.binar.bejticketing.service.Flight.AirportServiceImpl;
 import org.junit.jupiter.api.Test;

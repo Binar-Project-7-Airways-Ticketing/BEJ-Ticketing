@@ -42,7 +42,7 @@ public class NotificationServiceImplTest {
     }
 
     @Test
-    void updateotification(){
+    void updatNotification(){
         Notification notification = new Notification();
         notification.setIdNotification(1L);
         when(notificationRepository.findById(notification.getIdNotification())).thenReturn(Optional.of(notification));
