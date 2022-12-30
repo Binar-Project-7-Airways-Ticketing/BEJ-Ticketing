@@ -2,6 +2,7 @@ package com.binar.bejticketing.service.order;
 
 import com.binar.bejticketing.entity.AgeCategory;
 import com.binar.bejticketing.entity.Passenger;
+import com.binar.bejticketing.faker.MockData;
 import com.binar.bejticketing.repository.AgeCategoryRepository;
 import com.binar.bejticketing.repository.PassengerRepository;
 import com.binar.bejticketing.utils.Gender;
@@ -49,28 +50,10 @@ class PassengerServiceImplTest {
     List<AgeCategory> ageCategories = new ArrayList<>();
     @BeforeEach
     void setUp(){
-        Date parse = null;
-        Date parseBirthday = null;
-        try {
-            parse = new SimpleDateFormat("dd-MM-yyyy hh:MM:ss").parse("12-07-2001 12:00:00");
-            parseBirthday = new SimpleDateFormat("MM/dd/yyyy").parse("12/07/2001");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        passenger.setIdPassenger(1L);
-        passenger.setPassport("0829102");
-        passenger.setBirthday(parseBirthday);
-        passenger.setDeleted(false);
-        passenger.setContactNumber("08232368823");
-        passenger.setFirstName("Fathan");
-        passenger.setLastName("Azka");
-        passenger.setGender(Gender.PRIA);
-        passenger.setNationality("INDONESIA");
-        passenger.setSpecialRequest(NONE);
-        passenger.setCreatedAt(parse);
 
-        ageCategory = AgeCategory.builder().idCategory(2L).nameCategory(CHILDREN).price(BigInteger.valueOf(10000)).createdAt(parse).updatedAt(null).build();
-
+        MockData mockData = new MockData();
+        ageCategory = mockData.mockDataAgeCategory(ageCategory);
+        passenger = mockData.mockDataPassenger(passenger);
         ageCategories.add(ageCategory);
         when(ageCategoryRepository.findAll()).thenReturn(ageCategories);
         ageCategories = ageCategoryRepository.findAll();
