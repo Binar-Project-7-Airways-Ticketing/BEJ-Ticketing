@@ -51,7 +51,7 @@ public class HistoryController {
         ResponseData<List<Booking>> responseData = new ResponseData<>();
 
         responseData.setStatus(true);
-        responseData.setPayload(bookingService.getBookingHistoryById( idUser));
+        responseData.setPayload(bookingService.getBookingHistoryById(idUser));
         return ResponseEntity.ok(responseData);
     }
 
