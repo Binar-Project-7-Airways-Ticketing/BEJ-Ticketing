@@ -1,6 +1,7 @@
 package com.binar.bejticketing.service.order;
 
 import com.binar.bejticketing.entity.Payment;
+import com.binar.bejticketing.faker.MockData;
 import com.binar.bejticketing.repository.PaymentRepository;
 import com.binar.bejticketing.utils.PaymentMethod;
 import org.junit.Rule;
@@ -41,16 +42,8 @@ class PaymentServiceImplTest {
 
     @BeforeEach
     void setUp(){
-        Date parse = null;
-        try {
-            parse = new SimpleDateFormat("dd-MM-yyyy hh:MM:ss").parse("12-07-2001 12:00:00");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        payment.setIdPayment(1L);
-        payment.setPaymentMethod(PaymentMethod.BRI);
-        payment.setCreatedAt(parse);
-        payment.setUpdatedAt(null);
+        MockData mockData = new MockData();
+        payment = mockData.mockDataPayment(payment);
     }
     @Test
     void getAllPayments() {
