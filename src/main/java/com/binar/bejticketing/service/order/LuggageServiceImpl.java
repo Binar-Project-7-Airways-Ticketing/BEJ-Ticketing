@@ -6,6 +6,8 @@ import com.binar.bejticketing.entity.Seat;
 import com.binar.bejticketing.repository.LuggageRepository;
 import com.binar.bejticketing.repository.PlaneDetailsRepository;
 import com.binar.bejticketing.service.LuggageService;
+import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class LuggageServiceImpl implements LuggageService {
-    @Autowired
+//    @Autowired
     private LuggageRepository luggageRepository;
-    @Autowired
+//    @Autowired
     private PlaneDetailsRepository planeDetailsRepository;
     @Override
     public List<Luggage> getAllLuggage() {
@@ -49,12 +52,17 @@ public class LuggageServiceImpl implements LuggageService {
 
     @Override
     public Luggage createLuggage(Luggage luggage) {
-        return luggageRepository.saveAndFlush(luggage);
+        return luggageRepository.save(luggage);
     }
 
+    @SneakyThrows
     @Override
     public Luggage updateStateLuggage(Long id) {
-        return luggageRepository.updateLuggage(id);
+        int i = luggageRepository.updateLuggage(id);
+        if (i == 0){
+            throw new NoSuchFieldException("No value present");
+        }
+        return luggageRepository.findById(id).get();
     }
 
     @Override

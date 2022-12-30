@@ -7,6 +7,7 @@ import com.binar.bejticketing.repository.PlaneDetailsRepository;
 import com.binar.bejticketing.repository.SeatRepository;
 import com.binar.bejticketing.service.SeatService;
 import com.binar.bejticketing.utils.SeatUtils;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class SeatServiceImpl implements SeatService {
-    @Autowired
     private SeatRepository seatRepository;
-    @Autowired
+//    @Autowired
     private PlaneDetailsRepository planeDetailsRepository;
 
     @Override
