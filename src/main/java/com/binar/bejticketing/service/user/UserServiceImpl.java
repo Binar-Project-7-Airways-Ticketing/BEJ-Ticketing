@@ -44,11 +44,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User postUser(User user) {
-        return userRepository.save(user);
-    }
-
-    @Override
     public Role saveRole(Role role) {
         log.info("Saving new role {} to the database",role.getRoleStatus());
         return roleRepository.save(role);
@@ -72,11 +67,9 @@ public class UserServiceImpl implements UserService {
     public User findById(Long id) {
         Optional<User> search = userRepository.findById(id);
         if(search.isPresent()) {
-            log.info("updated!");
             return search.get();
         }
         else{
-            log.error("No such movie existed");
             return null;
         }
     }
@@ -102,8 +95,4 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    static User unwrapUser(Optional<User> entity, Long id){
-        if (entity.isPresent()) return entity.get();
-        else throw new EntityNotFoundException(id, User.class);
-    }
 }
