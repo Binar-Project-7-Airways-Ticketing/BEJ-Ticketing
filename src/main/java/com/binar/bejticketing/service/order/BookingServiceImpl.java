@@ -42,9 +42,7 @@ public class BookingServiceImpl implements BookingService {
         List<Booking> getBooking = new ArrayList<>();
         booking.forEach(booking1 -> {
             if (booking1.getUser().getId().equals(idUser)){
-                getBooking.add(booking1);
-            }
-                throw new DataNotFoundException(idUser);
+                getBooking.add(booking1);}
         });
         return booking;
     }
