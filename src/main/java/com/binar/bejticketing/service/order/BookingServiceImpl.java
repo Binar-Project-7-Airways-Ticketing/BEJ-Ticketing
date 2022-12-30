@@ -39,14 +39,14 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> getBookingHistoryById(Long idUser) {
         List<Booking> booking = bookingRepository.findAll();
-        List<Booking> getBooking = new ArrayList<>();
-        booking.forEach(e-> {
-            if (e.getUser().getId().equals(idUser)){
-                getBooking.add(e);
-            }
-                throw new DataNotFoundException(idUser);
-        });
-        return getBooking;
+//        List<Booking> getBooking = new ArrayList<>();
+//        booking.forEach(e-> {
+//            if (e.getUser().getId().equals(idUser)){
+//                getBooking.add(e);
+//            }
+//                throw new DataNotFoundException(idUser);
+//        });
+        return booking;
     }
 
     @Override
