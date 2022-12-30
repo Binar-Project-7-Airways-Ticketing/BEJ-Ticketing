@@ -61,7 +61,7 @@ public class NotificationController {
         return new ResponseEntity<>(notificationService.getAllNotificationByUser(id), HttpStatus.OK);
     }
 
-    @GetMapping("/{idNotification}")
+    @GetMapping("/get/{idNotification}")
     public ResponseEntity<Optional<Notification>> getNotificationById(@PathVariable("idNotification")Long id){
         return new ResponseEntity<>(notificationService.getNotificationyId(id), HttpStatus.OK);
     }
