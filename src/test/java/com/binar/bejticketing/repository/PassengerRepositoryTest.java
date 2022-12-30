@@ -38,6 +38,7 @@ class PassengerRepositoryTest {
     @Autowired
     private PassengerRepository passengerRepository;
 
+    @Autowired
     Passenger passenger = new Passenger();
 
     @BeforeEach
@@ -64,7 +65,6 @@ class PassengerRepositoryTest {
         passenger.setCreatedAt(parse);
 //        when(passengerRepository.save(passenger)).thenReturn(passenger);
 
-        passengerRepository.saveAllAndFlush(List.of(passenger));
     }
     @AfterEach
     void tearUp(){
@@ -73,8 +73,8 @@ class PassengerRepositoryTest {
 
     @Test
     void getAllPassengers() {
+        passengerRepository.saveAllAndFlush(List.of(passenger));
         List<Passenger> passengers = passengerRepository.getAllPassengers();
-        List<Passenger> passengers2 = new ArrayList<>();
         System.out.println(passengers);
 
 //        when(passengerRepository.getAllPassengers()).thenReturn(passengers);

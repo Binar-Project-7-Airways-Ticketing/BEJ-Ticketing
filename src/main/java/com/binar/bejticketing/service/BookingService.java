@@ -12,7 +12,7 @@ import java.util.List;
 public interface BookingService {
     List<Booking> getAllBooking();
     List<BookingDetails> getAllBookingDetails();
-    List<Booking> getBookingHistoryById(Long idBooking, Long idUser);
+    List<Booking> getBookingHistoryById( Long idUser);
     List<BookingDetails> createBookingDetails(List<BookingDetails> bookingDetails);
     Booking getBookingById(Long idBooking);
     Booking createBooking(Booking booking);

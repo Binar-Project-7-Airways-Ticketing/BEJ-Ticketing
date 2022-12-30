@@ -12,6 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -86,7 +87,27 @@ public class FlightController {
         return new ResponseEntity<>(flightService.findFlightSearchDatePaging(dCode,aCode,date,pageable), HttpStatus.OK);
     }
 
+    @GetMapping("/paging/ascend/{size}/{page}")
+    public ResponseEntity<Iterable<Flight>> getFlightSearchDatePagingAscend(@RequestParam("departure-code") String dCode ,
+                                                                      @RequestParam("arrival-code") String aCode,
+                                                                      @PathVariable("size") int size ,
+                                                                      @PathVariable("page") int page,
+                                                                      @RequestParam("date")@DateTimeFormat(pattern="MM/dd/yyyy") Date date){
 
+        Pageable pageable = PageRequest.of(page-1,size, Sort.by("price").ascending());
+        return new ResponseEntity<>(flightService.findFlightSearchDatePaging(dCode,aCode,date,pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/paging/descend/{size}/{page}")
+    public ResponseEntity<Iterable<Flight>> getFlightSearchDatePagingDescend(@RequestParam("departure-code") String dCode ,
+                                                                            @RequestParam("arrival-code") String aCode,
+                                                                            @PathVariable("size") int size ,
+                                                                            @PathVariable("page") int page,
+                                                                            @RequestParam("date")@DateTimeFormat(pattern="MM/dd/yyyy") Date date){
+
+        Pageable pageable = PageRequest.of(page-1,size, Sort.by("price").descending());
+        return new ResponseEntity<>(flightService.findFlightSearchDatePaging(dCode,aCode,date,pageable), HttpStatus.OK);
+    }
     @GetMapping("/price/{id}")
     public ResponseEntity<PriceDto> getPrice(@PathVariable("id") Long id){
         PriceDto priceDto = new PriceDto();
