@@ -12,7 +12,6 @@ public interface UserService {
     boolean deleteUser(Long id);
     User updaterUser(Long id, UserUpdateDto user);
     User getUserById(Long id);
-    User postUser(User user);
     User findById(Long id);
     void changePassword(String password , Long id);
     Role saveRole(Role role);
