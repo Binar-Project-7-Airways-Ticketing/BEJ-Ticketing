@@ -5,6 +5,7 @@ import com.binar.bejticketing.entity.Booking;
 import com.binar.bejticketing.service.BookingService;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@SecurityRequirement(name = "Authorize")
 @RequestMapping("/api/history")
 public class HistoryController {
     @Autowired
@@ -66,10 +68,10 @@ public class HistoryController {
                                                                          @RequestParam("picture-url") MultipartFile file)
             throws IOException {
         byte[] bit = file.getBytes();
-        Files.write(Path.of("C:\\Users\\fathanazka\\Downloads\\diamond.png"),bit);
+        Files.write(Path.of("src/main/java/com/binar/bejticketing/media/bukti.jpg"),bit);
 
         String filename = String.valueOf(UUID.randomUUID());
-        cloudinary.uploader().upload(new File("C:\\Users\\fathanazka\\Downloads\\diamond.png"),
+        cloudinary.uploader().upload(new File("src/main/java/com/binar/bejticketing/media/bukti.jpg"),
                 ObjectUtils.asMap("public_id", filename));
 
         String url = cloudinary.url().imageTag(filename);

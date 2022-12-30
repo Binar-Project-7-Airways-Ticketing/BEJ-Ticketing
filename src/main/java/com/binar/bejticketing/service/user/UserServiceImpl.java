@@ -90,12 +90,12 @@ public class UserServiceImpl implements UserService {
     public User updaterUser(Long id, UserUpdateDto user) {
         User users = findById(id);
         if (user != null) {
-            user.setDisplayName(user.getDisplayName());
-            user.setFirstName(user.getFirstName());
-            user.setLastName(user.getLastName());
-            user.setGender(user.getGender());
-            user.setBirthday(user.getBirthday());
-            user.setEmail(user.getEmail());
+            users.setDisplayName(user.getDisplayName());
+            users.setFirstName(user.getFirstName());
+            users.setLastName(user.getLastName());
+            users.setGender(user.getGender());
+            users.setBirthday(user.getBirthday());
+            users.setEmail(user.getEmail());
             userRepository.saveAndFlush(users);
         }
         return users;

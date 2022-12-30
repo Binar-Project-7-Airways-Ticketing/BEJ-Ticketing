@@ -24,10 +24,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-@Configuration @EnableWebSecurity @RequiredArgsConstructor
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig  extends WebSecurityConfigurerAdapter{
+    private static final String ADMIN = "ADMIN_ROLE";
+    private static final String USER = "USER_ROLE";
     @Autowired
     private UserDetailsService userDetailsService;
     @Autowired
@@ -53,16 +59,37 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
 
 
-        http
-            .csrf().disable()
+        http.cors().configurationSource(request -> {
+            CorsConfiguration cors = new CorsConfiguration();
+            cors.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "OPTIONS", "DELETE"));
+            cors.setAllowedHeaders(Collections.singletonList("*"));
+            cors.setAllowedOrigins(Collections.singletonList("*"));
+            cors.setMaxAge(3600L);
+            cors.applyPermitDefaultValues();
+                return cors;
+        });
+            http.csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin","/api/passenger/**","/api/luggage/**","/api/seat/**","/api/flight/**","/api/booking/**","/api/airport/**","/api/ticket/**","/api/plane/**").permitAll()
-//                .antMatchers("/film/create","/film/update","/film/delete",
-//                        "/user/users","user/getall", "user/delete/{id}"
-//                        ,"/role/addToUser").hasRole("ADMIN").
-//                antMatchers("/api").hasRole("USER")
-//                .antMatchers("user/update{id}").hasRole("USER")
+                .authorizeRequests().antMatchers("/api/auth/signup","/api/auth/signin").permitAll()
+                .antMatchers("/api/user/**").permitAll()
+                .antMatchers("/api/passenger/**").permitAll()
+                .antMatchers("/api/luggage/**").permitAll()
+                .antMatchers("/api/seat/**").permitAll()
+                .antMatchers("/api/flight/**").permitAll()
+                .antMatchers("/api/booking/**").permitAll()
+                .antMatchers("/api/airport/**").permitAll()
+                .antMatchers("/api/ticket/**").permitAll()
+                .antMatchers("/api/plane/**").permitAll()
+                .antMatchers("/api/payment/**").permitAll()
+                .antMatchers("/api/notification/create").permitAll()
+                .antMatchers("/api/notification/update").permitAll()
+
+                .antMatchers("/api/notification/delete/**").hasAnyAuthority(USER,ADMIN)
+                .antMatchers("/api/notification/user/**").hasAnyAuthority(USER,ADMIN)
+                .antMatchers("/api/notification/read/**").hasAnyAuthority(USER,ADMIN)
+                .antMatchers("/api/notification/get/**").hasAnyAuthority(USER,ADMIN)
+                .antMatchers("/api/history/**").hasAnyAuthority(USER,ADMIN)
                 .antMatchers("/swagger-ui/**").permitAll()
                 .anyRequest().authenticated()
             .and()

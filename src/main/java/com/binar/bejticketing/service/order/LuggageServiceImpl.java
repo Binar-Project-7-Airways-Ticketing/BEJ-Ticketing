@@ -38,7 +38,6 @@ public class LuggageServiceImpl implements LuggageService {
         List<Luggage> arraySeat = new ArrayList<>();
         luggages.forEach(luggage -> {
             Long idPlaneClass = luggage.getPlaneDetails().getIdPlaneClass();
-            System.out.println(idPlaneClass);
             if (idPlaneClass.equals(idPlane)){
                 arraySeat.add(luggage);
             }
