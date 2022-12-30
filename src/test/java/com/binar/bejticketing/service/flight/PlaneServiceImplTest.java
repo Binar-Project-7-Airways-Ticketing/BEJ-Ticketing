@@ -44,16 +44,16 @@ public class PlaneServiceImplTest {
         when(planeRepository.findById(plane.getIdPlane())).thenReturn(Optional.of(plane));
 
         Plane planeUpdate = new Plane();
-        plane.setIdPlane(1L);
+        planeUpdate.setIdPlane(1L);
         planeUpdate.setPlaneType("BOEING 101");
         planeUpdate.setBaggageCapacity(1000);
-        planeService.updatePlane(plane);
+        planeService.updatePlane(planeUpdate);
 
         ArgumentCaptor<Plane> userEntityArgumentCaptor = ArgumentCaptor.forClass(Plane.class);
         verify(planeRepository).save(userEntityArgumentCaptor.capture());
 
         Plane capturePlane = userEntityArgumentCaptor.getValue();
-        assertThat(capturePlane).isEqualTo(plane);
+        assertThat(capturePlane).isEqualTo(planeUpdate);
     }
 
     @Test

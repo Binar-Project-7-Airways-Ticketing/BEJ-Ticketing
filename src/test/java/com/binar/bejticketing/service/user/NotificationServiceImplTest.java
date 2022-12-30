@@ -53,13 +53,13 @@ public class NotificationServiceImplTest {
         notificationUpdate.setTitle("Pembayaran");
         notificationUpdate.setMessage("Segera Lakukan Pembayaran");
 
-        notificationService.updateNotification(notification);
+        notificationService.updateNotification(notificationUpdate);
 
         ArgumentCaptor<Notification> userEntityArgumentCaptor = ArgumentCaptor.forClass(Notification.class);
         verify(notificationRepository).save(userEntityArgumentCaptor.capture());
 
         Notification captureNotification = userEntityArgumentCaptor.getValue();
-        assertThat(captureNotification).isEqualTo(notification);
+        assertThat(captureNotification).isEqualTo(notificationUpdate);
     }
 
     @Test

@@ -10,7 +10,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
+import java.util.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,12 +28,14 @@ public class FlightServiceImplTest {
     @InjectMocks
     private FlightServiceImpl flightService;
 
-    @Test //kurang date
+    @Test
     void createFlight(){
         Flight flight = new Flight();
         flight.setFlightNumber("SOS 1");
         flight.setDepartureCode("JKT");
         flight.setArrivalCode("DPS");
+
+
 
         flightService.createFlight(flight);
         ArgumentCaptor<Flight> userEntityArgumentCaptor = ArgumentCaptor.forClass(Flight.class);
@@ -40,7 +45,7 @@ public class FlightServiceImplTest {
         assertThat(captureFlight).isEqualTo(flight);
     }
 
-    @Test //kurang date
+    @Test
     void updateFlight(){
         Flight flight = new Flight();
         flight.setIdFlight(1L);
@@ -50,13 +55,12 @@ public class FlightServiceImplTest {
         flightUpdate.setFlightNumber("SOS 1");
         flightUpdate.setDepartureCode("JKT");
         flightUpdate.setArrivalCode("DPS");
-
-        flightService.updateFlight(flight);
+        flightService.updateFlight(flightUpdate);
         ArgumentCaptor<Flight> userEntityArgumentCaptor = ArgumentCaptor.forClass(Flight.class);
         verify(flightRepository).save(userEntityArgumentCaptor.capture());
 
         Flight captureFlight = userEntityArgumentCaptor.getValue();
-        assertThat(captureFlight).isEqualTo(flight);
+        assertThat(captureFlight).isEqualTo(flightUpdate);
     }
 
     @Test
@@ -86,11 +90,17 @@ public class FlightServiceImplTest {
         verify(flightRepository).findById(1L);
     }
 
+    @Test
     void findFlightSearchDate(){
-
+        flightService.findFlightSearchDate("JKT","DPS",new Date("12/20/2022"));
+        verify(flightRepository).getFlightSearchDate("JKT","DPS",new Date("12/20/2022"));
     }
 
+    @Test
     void findFlightSearchDatePaging(){
 
+        Pageable pageable = PageRequest.of(0,2);
+        flightService.findFlightSearchDatePaging("JKT","DPS",new Date(2022,12,30),pageable);
+        verify(flightRepository).getFlightSearchDatePaging("JKT","DPS",new Date(2022,12,30),pageable);
     }
 }

@@ -49,13 +49,13 @@ public class AirportServiceImplTest {
         airportUpdate.setIdAirport(1L);
         airportUpdate.setAirportCode("JKT");
         airportUpdate.setAirportName("Bandara");
-        airportService.updateAirport(airport);
+        airportService.updateAirport(airportUpdate);
 
         ArgumentCaptor<Airport> userEntityArgumentCaptor = ArgumentCaptor.forClass(Airport.class);
         verify(airportRepository).save(userEntityArgumentCaptor.capture());
 
         Airport captureAirport = userEntityArgumentCaptor.getValue();
-        assertThat(captureAirport).isEqualTo(airport);
+        assertThat(captureAirport).isEqualTo(airportUpdate);
 
     }
     @Test
