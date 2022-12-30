@@ -40,11 +40,11 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getBookingHistoryById(Long idUser) {
         List<Booking> booking = bookingRepository.findAll();
         List<Booking> getBooking = new ArrayList<>();
-        booking.stream().forEach(e-> {
-            if (e.getUser().getId() == null){
-                throw new DataNotFoundException(idUser);
+        booking.forEach(e-> {
+            if (e.getUser().getId().equals(idUser)){
+                getBooking.add(e);
             }
-            getBooking.add(e);
+                throw new DataNotFoundException(idUser);
         });
         return getBooking;
     }
