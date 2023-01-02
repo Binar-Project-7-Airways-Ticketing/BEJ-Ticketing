@@ -17,10 +17,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class SeatServiceImpl implements SeatService {
+    @Autowired
     private SeatRepository seatRepository;
-//    @Autowired
+    @Autowired
     private PlaneDetailsRepository planeDetailsRepository;
 
     @Override
