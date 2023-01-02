@@ -73,7 +73,9 @@ public class MockData {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        seat = Seat.builder().idSeat(1L).numberSeat("A01").stateSeat(AVAILABLE).createdAt(parse).updatedAt(null).build();
+        PlaneDetails planeDetails = new PlaneDetails();
+        planeDetails = mockDataPlaneDetail(planeDetails);
+        seat = Seat.builder().idSeat(1L).planeDetails(planeDetails).numberSeat("A01").stateSeat(AVAILABLE).createdAt(parse).updatedAt(null).build();
 
         return seat;
     }
@@ -97,13 +99,6 @@ public class MockData {
         return luggage;
     }
     public PlaneDetails mockDataPlaneDetail(PlaneDetails planeDetails){
-        Date parse = null;
-
-        try {
-            parse = new SimpleDateFormat("dd-MM-yyyy hh:MM:ss").parse("12-07-2001 12:00:00");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
         planeDetails.setIdPlaneClass(1L);
         planeDetails.setPlaneClass("ECONOMY");
         planeDetails.setPrice(10000L);
