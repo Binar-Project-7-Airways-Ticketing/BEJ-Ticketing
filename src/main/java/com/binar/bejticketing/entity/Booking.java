@@ -48,7 +48,7 @@ public class Booking {
     @Column(name = "session")
     private BigInteger session;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_user")
     private User user;
 
